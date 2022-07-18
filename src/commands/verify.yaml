@@ -1,0 +1,86 @@
+description: Verify target by BOM attestation
+parameters:
+  TARGET:
+    description: Verify target by BOM attestation
+    default: ""
+    type: string
+  attest-config:
+    description: Attestation config map
+    default: ""
+    type: string
+  attest-default:
+    description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+    default: sigstore
+    type: string
+  attest-name:
+    description: Attestation config name
+    default: gensbom
+    type: string
+  config:
+    description: Application config file
+    default: ""
+    type: string
+  context-type:
+    description: Snapshot header types, options=[jenkins github local]
+    default: local
+    type: string
+  failonerror:
+    description: Fail on errors
+    default: true
+    type: boolean
+  filter-purl:
+    description: Filter out purls by regex
+    default: ""
+    type: string
+  filter-regex:
+    description: Filter out files by regex
+    default: .*\.pyc,.*\.git/.*
+    type: string
+  inputformat:
+    description: Sbom input formatter, options=[attest-cyclonedx-json]
+    default: attest-cyclonedx-json
+    type: string
+  name:
+    description: Custom/project name
+    default: ""
+    type: string
+  output-directory:
+    description: Report output directory
+    default: /home/samtholiya/.cache/gensbom
+    type: string
+  output-file:
+    description: Output result to file
+    default: ""
+    type: string
+  quiet:
+    description: Suppress all logging output
+    default: false
+    type: boolean
+  scribe-clientid:
+    description: Scribe client id
+    default: ""
+    type: string
+  scribe-clientsecret:
+    description: Scribe client secret
+    default: ""
+    type: string
+  scribe-enable:
+    description: Enable scribe client
+    default: false
+    type: boolean
+  scribe-url:
+    description: Scribe url
+    default: https://api.production.scribesecurity.com
+    type: string
+  show:
+    description: Print object to stdout
+    default: false
+    type: boolean
+  verbose:
+    description: Increase verbosity (-v = info, -vv = debug)
+    default: 1
+    type: integer
+steps:
+- run:
+    name: Verify target by BOM attestation
+    command: gensbom verify << parameters.TARGET >> --context-type << parmaeters.context-type >> --inputformat << parmaeters.inputformat >> --name << parmaeters.name >> --attest-config << parmaeters.attest-config >> --attest-default << parmaeters.attest-default >> --attest-name << parmaeters.attest-name >> --config << parmaeters.config >> --failonerror << parmaeters.failonerror >> --filter-purl << parmaeters.filter-purl >> --filter-regex << parmaeters.filter-regex >> --output-directory << parmaeters.output-directory >> --output-file << parmaeters.output-file >> --quiet << parmaeters.quiet >> --scribe-clientid << parmaeters.scribe-clientid >> --scribe-clientsecret << parmaeters.scribe-clientsecret >> --scribe-enable << parmaeters.scribe-enable >> --scribe-url << parmaeters.scribe-url >> --show << parmaeters.show >> --verbose << parmaeters.verbose >>

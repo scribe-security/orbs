@@ -1,0 +1,14 @@
+description: >
+  Create target BOM (images,dir) 
+# What will this job do?
+
+executor: default
+
+parameters:
+  to:
+    type: string
+    default: "World"
+    description: "Hello to whom?"
+steps:
+  - greet:
+      to: << parameters.to >>

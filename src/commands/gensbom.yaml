@@ -1,0 +1,114 @@
+description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
+parameters:
+  TARGET:
+    description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
+    default: ""
+    type: string
+  attach-regex:
+    description: Attach files content by regex
+    default: ""
+    type: string
+  attest-config:
+    description: Attestation config map
+    default: ""
+    type: string
+  attest-default:
+    description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+    default: sigstore
+    type: string
+  attest-name:
+    description: Attestation config name
+    default: gensbom
+    type: string
+  components:
+    description: Select sbom components groups, options=[metadata layers packages files dep]
+    default: metadata,layers,packages,files,dep
+    type: string
+  config:
+    description: Application config file
+    default: ""
+    type: string
+  context-dir:
+    description: Context dir
+    default: ""
+    type: string
+  context-type:
+    description: Context type, options=[jenkins github local]
+    default: local
+    type: string
+  env:
+    description: Envrionment keys to include in sbom
+    default: ""
+    type: string
+  failonerror:
+    description: Fail on errors
+    default: true
+    type: boolean
+  filter-purl:
+    description: Filter out purls by regex
+    default: ""
+    type: string
+  filter-regex:
+    description: Filter out files by regex
+    default: .*\.pyc,.*\.git/.*
+    type: string
+  force:
+    description: Force overwrite cache
+    default: false
+    type: boolean
+  format:
+    description: Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+    default: cyclonedx-json
+    type: string
+  label:
+    description: Label to connect to sboms
+    default: ""
+    type: string
+  name:
+    description: Bomb custom/project name
+    default: ""
+    type: string
+  normalizers-packagejson-enable:
+    description: Normalize package json files
+    default: true
+    type: boolean
+  output-directory:
+    description: Report output directory
+    default: /home/samtholiya/.cache/gensbom
+    type: string
+  output-file:
+    description: Output result to file
+    default: ""
+    type: string
+  quiet:
+    description: Suppress all logging output
+    default: false
+    type: boolean
+  scribe-clientid:
+    description: Scribe client id
+    default: ""
+    type: string
+  scribe-clientsecret:
+    description: Scribe client secret
+    default: ""
+    type: string
+  scribe-enable:
+    description: Enable scribe client
+    default: false
+    type: boolean
+  scribe-url:
+    description: Scribe url
+    default: https://api.production.scribesecurity.com
+    type: string
+  show:
+    description: Print object to stdout
+    default: false
+    type: boolean
+  verbose:
+    description: Increase verbosity (-v = info, -vv = debug)
+    default: 1
+    type: integer
+steps:
+- run:
+    name: Generate Software Bill Of Materials (SBOM) from container images and filesystems
+    command: gensbom gensbom << parameters.TARGET >> --attach-regex << parmaeters.attach-regex >> --attest-config << parmaeters.attest-config >> --attest-default << parmaeters.attest-default >> --attest-name << parmaeters.attest-name >> --components << parmaeters.components >> --config << parmaeters.config >> --context-dir << parmaeters.context-dir >> --context-type << parmaeters.context-type >> --env << parmaeters.env >> --failonerror << parmaeters.failonerror >> --filter-purl << parmaeters.filter-purl >> --filter-regex << parmaeters.filter-regex >> --force << parmaeters.force >> --format << parmaeters.format >> --label << parmaeters.label >> --name << parmaeters.name >> --normalizers-packagejson-enable << parmaeters.normalizers-packagejson-enable >> --output-directory << parmaeters.output-directory >> --output-file << parmaeters.output-file >> --quiet << parmaeters.quiet >> --scribe-clientid << parmaeters.scribe-clientid >> --scribe-clientsecret << parmaeters.scribe-clientsecret >> --scribe-enable << parmaeters.scribe-enable >> --scribe-url << parmaeters.scribe-url >> --show << parmaeters.show >> --verbose << parmaeters.verbose >> --attest-config << parmaeters.attest-config >> --attest-default << parmaeters.attest-default >> --attest-name << parmaeters.attest-name >> --config << parmaeters.config >> --failonerror << parmaeters.failonerror >> --filter-purl << parmaeters.filter-purl >> --filter-regex << parmaeters.filter-regex >> --output-directory << parmaeters.output-directory >> --output-file << parmaeters.output-file >> --quiet << parmaeters.quiet >> --scribe-clientid << parmaeters.scribe-clientid >> --scribe-clientsecret << parmaeters.scribe-clientsecret >> --scribe-enable << parmaeters.scribe-enable >> --scribe-url << parmaeters.scribe-url >> --show << parmaeters.show >> --verbose << parmaeters.verbose >>
