@@ -64,10 +64,6 @@ parameters:
     description: Label to connect to sboms
     default: ""
     type: string
-  name:
-    description: Bomb custom/project name
-    default: ""
-    type: string
   normalizers-packagejson-enable:
     description: Normalize package json files
     default: true
@@ -111,5 +107,4 @@ parameters:
 steps:
 - run:
     name: Create SBOM for target
-    command: |
-      gensbom bom << parameters.TARGET >> --attach-regex << parmaeters.attach-regex >> --components << parmaeters.components >> --context-dir << parmaeters.context-dir >> --context-type << parmaeters.context-type >> --env << parmaeters.env >> --force << parmaeters.force >> --format << parmaeters.format >> --label << parmaeters.label >> --name << parmaeters.name >> --normalizers-packagejson-enable << parmaeters.normalizers-packagejson-enable >> --attest-config << parmaeters.attest-config >> --attest-default << parmaeters.attest-default >> --attest-name << parmaeters.attest-name >> --config << parmaeters.config >> --failonerror << parmaeters.failonerror >> --filter-purl << parmaeters.filter-purl >> --filter-regex << parmaeters.filter-regex >> --output-directory << parmaeters.output-directory >> --output-file << parmaeters.output-file >> --quiet << parmaeters.quiet >> --scribe-clientid << parmaeters.scribe-clientid >> --scribe-clientsecret << parmaeters.scribe-clientsecret >> --scribe-enable << parmaeters.scribe-enable >> --scribe-url << parmaeters.scribe-url >> --show << parmaeters.show >> --verbose << parmaeters.verbose >>
+    command: gensbom bom << parameters.TARGET >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>

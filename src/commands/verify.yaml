@@ -40,10 +40,6 @@ parameters:
     description: Sbom input formatter, options=[attest-cyclonedx-json]
     default: attest-cyclonedx-json
     type: string
-  name:
-    description: Custom/project name
-    default: ""
-    type: string
   output-directory:
     description: Report output directory
     default: /home/samtholiya/.cache/gensbom
@@ -83,5 +79,4 @@ parameters:
 steps:
 - run:
     name: Verify target by BOM attestation
-    command: |
-      gensbom verify << parameters.TARGET >> --context-type << parmaeters.context-type >> --inputformat << parmaeters.inputformat >> --name << parmaeters.name >> --attest-config << parmaeters.attest-config >> --attest-default << parmaeters.attest-default >> --attest-name << parmaeters.attest-name >> --config << parmaeters.config >> --failonerror << parmaeters.failonerror >> --filter-purl << parmaeters.filter-purl >> --filter-regex << parmaeters.filter-regex >> --output-directory << parmaeters.output-directory >> --output-file << parmaeters.output-file >> --quiet << parmaeters.quiet >> --scribe-clientid << parmaeters.scribe-clientid >> --scribe-clientsecret << parmaeters.scribe-clientsecret >> --scribe-enable << parmaeters.scribe-enable >> --scribe-url << parmaeters.scribe-url >> --show << parmaeters.show >> --verbose << parmaeters.verbose >>
+    command: gensbom verify << parameters.TARGET >> --context-type << parameters.context-type >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>

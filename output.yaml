@@ -1,0 +1,518 @@
+version: 2.1
+description: |
+    Sample orb description
+display:
+    home_url: https://www.example.com/docs
+    source_url: https://github.com/scribe-security/gensbom-orb
+commands:
+    bom:
+        description: Create SBOM for target
+        parameters:
+            TARGET:
+                default: ""
+                description: Create SBOM for target
+                type: string
+            attach-regex:
+                default: ""
+                description: Attach files content by regex
+                type: string
+            attest-config:
+                default: ""
+                description: Attestation config map
+                type: string
+            attest-default:
+                default: sigstore
+                description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+                type: string
+            attest-name:
+                default: gensbom
+                description: Attestation config name
+                type: string
+            components:
+                default: metadata,layers,packages,files,dep
+                description: Select sbom components groups, options=[metadata layers packages files dep]
+                type: string
+            config:
+                default: ""
+                description: Application config file
+                type: string
+            context-dir:
+                default: ""
+                description: Context dir
+                type: string
+            context-type:
+                default: local
+                description: Context type, options=[jenkins github local]
+                type: string
+            env:
+                default: ""
+                description: Envrionment keys to include in sbom
+                type: string
+            failonerror:
+                default: true
+                description: Fail on errors
+                type: boolean
+            filter-purl:
+                default: ""
+                description: Filter out purls by regex
+                type: string
+            filter-regex:
+                default: .*\.pyc,.*\.git/.*
+                description: Filter out files by regex
+                type: string
+            force:
+                default: false
+                description: Force overwrite cache
+                type: boolean
+            format:
+                default: cyclonedx-json
+                description: Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+                type: string
+            label:
+                default: ""
+                description: Label to connect to sboms
+                type: string
+            normalizers-packagejson-enable:
+                default: true
+                description: Normalize package json files
+                type: boolean
+            output-directory:
+                default: /home/samtholiya/.cache/gensbom
+                description: Report output directory
+                type: string
+            output-file:
+                default: ""
+                description: Output result to file
+                type: string
+            quiet:
+                default: false
+                description: Suppress all logging output
+                type: boolean
+            scribe-clientid:
+                default: ""
+                description: Scribe client id
+                type: string
+            scribe-clientsecret:
+                default: ""
+                description: Scribe client secret
+                type: string
+            scribe-enable:
+                default: false
+                description: Enable scribe client
+                type: boolean
+            scribe-url:
+                default: https://api.production.scribesecurity.com
+                description: Scribe url
+                type: string
+            show:
+                default: false
+                description: Print object to stdout
+                type: boolean
+            verbose:
+                default: 1
+                description: Increase verbosity (-v = info, -vv = debug)
+                type: integer
+        steps:
+            - run:
+                command: gensbom bom << parameters.TARGET >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                name: Create SBOM for target
+    find:
+        description: Find target BOM
+        parameters:
+            TARGET:
+                default: ""
+                description: Find target BOM
+                type: string
+            all:
+                default: false
+                description: Find all output types
+                type: boolean
+            attest-config:
+                default: ""
+                description: Attestation config map
+                type: string
+            attest-default:
+                default: sigstore
+                description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+                type: string
+            attest-name:
+                default: gensbom
+                description: Attestation config name
+                type: string
+            config:
+                default: ""
+                description: Application config file
+                type: string
+            failonerror:
+                default: true
+                description: Fail on errors
+                type: boolean
+            filter-purl:
+                default: ""
+                description: Filter out purls by regex
+                type: string
+            filter-regex:
+                default: .*\.pyc,.*\.git/.*
+                description: Filter out files by regex
+                type: string
+            format:
+                default: cyclonedx-json
+                description: Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+                type: string
+            output-directory:
+                default: /home/samtholiya/.cache/gensbom
+                description: Report output directory
+                type: string
+            output-file:
+                default: ""
+                description: Output result to file
+                type: string
+            quiet:
+                default: false
+                description: Suppress all logging output
+                type: boolean
+            scribe-clientid:
+                default: ""
+                description: Scribe client id
+                type: string
+            scribe-clientsecret:
+                default: ""
+                description: Scribe client secret
+                type: string
+            scribe-enable:
+                default: false
+                description: Enable scribe client
+                type: boolean
+            scribe-url:
+                default: https://api.production.scribesecurity.com
+                description: Scribe url
+                type: string
+            show:
+                default: false
+                description: Print object to stdout
+                type: boolean
+            verbose:
+                default: 1
+                description: Increase verbosity (-v = info, -vv = debug)
+                type: integer
+        steps:
+            - run:
+                command: gensbom find << parameters.TARGET >> --all << parameters.all >> --format << parameters.format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                name: Find target BOM
+    gensbom:
+        description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
+        parameters:
+            TARGET:
+                default: ""
+                description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
+                type: string
+            attach-regex:
+                default: ""
+                description: Attach files content by regex
+                type: string
+            attest-config:
+                default: ""
+                description: Attestation config map
+                type: string
+            attest-default:
+                default: sigstore
+                description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+                type: string
+            attest-name:
+                default: gensbom
+                description: Attestation config name
+                type: string
+            components:
+                default: metadata,layers,packages,files,dep
+                description: Select sbom components groups, options=[metadata layers packages files dep]
+                type: string
+            config:
+                default: ""
+                description: Application config file
+                type: string
+            context-dir:
+                default: ""
+                description: Context dir
+                type: string
+            context-type:
+                default: local
+                description: Context type, options=[jenkins github local]
+                type: string
+            env:
+                default: ""
+                description: Envrionment keys to include in sbom
+                type: string
+            failonerror:
+                default: true
+                description: Fail on errors
+                type: boolean
+            filter-purl:
+                default: ""
+                description: Filter out purls by regex
+                type: string
+            filter-regex:
+                default: .*\.pyc,.*\.git/.*
+                description: Filter out files by regex
+                type: string
+            force:
+                default: false
+                description: Force overwrite cache
+                type: boolean
+            format:
+                default: cyclonedx-json
+                description: Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+                type: string
+            label:
+                default: ""
+                description: Label to connect to sboms
+                type: string
+            normalizers-packagejson-enable:
+                default: true
+                description: Normalize package json files
+                type: boolean
+            output-directory:
+                default: /home/samtholiya/.cache/gensbom
+                description: Report output directory
+                type: string
+            output-file:
+                default: ""
+                description: Output result to file
+                type: string
+            quiet:
+                default: false
+                description: Suppress all logging output
+                type: boolean
+            scribe-clientid:
+                default: ""
+                description: Scribe client id
+                type: string
+            scribe-clientsecret:
+                default: ""
+                description: Scribe client secret
+                type: string
+            scribe-enable:
+                default: false
+                description: Enable scribe client
+                type: boolean
+            scribe-url:
+                default: https://api.production.scribesecurity.com
+                description: Scribe url
+                type: string
+            show:
+                default: false
+                description: Print object to stdout
+                type: boolean
+            verbose:
+                default: 1
+                description: Increase verbosity (-v = info, -vv = debug)
+                type: integer
+        steps:
+            - run:
+                command: gensbom gensbom << parameters.TARGET >> --attach-regex << parameters.attach-regex >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --components << parameters.components >> --config << parameters.config >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                name: Generate Software Bill Of Materials (SBOM) from container images and filesystems
+    install:
+        description: This will install the binary
+        parameters:
+            version:
+                default: latest
+                description: the version of the binary to install
+                type: string
+        steps:
+            - run:
+                command: |-
+                    #!/bin/sh
+                    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh
+                name: installing binaries version >> parameters.version >>
+    sign:
+        description: Sign external or local or cached BOM, creates statement/attestation
+        parameters:
+            TARGET:
+                default: ""
+                description: Sign external or local or cached BOM, creates statement/attestation
+                type: string
+            attest-config:
+                default: ""
+                description: Attestation config map
+                type: string
+            attest-default:
+                default: sigstore
+                description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+                type: string
+            attest-name:
+                default: gensbom
+                description: Attestation config name
+                type: string
+            config:
+                default: ""
+                description: Application config file
+                type: string
+            context-type:
+                default: local
+                description: Snapshot header types, options=[jenkins github local]
+                type: string
+            failonerror:
+                default: true
+                description: Fail on errors
+                type: boolean
+            filter-purl:
+                default: ""
+                description: Filter out purls by regex
+                type: string
+            filter-regex:
+                default: .*\.pyc,.*\.git/.*
+                description: Filter out files by regex
+                type: string
+            force:
+                default: false
+                description: Force overwrite cache
+                type: boolean
+            format:
+                default: attest-cyclonedx-json
+                description: Sbom output formatter, options=[attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+                type: string
+            inputformat:
+                default: cyclonedx-json
+                description: Sbom input formatter, options=[cyclonedx-json cyclonedx-xml]
+                type: string
+            output-directory:
+                default: /home/samtholiya/.cache/gensbom
+                description: Report output directory
+                type: string
+            output-file:
+                default: ""
+                description: Output result to file
+                type: string
+            quiet:
+                default: false
+                description: Suppress all logging output
+                type: boolean
+            scribe-clientid:
+                default: ""
+                description: Scribe client id
+                type: string
+            scribe-clientsecret:
+                default: ""
+                description: Scribe client secret
+                type: string
+            scribe-enable:
+                default: false
+                description: Enable scribe client
+                type: boolean
+            scribe-url:
+                default: https://api.production.scribesecurity.com
+                description: Scribe url
+                type: string
+            show:
+                default: false
+                description: Print object to stdout
+                type: boolean
+            verbose:
+                default: 1
+                description: Increase verbosity (-v = info, -vv = debug)
+                type: integer
+        steps:
+            - run:
+                command: gensbom sign << parameters.TARGET >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                name: Sign external or local or cached BOM, creates statement/attestation
+    verify:
+        description: Verify target by BOM attestation
+        parameters:
+            TARGET:
+                default: ""
+                description: Verify target by BOM attestation
+                type: string
+            attest-config:
+                default: ""
+                description: Attestation config map
+                type: string
+            attest-default:
+                default: sigstore
+                description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+                type: string
+            attest-name:
+                default: gensbom
+                description: Attestation config name
+                type: string
+            config:
+                default: ""
+                description: Application config file
+                type: string
+            context-type:
+                default: local
+                description: Snapshot header types, options=[jenkins github local]
+                type: string
+            failonerror:
+                default: true
+                description: Fail on errors
+                type: boolean
+            filter-purl:
+                default: ""
+                description: Filter out purls by regex
+                type: string
+            filter-regex:
+                default: .*\.pyc,.*\.git/.*
+                description: Filter out files by regex
+                type: string
+            inputformat:
+                default: attest-cyclonedx-json
+                description: Sbom input formatter, options=[attest-cyclonedx-json]
+                type: string
+            output-directory:
+                default: /home/samtholiya/.cache/gensbom
+                description: Report output directory
+                type: string
+            output-file:
+                default: ""
+                description: Output result to file
+                type: string
+            quiet:
+                default: false
+                description: Suppress all logging output
+                type: boolean
+            scribe-clientid:
+                default: ""
+                description: Scribe client id
+                type: string
+            scribe-clientsecret:
+                default: ""
+                description: Scribe client secret
+                type: string
+            scribe-enable:
+                default: false
+                description: Enable scribe client
+                type: boolean
+            scribe-url:
+                default: https://api.production.scribesecurity.com
+                description: Scribe url
+                type: string
+            show:
+                default: false
+                description: Print object to stdout
+                type: boolean
+            verbose:
+                default: 1
+                description: Increase verbosity (-v = info, -vv = debug)
+                type: integer
+        steps:
+            - run:
+                command: gensbom verify << parameters.TARGET >> --context-type << parameters.context-type >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                name: Verify target by BOM attestation
+executors:
+    default:
+        description: |
+            This is a sample executor using Docker and Node. If you want to provide a custom environment in your orb, insert your image here. If you do not require an executor, you can simply delete this directory.
+        docker:
+            - image: ubuntu:latest
+examples:
+    example:
+        description: |
+            Sample example description.
+        usage:
+            version: "2.1"
+            orbs:
+                <orb-name>: <namespace>/<orb-name>@1.2.3
+            workflows:
+                use-my-orb:
+                    jobs:
+                        - <orb-name>/<job-name>
+
