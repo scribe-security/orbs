@@ -16,7 +16,9 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - <orb-name>/greet
+      - gensbom/install
+      - gensbom/bom:
+          TARGET: alpine:latest
 workflows:
   test-deploy:
     jobs:
