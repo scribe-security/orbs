@@ -6,8 +6,11 @@ description: >
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    gensbom: scribe-security/gensbom@1.2.3
   workflows:
     use-my-orb:
       jobs:
-        - <orb-name>/<job-name>
+        - gensbom/install
+        - gensbom/verify:
+            TARGET: alpine:latest # any image to be analysed for sbom
+
