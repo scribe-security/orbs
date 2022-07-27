@@ -16,5 +16,4 @@ elif rpm --help >/dev/null ; then
     $SUDO yum install curl jq -y
 fi
 
-curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh
-export PATH=$PATH:/root/.scribe/bin
+curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
