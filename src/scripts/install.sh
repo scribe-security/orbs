@@ -17,4 +17,4 @@ elif rpm --help >/dev/null ; then
 fi
 
 curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh
-export PATH=$PATH:~/.scribe/bin
+export PATH=$PATH:/root/.scribe/bin
