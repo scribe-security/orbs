@@ -107,27 +107,27 @@ steps:
     command: >
         gensbom bom << parameters.TARGET >> \
           <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
-          <<# parameters.components >>--components << parameters.components >>><</ parameters.components >> \
-          <<# parameters.context-dir >>--context-dir << parameters.context-dir >>><</ parameters.context-dir >> \
-          <<# parameters.context-type >>--context-type << parameters.context-type >>><</ parameters.context-type >> \
-          <<# parameters.env >>--env << parameters.env >>><</ parameters.env >> \
-          <<# parameters.force >>--force << parameters.force >>><</ parameters.force >> \
-          <<# parameters.format >>--format << parameters.format >>><</ parameters.format >> \
-          <<# parameters.label >>--label << parameters.label >>><</ parameters.label >> \
-          <<# parameters.config >>--config << parameters.config >>><</ parameters.config >> \
-          <<# parameters.filter-purl >>--filter-purl << parameters.filter-purl >>><</ parameters.filter-purl >> \
-          <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >>><</ parameters.filter-regex >> \
-          <<# parameters.output-directory >>--output-directory << parameters.output-directory >>><</ parameters.output-directory >> \
-          <<# parameters.output-file >>--output-file << parameters.output-file >>><</ parameters.output-file >> \
-          <<# parameters.verbose >>--verbose << parameters.verbose >>><</ parameters.verbose >> \
-          <<# parameters.attest-config >>--attest.config << parameters.attest-config >>><</ parameters.attest-config >> \
-          <<# parameters.attest-name >>--attest.name << parameters.attest-name >>><</ parameters.attest-name >> \
-          <<# parameters.attest-default >>--attest.default << parameters.attest-default >>><</ parameters.attest-default >> \
-          <<# parameters.scribe-clientid >>--scribe.clientid << parameters.scribe-clientid >>><</ parameters.scribe-clientid  >> \
-          <<# parameters.scribe-clientsecret >>--scribe.clientsecret << parameters.scribe-clientsecret >>><</ parameters.scribe-clientsecret  >> \
-          <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >>><</ parameters.scribe-enable  >> \
-          <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >>><</ parameters.scribe-url  >> \
-          <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >>><</ parameters.scribe-audience  >> \
-          <<# parameters.scribe-loginurl  >>--scribe.auth0.loginurl << parameters.scribe-loginurl >>><</ parameters.scribe-loginurl  >> 
+          <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
+          <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
+          <<# parameters.context-type >>--context-type << parameters.context-type >><</ parameters.context-type >> \
+          <<# parameters.env >>--env << parameters.env >><</ parameters.env >> \
+          <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
+          <<# parameters.format >>--format << parameters.format >><</ parameters.format >> \
+          <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
+          <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
+          <<# parameters.filter-purl >>--filter-purl << parameters.filter-purl >><</ parameters.filter-purl >> \
+          <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
+          <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
+          <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
+          <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
+          <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
+          <<# parameters.attest-name >>--attest.name << parameters.attest-name >><</ parameters.attest-name >> \
+          <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
+          <<# parameters.scribe-clientid >>--scribe.clientid << parameters.scribe-clientid >><</ parameters.scribe-clientid  >> \
+          <<# parameters.scribe-clientsecret >>--scribe.clientsecret << parameters.scribe-clientsecret >><</ parameters.scribe-clientsecret  >> \
+          <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable  >> \
+          <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
+          <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
+          <<# parameters.scribe-loginurl  >>--scribe.auth0.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >> 
 
-      # <<# parameters.attach-regex >>--product-key << parameters.product-key >>><</ parameters.attach-regex >> \
+      # <<# parameters.attach-regex >>--product-key << parameters.product-key >><</ parameters.attach-regex >> \
