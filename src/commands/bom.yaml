@@ -79,4 +79,24 @@ parameters:
 steps:
 - run:
     name: Create SBOM for target
-    command: gensbom bom << parameters.TARGET >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --show << parameters.show >> --verbose << parameters.verbose >>
+    command: >
+        gensbom bom << parameters.TARGET >> \
+          --attach-regex << parameters.attach-regex >> \
+          --components << parameters.components >> \
+          --context-dir << parameters.context-dir >> \
+          --context-type << parameters.context-type >> \
+          --env << parameters.env >> \
+          --force << parameters.force >> \
+          --format << parameters.format >> \
+          --label << parameters.label >> \
+          --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> \
+          --config << parameters.config >> \
+          --failonerror << parameters.failonerror >> \
+          --filter-purl << parameters.filter-purl >> \
+          --filter-regex << parameters.filter-regex >> \
+          --output-directory << parameters.output-directory >> \
+          --output-file << parameters.output-file >> \
+          --quiet << parameters.quiet >> \
+          --show << parameters.show >> \
+          --verbose << parameters.verbose >>
+# <<# parameters.recursive >>--attach-regex << parameters.attach-regex >> \
