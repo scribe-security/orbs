@@ -119,7 +119,7 @@ steps:
           --filter-regex << parameters.filter-regex >> \
           --output-directory << parameters.output-directory >> \
           --output-file << parameters.output-file >> \
-          --verbose << parameters.verbose >>
+          --verbose << parameters.verbose >> \
           --attest.config << parameters.attest-config >> \
           --attest.name << parameters.attest-name >> \
           --attest.default << parameters.attest-default >> \
