@@ -7,5 +7,5 @@ description:  |
   * Valint - validate supply chain integrity tool
 
 display:
-  home_url: "https://scribe-security.com/documentation/ci-cd-integrations/circleci"
+  home_url: "https://scribesecurity.com"
   source_url: "https://github.com/scribe-security/cicleci-orbs"
