@@ -83,6 +83,7 @@ parameters:
   scribe-clientid:
     description: 'Scribe client id'
     type: string
+    default: ""
   scribe-clientsecret:
     description: 'Scribe access token'
     type: string
@@ -126,7 +127,6 @@ steps:
           --scribe.clientsecret << parameters.scribe-clientsecret >>
           --scribe.enable << parameters.scribe-enable >>
           --scribe.url << parameters.scribe-url >>
-          --scribe.clientid << parameters.scribe-clientid >>
           --scribe.auth0.audience << parameters.scribe-audience >>
           --scribe.loginurl << parameters.scribe-loginurl >>
       # --product-key << parameters.product-key >> \
