@@ -81,10 +81,10 @@ parameters:
     default: false
     type: boolean
   scribe-clientid:
-    description: 'Scribe client id' 
+    description: 'Scribe client id'
     type: string
   scribe-clientsecret:
-    description: 'Scribe access token' 
+    description: 'Scribe access token'
     type: string
     default: ""
   scribe-url:
@@ -92,11 +92,11 @@ parameters:
     type: string
     default: ""
   scribe-loginurl:
-    description: 'Scribe auth login url' 
+    description: 'Scribe auth login url'
     type: string
     default: ""
   scribe-audience:
-    description: 'Scribe auth audience' 
+    description: 'Scribe auth audience'
     type: string
     default: ""
 
@@ -130,59 +130,3 @@ steps:
           --scribe.clientid << parameters.scribe-clientid >>
           --scribe.auth0.audience << parameters.scribe-audience >>
           --scribe.loginurl << parameters.scribe-loginurl >>
-# <<# parameters.recursive >>--attach-regex << parameters.attach-regex >> \
-
-
-  type:
-    description: 'Target source type options=[docker,docker-archive, oci-archive, dir, registry]'
-    default: registry
-  target:
-    description: 'Target object name format=[<image:tag>, <dir_path>]'
-    required: true
-  verbose:
-    description: 'Increase verbosity (-v = info, -vv = debug)'
-    default: 1
-  config:
-    description: 'Application config file'
-  format:
-    description: 'Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json]'
-  output-directory:
-    description: 'Report output directory'
-    default: ./scribe/gensbom
-  output-file:
-    description: 'Output result to file'
-  name:
-    description: 'Custom/project name'
-  label:
-    description: 'Custom label'
-  env:
-    description: 'Custom env'
-  filter-regex:
-    description: 'Filter out files by regex'
-  attach-regex:
-    description: 'Collect files content by regex'
-  force:
-    description: 'Force overwrite cache'
-    default: false
-  attest-config:
-    description: 'Attestation config map'
-  attest-name:
-    description: 'Attestation config name (default "gensbom")'
-  attest-default:
-    description: 'Attestation default config, options=[sigstore sigstore-github x509]'
-    default: sigstore-github
-  scribe-enable:
-    description: 'Enable scribe client'
-    default: false
-  scribe-clientid:
-    description: 'Scribe client id' 
-  scribe-clientsecret:
-    description: 'Scribe access token' 
-  scribe-url:
-    description: 'Scribe url'
-  scribe-loginurl:
-    description: 'Scribe auth login url' 
-  scribe-audience:
-    description: 'Scribe auth audience' 
-  context-dir:
-    description: 'Context dir' 
