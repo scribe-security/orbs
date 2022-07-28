@@ -54,7 +54,7 @@ parameters:
     type: string
   output-directory:
     description: Report output directory
-    default: /home/samtholiya/.cache/gensbom
+    default: ./scribe/gensbom
     type: string
   output-file:
     description: Output result to file
@@ -129,4 +129,5 @@ steps:
           <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
           <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
           <<# parameters.scribe-loginurl  >>--scribe.auth0.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
+      #  - --context-type=circleci 2DO add support for circleci context.
       # <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \

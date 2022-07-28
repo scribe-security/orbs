@@ -19,6 +19,21 @@ jobs:
       - gensbom/install
       - gensbom/bom:
           target: alpine:latest
+
+  # integration-tests:
+  #   docker:
+  #     - image: ubuntu:latest
+  #   environment:
+  #     SCRIBE_URL: "https://api.staging.scribesecurity.com"
+  #     SCRIBE_LOGIN_URL: "https://scribesecurity-staging.us.auth0.com"
+  #     SCRIBE_AUDIENCE: "api.staging.scribesecurity.com"
+  #   steps:
+  #     - checkout
+  #     # Run your orb's commands to validate them.
+  #     - gensbom/install
+  #     - gensbom/bom:
+  #         target: alpine:latest
+  
 workflows:
   test-deploy:
     jobs:
