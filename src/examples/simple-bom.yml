@@ -1,0 +1,20 @@
+description: >
+  Generate a SBOM for targets
+
+usage:
+  version: 2.1
+  orbs:
+    gensbom: scribe-security/gensbom@1.2.3
+  workflows:
+    use-my-orb:
+      jobs:
+        - checkout
+        - gensbom/install
+        # Bom checkout
+        - gensbom/bom:
+            target: dir:.
+            verbose: 2
+        # Bom some image
+        - gensbom/bom:
+            target: alpine:latest
+            verbose: 2

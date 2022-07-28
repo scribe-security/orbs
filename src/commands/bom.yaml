@@ -1,11 +1,7 @@
 description: Create SBOM for target
 parameters:
-  TARGET:
+  target:
     description: Create SBOM for target
-    default: ""
-    type: string
-  attach-regex:
-    description: Attach files content by regex
     default: ""
     type: string
   components:
@@ -28,10 +24,10 @@ parameters:
     description: Envrionment keys to include in sbom
     default: ""
     type: string
-  failonerror:
-    description: Fail on errors
-    default: true
-    type: boolean
+  product-key:
+    description: 'Custom/project product-key'
+    default: ""
+    type: string
   filter-purl:
     description: Filter out purls by regex
     default: ""
@@ -39,6 +35,10 @@ parameters:
   filter-regex:
     description: Filter out files by regex
     default: .*\.pyc,.*\.git/.*
+    type: string
+  attach-regex:
+    description: Attach files content by regex
+    default: ""
     type: string
   force:
     description: Force overwrite cache
@@ -52,31 +52,82 @@ parameters:
     description: Label to connect to sboms
     default: ""
     type: string
-  normalizers-packagejson-enable:
-    description: Normalize package json files
-    default: true
-    type: boolean
   output-directory:
     description: Report output directory
-    default: /home/samtholiya/.cache/gensbom
+    default: ./scribe/gensbom
     type: string
   output-file:
     description: Output result to file
     default: ""
     type: string
-  quiet:
-    description: Suppress all logging output
-    default: false
-    type: boolean
-  show:
-    description: Print object to stdout
-    default: false
-    type: boolean
   verbose:
     description: Increase verbosity (-v = info, -vv = debug)
     default: 1
     type: integer
+  attest-config:
+    description: 'Attestation config map'
+    default: ""
+    type: string
+  attest-name:
+    description: 'Attestation config name (default "gensbom")'
+    default: ""
+    type: string
+  attest-default:
+    description: 'Attestation default config, options=[sigstore sigstore-github x509]'
+    default: ""
+    type: string
+  scribe-enable:
+    description: 'Enable scribe client'
+    default: false
+    type: boolean
+  scribe-clientid:
+    description: 'Scribe client id'
+    type: string
+    default: ""
+  scribe-clientsecret:
+    description: 'Scribe access token'
+    type: string
+    default: ""
+  scribe-url:
+    description: 'Scribe url'
+    type: string
+    default: ""
+  scribe-loginurl:
+    description: 'Scribe auth login url'
+    type: string
+    default: ""
+  scribe-audience:
+    description: 'Scribe auth audience'
+    type: string
+    default: ""
+
 steps:
 - run:
     name: Create SBOM for target
-    command: gensbom bom << parameters.TARGET >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --show << parameters.show >> --verbose << parameters.verbose >>
+    command: >
+        gensbom bom << parameters.target >> \
+          <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
+          <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
+          <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
+          <<# parameters.context-type >>--context-type << parameters.context-type >><</ parameters.context-type >> \
+          <<# parameters.env >>--env << parameters.env >><</ parameters.env >> \
+          <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
+          <<# parameters.format >>--format << parameters.format >><</ parameters.format >> \
+          <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
+          <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
+          <<# parameters.filter-purl >>--filter-purl << parameters.filter-purl >><</ parameters.filter-purl >> \
+          <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
+          <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
+          <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
+          <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
+          <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
+          <<# parameters.attest-name >>--attest.name << parameters.attest-name >><</ parameters.attest-name >> \
+          <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
+          <<# parameters.scribe-clientid >>--scribe.clientid << parameters.scribe-clientid >><</ parameters.scribe-clientid  >> \
+          <<# parameters.scribe-clientsecret >>--scribe.clientsecret << parameters.scribe-clientsecret >><</ parameters.scribe-clientsecret  >> \
+          <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable  >> \
+          <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
+          <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
+          <<# parameters.scribe-loginurl  >>--scribe.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
+      #  - --context-type=circleci 2DO add support for circleci context.
+      # <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \

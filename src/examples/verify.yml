@@ -1,5 +1,5 @@
 description: >
-  Sample example description.
+  MOCK
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
 # Comments are not retained.
@@ -12,5 +12,5 @@ usage:
       jobs:
         - gensbom/install
         - gensbom/verify:
-            TARGET: alpine:latest # any image to be analysed for sbom
+            target: alpine:latest # any image to be analysed for sbom
 

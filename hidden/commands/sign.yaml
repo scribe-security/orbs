@@ -1,13 +1,9 @@
-description: Find target BOM
+description: Sign external or local or cached BOM, creates statement/attestation
 parameters:
-  TARGET:
-    description: Find target BOM
+  target:
+    description: Sign external or local or cached BOM, creates statement/attestation
     default: ""
     type: string
-  all:
-    description: Find all output types
-    default: false
-    type: boolean
   attest-config:
     description: Attestation config map
     default: ""
@@ -24,6 +20,10 @@ parameters:
     description: Application config file
     default: ""
     type: string
+  context-type:
+    description: Snapshot header types, options=[jenkins github local]
+    default: local
+    type: string
   failonerror:
     description: Fail on errors
     default: true
@@ -36,8 +36,16 @@ parameters:
     description: Filter out files by regex
     default: .*\.pyc,.*\.git/.*
     type: string
+  force:
+    description: Force overwrite cache
+    default: false
+    type: boolean
   format:
-    description: Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+    description: Sbom output formatter, options=[attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+    default: attest-cyclonedx-json
+    type: string
+  inputformat:
+    description: Sbom input formatter, options=[cyclonedx-json cyclonedx-xml]
     default: cyclonedx-json
     type: string
   output-directory:
@@ -78,5 +86,5 @@ parameters:
     type: integer
 steps:
 - run:
-    name: Find target BOM
-    command: gensbom find << parameters.TARGET >> --all << parameters.all >> --format << parameters.format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+    name: Sign external or local or cached BOM, creates statement/attestation
+    command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>

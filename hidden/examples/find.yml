@@ -11,6 +11,6 @@ usage:
     use-my-orb:
       jobs:
         - gensbom/install
-        - gensbom/bom:
-            TARGET: alpine:latest # any image to be analysed for sbom
+        - gensbom/find:
+            target: alpine:latest # any image to be analysed for sbom
 
