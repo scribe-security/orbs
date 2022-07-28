@@ -99,10 +99,6 @@ parameters:
     description: 'Scribe auth audience' 
     type: string
     default: ""
-  context-dir:
-    description: 'Context dir' 
-    type: string
-    default: ""
 
 steps:
 - run:
@@ -134,7 +130,6 @@ steps:
           --scribe.clientid << parameters.scribe-clientid >>
           --scribe.auth0.audience << parameters.scribe-audience >>
           --scribe.loginurl << parameters.scribe-loginurl >>
-          --context-dir << parameters.context-dir >>
 # <<# parameters.recursive >>--attach-regex << parameters.attach-regex >> \
 
 
