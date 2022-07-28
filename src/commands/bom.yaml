@@ -120,13 +120,13 @@ steps:
           --output-directory << parameters.output-directory >> \
           --output-file << parameters.output-file >> \
           --verbose << parameters.verbose >>
-          --attest.config << parameters.attest-config >>
-          --attest.name << parameters.attest-name >>
-          --attest.default << parameters.attest-default >>
-          --scribe.clientid << parameters.scribe-clientid >>
-          --scribe.clientsecret << parameters.scribe-clientsecret >>
-          --scribe.enable << parameters.scribe-enable >>
-          --scribe.url << parameters.scribe-url >>
-          --scribe.auth0.audience << parameters.scribe-audience >>
+          --attest.config << parameters.attest-config >> \
+          --attest.name << parameters.attest-name >> \
+          --attest.default << parameters.attest-default >> \
+          --scribe.clientid << parameters.scribe-clientid >> \
+          --scribe.clientsecret << parameters.scribe-clientsecret >> \
+          --scribe.enable << parameters.scribe-enable >> \
+          --scribe.url << parameters.scribe-url >> \
+          --scribe.auth0.audience << parameters.scribe-audience >> \
           --scribe.loginurl << parameters.scribe-loginurl >>
       # --product-key << parameters.product-key >> \
