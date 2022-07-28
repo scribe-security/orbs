@@ -1,6 +1,6 @@
 description: Verify target by BOM attestation
 parameters:
-  TARGET:
+  target:
     description: Verify target by BOM attestation
     default: ""
     type: string

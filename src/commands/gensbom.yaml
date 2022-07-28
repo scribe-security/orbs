@@ -1,6 +1,6 @@
 description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
 parameters:
-  TARGET:
+  target:
     description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
     default: ""
     type: string

@@ -12,5 +12,5 @@ usage:
       jobs:
         - gensbom/install
         - gensbom/verify:
-            TARGET: alpine:latest # any image to be analysed for sbom
+            target: alpine:latest # any image to be analysed for sbom
 
