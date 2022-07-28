@@ -1,9 +1,11 @@
 #!/bin/sh
-
+set -x
+pwd
 if [[ $(command -v wget) == "" ]]; then
     wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
     exit 0
 elif [[[ $(command -v curl) == "" ]]; then
+    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
 else 
     id=$(id -u)
     if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
