@@ -33,8 +33,7 @@ jobs:
           command: |
             git clone -b v1.0.0-alpha.4 --single-branch https://github.com/mongo-express/mongo-express.git --depth=1 mongo-express-scm
       # Run your orb's commands to validate them.
-      - gensbom/install:
-          name: "Installing Scribe tools"
+      - gensbom/install
       - gensbom/bom:
           target: dir:mongo-express-scm
           verbose: 3
