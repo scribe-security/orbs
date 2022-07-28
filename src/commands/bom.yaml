@@ -74,7 +74,7 @@ parameters:
     type: string
   attest-default:
     description: 'Attestation default config, options=[sigstore sigstore-github x509]'
-    default: "sigstore"
+    default: ""
     type: string
   scribe-enable:
     description: 'Enable scribe client'
