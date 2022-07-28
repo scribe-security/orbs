@@ -33,13 +33,13 @@ jobs:
       - gensbom/install
       - gensbom/bom:
           target: alpine:latest
-           verbose: 3
-           scribe-enable: true
-           scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-           scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
-           scribe-url:  $SCRIBE_URL
-           scribe-loginurl: $SCRIBE_LOGIN_URL
-           scribe-audience: $SCRIBE_AUDIENCE
+          verbose: 3
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-url:  $SCRIBE_URL
+          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-audience: $SCRIBE_AUDIENCE
 workflows:
   test-deploy:
     jobs:
