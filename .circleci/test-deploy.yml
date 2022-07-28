@@ -18,7 +18,7 @@ jobs:
       # Run your orb's commands to validate them.
       - gensbom/install
       - gensbom/bom:
-          TARGET: alpine:latest
+          target: alpine:latest
 workflows:
   test-deploy:
     jobs:

@@ -17,3 +17,6 @@ elif rpm --help >/dev/null ; then
 fi
 
 curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
+
+# 2DO use a more basic and common tool instead of curl.
+# wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
