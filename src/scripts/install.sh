@@ -11,10 +11,10 @@ if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
 if is_command wget; then
     ls -lh /usr/local/
     ls -lh /usr/local/bin
-    $SUDO wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
+    wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
     exit 0
 elif is_command curl; then
-    $SUDO curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
+    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
 else 
     if dpkg --help >/dev/null ; then
         export EXT=".deb"
@@ -29,9 +29,12 @@ else
         $SUDO yum install curl jq -y
     fi
 
-    $SUDO curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh -s -- -b /usr/local/bin
+    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
 fi
 
 
-
-# 2DO use a more basic and common tool instead of curl.
+# # Exit if version is already installed
+# if command -v secrethub >/dev/null 2>&1 && secrethub --version 2>&1 | cut -d "," -f 1 | grep -q "$(echo $VERSION | cut -c 2-)$"; then
+#   echo -e "${OK_COLOR}==> Version ${VERSION} is already installed${NO_COLOR}"
+#   exit 0
+# fi
