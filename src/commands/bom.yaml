@@ -24,8 +24,8 @@ parameters:
     description: Envrionment keys to include in sbom
     default: ""
     type: string
-  name:
-    description: 'Custom/project name'
+  product-key:
+    description: 'Custom/project product-key'
     default: ""
     type: string
   filter-purl:
@@ -114,7 +114,6 @@ steps:
           --format << parameters.format >> \
           --label << parameters.label >> \
           --config << parameters.config >> \
-          --name << parameters.name >> \
           --filter-purl << parameters.filter-purl >> \
           --filter-regex << parameters.filter-regex >> \
           --output-directory << parameters.output-directory >> \
@@ -130,3 +129,4 @@ steps:
           --scribe.clientid << parameters.scribe-clientid >>
           --scribe.auth0.audience << parameters.scribe-audience >>
           --scribe.loginurl << parameters.scribe-loginurl >>
+      # --product-key << parameters.product-key >> \
