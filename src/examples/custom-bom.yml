@@ -3,7 +3,7 @@ description: >
   * Adding envrionments
   * Selecting sections
   * Adding labels
-  
+
 usage:
   version: 2.1
   orbs:
@@ -12,7 +12,6 @@ usage:
     use-my-orb:
       jobs:
         - gensbom/install
-        # Bom some image
         - gensbom/bom:
             target: alpine:latest
             verbose: 2

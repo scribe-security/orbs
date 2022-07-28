@@ -1,6 +1,6 @@
 description: >
   Generate a SBOM for targets
-  
+
 usage:
   version: 2.1
   orbs:
