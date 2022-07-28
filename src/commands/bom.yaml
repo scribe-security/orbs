@@ -81,7 +81,7 @@ steps:
     name: Create SBOM for target
     command: >
         gensbom bom << parameters.TARGET >> \
-          --attach-regex << parameters.attach-regex >> \
+          <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
           --components << parameters.components >> \
           --context-dir << parameters.context-dir >> \
           --context-type << parameters.context-type >> \
