@@ -3,7 +3,7 @@ description: |
     Sample orb description
 display:
     home_url: https://www.example.com/docs
-    source_url: https://github.com/scribe-security/scribe-orbs-orb
+    source_url: https://github.com/scribe-security/orbs-orb
 commands:
     bom:
         description: Create SBOM for target
@@ -199,7 +199,7 @@ commands:
             - run:
                 command: gensbom find << parameters.target >> --all << parameters.all >> --format << parameters.format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Find target BOM
-    gensbom:
+    scribe:
         description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
         parameters:
             target:

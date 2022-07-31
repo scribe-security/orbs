@@ -5,15 +5,15 @@ description: >
 usage:
   version: 2.1
   orbs:
-    gensbom: scribe-security/scribe-orbs@1.2.3
+    scribe: scribe-security/orbs@1.2.3
   workflows:
   integration-tests:
     docker:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - scribe-orbs/install
-      - scribe-orbs/bom:
+      - scribe/install
+      - scribe/bom:
           target: dir:.
           verbose: 2
           scribe-enable: true
@@ -21,7 +21,7 @@ usage:
           scribe-clientsecret: $SCRIBE_CLIENT_SECRET
       - run: |
           docker build . -t example_image
-      - scribe-orbs/bom:
+      - scribe/bom:
           target: example_image:latest
           verbose: 2
           scribe-enable: true

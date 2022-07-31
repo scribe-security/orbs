@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  gensbom: scribe-security/scribe-orbs@dev:<<pipeline.git.revision>>
+  scribe: scribe-security/orbs@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 
 filters: &filters
@@ -16,8 +16,8 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - scribe-orbs/install
-      - scribe-orbs/bom:
+      - scribe/install
+      - scribe/bom:
           target: alpine:latest
 
   integration-tests:
@@ -32,8 +32,8 @@ jobs:
           name: custom checkout
           command: |
             git clone -b v1.0.0-alpha.4 --single-branch https://github.com/mongo-express/mongo-express.git --depth=1 mongo-express-scm
-      - scribe-orbs/install
-      - scribe-orbs/bom:
+      - scribe/install
+      - scribe/bom:
           target: dir:mongo-express-scm
           verbose: 2
           scribe-enable: true
@@ -42,7 +42,7 @@ jobs:
           scribe-url:  $SCRIBE_URL
           scribe-loginurl: $SCRIBE_LOGIN_URL
           scribe-audience: $SCRIBE_AUDIENCE
-      - scribe-orbs/bom:
+      - scribe/bom:
           target: mongo-express:1.0.0-alpha.4
           verbose: 2
           scribe-enable: true
@@ -72,7 +72,7 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: scribe-security/scribe-orbs-orb
+          orb-name: scribe-security/orbs-orb
           vcs-type: << pipeline.project.type >>
           pub-type: production
           requires:
