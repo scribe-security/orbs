@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  gensbom: scribe-security/gensbom@dev:<<pipeline.git.revision>>
+  gensbom: scribe-security/scribe-orbs@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 
 filters: &filters
@@ -72,7 +72,7 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: scribe-security/gensbom-orb
+          orb-name: scribe-security/scribe-orbs-orb
           vcs-type: << pipeline.project.type >>
           pub-type: production
           requires:

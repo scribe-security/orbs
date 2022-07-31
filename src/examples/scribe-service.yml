@@ -1,0 +1,43 @@
+description: >
+  Generate a SBOM for source and image,
+  Upload sbom to scribe and download integrity report.
+
+usage:
+  version: 2.1
+  orbs:
+    gensbom: scribe-security/scribe-orbs@1.2.3
+  workflows:
+  integration-tests:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - gensbom/install
+      - gensbom/bom:
+          target: dir:.
+          verbose: 2
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-url:  $SCRIBE_URL
+          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-audience: $SCRIBE_AUDIENCE
+      - run: |
+          docker build . -t example_image
+      - gensbom/bom:
+          target: example_image:latest
+          verbose: 2
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-url:  $SCRIBE_URL
+          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-audience: $SCRIBE_AUDIENCE
+      - valint/report:
+          verbose: 3
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-url:  $SCRIBE_URL
+          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-audience: $SCRIBE_AUDIENCE
