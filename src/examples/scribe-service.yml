@@ -12,32 +12,24 @@ usage:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - gensbom/install
-      - gensbom/bom:
+      - scribe-orbs/install
+      - scribe-orbs/bom:
           target: dir:.
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
-          scribe-url:  $SCRIBE_URL
-          scribe-loginurl: $SCRIBE_LOGIN_URL
-          scribe-audience: $SCRIBE_AUDIENCE
+          scribe-clientid: $SCRIBE_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
       - run: |
           docker build . -t example_image
-      - gensbom/bom:
+      - scribe-orbs/bom:
           target: example_image:latest
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
-          scribe-url:  $SCRIBE_URL
-          scribe-loginurl: $SCRIBE_LOGIN_URL
-          scribe-audience: $SCRIBE_AUDIENCE
+          scribe-clientid: $SCRIBE_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
       - valint/report:
-          verbose: 3
+          verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-clientid: $SCRIBE_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
-          scribe-loginurl: $SCRIBE_LOGIN_URL
-          scribe-audience: $SCRIBE_AUDIENCE

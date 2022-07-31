@@ -11,8 +11,8 @@ usage:
   workflows:
     use-my-orb:
       jobs:
-        - gensbom/install
-        - gensbom/bom:
+        - scribe-orbs/install
+        - scribe-orbs/bom:
             target: alpine:latest
             verbose: 2
             project-key: # Add product key label

@@ -16,8 +16,8 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - gensbom/install
-      - gensbom/bom:
+      - scribe-orbs/install
+      - scribe-orbs/bom:
           target: alpine:latest
 
   integration-tests:
@@ -32,8 +32,8 @@ jobs:
           name: custom checkout
           command: |
             git clone -b v1.0.0-alpha.4 --single-branch https://github.com/mongo-express/mongo-express.git --depth=1 mongo-express-scm
-      - gensbom/install
-      - gensbom/bom:
+      - scribe-orbs/install
+      - scribe-orbs/bom:
           target: dir:mongo-express-scm
           verbose: 2
           scribe-enable: true
@@ -42,7 +42,7 @@ jobs:
           scribe-url:  $SCRIBE_URL
           scribe-loginurl: $SCRIBE_LOGIN_URL
           scribe-audience: $SCRIBE_AUDIENCE
-      - gensbom/bom:
+      - scribe-orbs/bom:
           target: mongo-express:1.0.0-alpha.4
           verbose: 2
           scribe-enable: true

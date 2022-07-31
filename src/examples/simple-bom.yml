@@ -9,12 +9,12 @@ usage:
     use-my-orb:
       jobs:
         - checkout
-        - gensbom/install
+        - scribe-orbs/install
         # Bom checkout
-        - gensbom/bom:
+        - scribe-orbs/bom:
             target: dir:.
             verbose: 2
         # Bom some image
-        - gensbom/bom:
+        - scribe-orbs/bom:
             target: alpine:latest
             verbose: 2

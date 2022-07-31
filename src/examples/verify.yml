@@ -10,7 +10,7 @@ usage:
   workflows:
     use-my-orb:
       jobs:
-        - gensbom/install
-        - gensbom/verify:
+        - scribe-orbs/install
+        - scribe-orbs/verify:
             target: alpine:latest # any image to be analysed for sbom
 

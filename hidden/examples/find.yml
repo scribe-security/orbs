@@ -10,7 +10,7 @@ usage:
   workflows:
     use-my-orb:
       jobs:
-        - gensbom/install
+        - scribe-orbs/install
         - gensbom/find:
             target: alpine:latest # any image to be analysed for sbom
 
