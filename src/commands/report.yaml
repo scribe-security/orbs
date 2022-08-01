@@ -47,6 +47,7 @@ parameters:
   section:
     description: Select report sections, options=[files packages packages-files summary stat]
     type: string
+    default: ""
   verbose:
     description: Increase verbosity (-v = info, -vv = debug)
     default: 2
