@@ -68,7 +68,6 @@ steps:
         <<# parameters.integrity >>--integrity << parameters.integrity >><</ parameters.integrity >> \
         <<# parameters.section >>--section << parameters.section >><</ parameters.section >> \
         <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-        <<# parameters.context-type >>--context-type << parameters.context-type >><</ parameters.context-type >> \
         <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
         <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
         <<# parameters.scribe-clientid >>--scribe.clientid << parameters.scribe-clientid >><</ parameters.scribe-clientid  >> \
@@ -77,6 +76,6 @@ steps:
         <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
         <<# parameters.scribe-audience  >>--scribe.auth.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
         <<# parameters.scribe-loginurl  >>--scribe.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
-        <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >>
+        <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >>
         <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >>
         <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >>
