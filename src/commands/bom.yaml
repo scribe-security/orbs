@@ -62,7 +62,7 @@ parameters:
     type: string
   verbose:
     description: Increase verbosity (-v = info, -vv = debug)
-    default: 1
+    default: 2
     type: integer
   attest-config:
     description: 'Attestation config map'
