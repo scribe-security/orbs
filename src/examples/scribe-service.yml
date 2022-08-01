@@ -27,9 +27,8 @@ usage:
           scribe-enable: true
           scribe-clientid: $SCRIBE_CLIENT_ID
           scribe-clientsecret: $SCRIBE_CLIENT_SECRET
-      - valint/report:
+      - scribe/report:
           verbose: 2
           scribe-enable: true
           scribe-clientid: $SCRIBE_CLIENT_ID
           scribe-clientsecret: $SCRIBE_CLIENT_SECRET
-          scribe-url:  $SCRIBE_URL
