@@ -4,17 +4,17 @@ description: >
 usage:
   version: 2.1
   orbs:
-    gensbom: scribe-security/gensbom@1.2.3
+    scribe: scribe-security/orbs@1.2.3
   workflows:
     use-my-orb:
       jobs:
         - checkout
-        - gensbom/install
+        - scribe/install
         # Bom checkout
-        - gensbom/bom:
+        - scribe/bom:
             target: dir:.
             verbose: 2
         # Bom some image
-        - gensbom/bom:
+        - scribe/bom:
             target: alpine:latest
             verbose: 2

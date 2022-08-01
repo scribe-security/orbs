@@ -1,0 +1,35 @@
+description: >
+  Generate a SBOM for source and image,
+  Upload sbom to scribe and download integrity report.
+
+usage:
+  version: 2.1
+  orbs:
+    scribe: scribe-security/orbs@1.2.3
+  workflows:
+  integration-tests:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - scribe/install
+      - scribe/bom:
+          target: dir:.
+          verbose: 2
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
+      - run: |
+          docker build . -t example_image
+      - scribe/bom:
+          target: example_image:latest
+          verbose: 2
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
+      - valint/report:
+          verbose: 2
+          scribe-enable: true
+          scribe-clientid: $SCRIBE_CLIENT_ID
+          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
+          scribe-url:  $SCRIBE_URL

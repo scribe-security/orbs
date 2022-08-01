@@ -7,12 +7,12 @@ description: >
 usage:
   version: 2.1
   orbs:
-    gensbom: scribe-security/gensbom@1.2.3
+    scribe: scribe-security/orbs@1.2.3
   workflows:
     use-my-orb:
       jobs:
-        - gensbom/install
-        - gensbom/bom:
+        - scribe/install
+        - scribe/bom:
             target: alpine:latest
             verbose: 2
             project-key: # Add product key label
