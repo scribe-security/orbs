@@ -10,11 +10,11 @@ parameters:
     type: string
   integrity:
     description: Select report integrity, options=[Modified Not_Covered Validated Not_Validated]
-    default: Modified,Not_Covered,Validated,Not_Validated
+    default: ""
     type: string
   output-directory:
     description: Output directory path
-    default: /home/samtholiya/.cache/valint
+    default: ./scribe/valint
     type: string
   output-file:
     description: Output file path
@@ -46,7 +46,6 @@ parameters:
     default: ""
   section:
     description: Select report sections, options=[files packages packages-files summary stat]
-    default: files,packages,packages-files,summary,stat
     type: string
   verbose:
     description: Increase verbosity (-v = info, -vv = debug)
