@@ -50,7 +50,7 @@ parameters:
     default: ""
   verbose:
     description: Increase verbosity (-v = info, -vv = debug)
-    default: 2
+    default: 1
     type: integer
   timeout:
     description: Timeout duration
@@ -76,6 +76,6 @@ steps:
         <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
         <<# parameters.scribe-audience  >>--scribe.auth.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
         <<# parameters.scribe-loginurl  >>--scribe.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
-        <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >>
+        <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >>
         <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >>
         <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >>
