@@ -3,7 +3,7 @@ description: |
     Sample orb description
 display:
     home_url: https://www.example.com/docs
-    source_url: https://github.com/scribe-security/orbs-orb
+    source_url: https://github.com/scribe-security/orbs
 commands:
     bom:
         description: Create SBOM for target
