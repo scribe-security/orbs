@@ -52,6 +52,14 @@ parameters:
     description: Increase verbosity (-v = info, -vv = debug)
     default: 1
     type: integer
+  timeout:
+    description: Timeout duration
+    default: 60s
+    type: string
+  backoff:
+    description: Backoff duration
+    default: 5s
+    type: string
 steps:
 - run:
     name: download report from scribe service
@@ -70,3 +78,5 @@ steps:
         <<# parameters.scribe-audience  >>--scribe.auth.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
         <<# parameters.scribe-loginurl  >>--scribe.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
         <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >>
+        <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >>
+        <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >>
