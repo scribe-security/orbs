@@ -23,7 +23,6 @@ workflows:
           filters: *filters
       - orb-tools/publish:
           orb-name: scribe-security/orbs
-          pub-type: dev
           vcs-type: << pipeline.project.type >>
           requires:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
