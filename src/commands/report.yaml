@@ -12,10 +12,6 @@ parameters:
     description: Select report integrity, options=[Modified Not_Covered Validated Not_Validated]
     default: Modified,Not_Covered,Validated,Not_Validated
     type: string
-  level:
-    description: Log level, options=[panic fatal error warning info debug trace]
-    default: ""
-    type: string
   output-directory:
     description: Output directory path
     default: /home/samtholiya/.cache/valint
@@ -24,37 +20,33 @@ parameters:
     description: Output file path
     default: ""
     type: string
-  quiet:
-    description: Suppress all logging output
+  scribe-enable:
+    description: 'Enable scribe client'
     default: false
     type: boolean
   scribe-clientid:
-    description: Scribe client id
-    default: ""
+    description: 'Scribe client id'
     type: string
+    default: ""
   scribe-clientsecret:
-    description: Scribe client secret
+    description: 'Scribe access token'
+    type: string
     default: ""
-    type: string
-  scribe-enable:
-    description: Enable scribe client
-    default: false
-    type: boolean
   scribe-url:
-    description: Scribe url
-    default: https://api.production.scribesecurity.com
+    description: 'Scribe url'
     type: string
+    default: ""
+  scribe-loginurl:
+    description: 'Scribe auth login url'
+    type: string
+    default: ""
+  scribe-audience:
+    description: 'Scribe auth audience'
+    type: string
+    default: ""
   section:
     description: Select report sections, options=[files packages packages-files summary stat]
     default: files,packages,packages-files,summary,stat
-    type: string
-  show:
-    description: Print report to stdout
-    default: false
-    type: boolean
-  target:
-    description: download report from scribe service
-    default: ""
     type: string
   verbose:
     description: Increase verbosity (-v = info, -vv = debug)
@@ -64,18 +56,17 @@ steps:
 - run:
     name: download report from scribe service
     command: |
-      valint report << parameters.target >> <<# parameters.integrity >>--integrity << parameters.integrity >><</ parameters.integrity >> \
-       <<# parameters.scribe-enable >>--scribe-enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
-       <<# parameters.section >>--section << parameters.section >><</ parameters.section >> \
-       <<# parameters.show >>--show << parameters.show >><</ parameters.show >> \
-       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-       <<# parameters.context-type >>--context-type << parameters.context-type >><</ parameters.context-type >> \
-       <<# parameters.level >>--level << parameters.level >><</ parameters.level >> \
-       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
-       <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
-       <<# parameters.quiet >>--quiet << parameters.quiet >><</ parameters.quiet >> \
-       <<# parameters.scribe-clientid >>--scribe-clientid << parameters.scribe-clientid >><</ parameters.scribe-clientid >> \
-       <<# parameters.scribe-clientsecret >>--scribe-clientsecret << parameters.scribe-clientsecret >><</ parameters.scribe-clientsecret >> \
-       <<# parameters.scribe-enable >>--scribe-enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
-       <<# parameters.scribe-url >>--scribe-url << parameters.scribe-url >><</ parameters.scribe-url >> \
-       <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
+      valint report \
+        <<# parameters.integrity >>--integrity << parameters.integrity >><</ parameters.integrity >> \
+        <<# parameters.section >>--section << parameters.section >><</ parameters.section >> \
+        <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
+        <<# parameters.context-type >>--context-type << parameters.context-type >><</ parameters.context-type >> \
+        <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
+        <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
+        <<# parameters.scribe-clientid >>--scribe.clientid << parameters.scribe-clientid >><</ parameters.scribe-clientid  >> \
+        <<# parameters.scribe-clientsecret >>--scribe.clientsecret << parameters.scribe-clientsecret >><</ parameters.scribe-clientsecret  >> \
+        <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable  >> \
+        <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
+        <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
+        <<# parameters.scribe-loginurl  >>--scribe.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
+        <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >>
