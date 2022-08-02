@@ -1,3 +1,8 @@
+---
+title: circle-ci
+sidebar_position: 2
+---
+
 # Scribe CircleCI orbs
 
 <!---
