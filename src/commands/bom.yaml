@@ -106,6 +106,7 @@ steps:
     name: Create SBOM for target
     command: >
         gensbom bom << parameters.target >> \
+          <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
           <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
           <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
           <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
@@ -130,4 +131,3 @@ steps:
           <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
           <<# parameters.scribe-loginurl  >>--scribe.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
       #  - --context-type=circleci 2DO add support for circleci context.
-      # <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
