@@ -60,11 +60,11 @@ parameters:
     description: Suppress all logging output
     default: false
     type: boolean
-  scribe-clientid:
+  scribe-client-id:
     description: Scribe client id
     default: ""
     type: string
-  scribe-clientsecret:
+  scribe-client-secret:
     description: Scribe client secret
     default: ""
     type: string
@@ -87,4 +87,4 @@ parameters:
 steps:
 - run:
     name: Sign external or local or cached BOM, creates statement/attestation
-    command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+    command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>

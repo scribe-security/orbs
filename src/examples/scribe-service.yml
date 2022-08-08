@@ -17,18 +17,18 @@ usage:
           target: dir:.
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
+          scribe-client-id: $SCRIBE_CLIENT_ID
+          scribe-client-secret: $SCRIBE_CLIENT_SECRET
       - run: |
           docker build . -t example_image
       - scribe/bom:
           target: example_image:latest
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
+          scribe-client-id: $SCRIBE_CLIENT_ID
+          scribe-client-secret: $SCRIBE_CLIENT_SECRET
       - scribe/report:
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_CLIENT_SECRET
+          scribe-client-id: $SCRIBE_CLIENT_ID
+          scribe-client-secret: $SCRIBE_CLIENT_SECRET

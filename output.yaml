@@ -88,11 +88,11 @@ commands:
                 default: false
                 description: Suppress all logging output
                 type: boolean
-            scribe-clientid:
+            scribe-client-id:
                 default: ""
                 description: Scribe client id
                 type: string
-            scribe-clientsecret:
+            scribe-client-secret:
                 default: ""
                 description: Scribe client secret
                 type: string
@@ -114,7 +114,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom bom << parameters.target >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom bom << parameters.target >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Create SBOM for target
     find:
         description: Find target BOM
@@ -171,11 +171,11 @@ commands:
                 default: false
                 description: Suppress all logging output
                 type: boolean
-            scribe-clientid:
+            scribe-client-id:
                 default: ""
                 description: Scribe client id
                 type: string
-            scribe-clientsecret:
+            scribe-client-secret:
                 default: ""
                 description: Scribe client secret
                 type: string
@@ -197,7 +197,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom find << parameters.target >> --all << parameters.all >> --format << parameters.format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom find << parameters.target >> --all << parameters.all >> --format << parameters.format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Find target BOM
     scribe:
         description: Generate Software Bill Of Materials (SBOM) from container images and filesystems
@@ -282,11 +282,11 @@ commands:
                 default: false
                 description: Suppress all logging output
                 type: boolean
-            scribe-clientid:
+            scribe-client-id:
                 default: ""
                 description: Scribe client id
                 type: string
-            scribe-clientsecret:
+            scribe-client-secret:
                 default: ""
                 description: Scribe client secret
                 type: string
@@ -308,7 +308,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom gensbom << parameters.target >> --attach-regex << parameters.attach-regex >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --components << parameters.components >> --config << parameters.config >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom gensbom << parameters.target >> --attach-regex << parameters.attach-regex >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --components << parameters.components >> --config << parameters.config >> --context-dir << parameters.context-dir >> --context-type << parameters.context-type >> --env << parameters.env >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Generate Software Bill Of Materials (SBOM) from container images and filesystems
     install:
         description: This will install the binary
@@ -386,11 +386,11 @@ commands:
                 default: false
                 description: Suppress all logging output
                 type: boolean
-            scribe-clientid:
+            scribe-client-id:
                 default: ""
                 description: Scribe client id
                 type: string
-            scribe-clientsecret:
+            scribe-client-secret:
                 default: ""
                 description: Scribe client secret
                 type: string
@@ -412,7 +412,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Sign external or local or cached BOM, creates statement/attestation
     verify:
         description: Verify target by BOM attestation
@@ -469,11 +469,11 @@ commands:
                 default: false
                 description: Suppress all logging output
                 type: boolean
-            scribe-clientid:
+            scribe-client-id:
                 default: ""
                 description: Scribe client id
                 type: string
-            scribe-clientsecret:
+            scribe-client-secret:
                 default: ""
                 description: Scribe client secret
                 type: string
@@ -495,7 +495,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom verify << parameters.target >> --context-type << parameters.context-type >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-clientid << parameters.scribe-clientid >> --scribe-clientsecret << parameters.scribe-clientsecret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom verify << parameters.target >> --context-type << parameters.context-type >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Verify target by BOM attestation
 executors:
     default:
