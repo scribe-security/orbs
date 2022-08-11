@@ -8,7 +8,7 @@ parameters:
     description: Application config file
     default: ""
     type: string
-  inputformat:
+  input-format:
     description: Sbom input formatter, options=[attest-cyclonedx-json]
     default: attest-cyclonedx-json
     type: string
@@ -66,7 +66,7 @@ steps:
     name: Verify target by BOM attestation
     command: gensbom verify << parameters.target >> \
       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-      <<# parameters.inputformat >>--inputformat << parameters.inputformat >><</ parameters.inputformat >> \
+      <<# parameters.input-format >>--input-format << parameters.input-format >><</ parameters.input-format >> \
       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
       <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \

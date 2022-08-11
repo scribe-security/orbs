@@ -370,7 +370,7 @@ commands:
                 default: attest-cyclonedx-json
                 description: Sbom output formatter, options=[attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
                 type: string
-            inputformat:
+            input-format:
                 default: cyclonedx-json
                 description: Sbom input formatter, options=[cyclonedx-json cyclonedx-xml]
                 type: string
@@ -412,7 +412,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom sign << parameters.target >> --context-type << parameters.context-type >> --force << parameters.force >> --format << parameters.format >> --input-format << parameters.input-format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Sign external or local or cached BOM, creates statement/attestation
     verify:
         description: Verify target by BOM attestation
@@ -453,7 +453,7 @@ commands:
                 default: .*\.pyc,.*\.git/.*
                 description: Filter out files by regex
                 type: string
-            inputformat:
+            input-format:
                 default: attest-cyclonedx-json
                 description: Sbom input formatter, options=[attest-cyclonedx-json]
                 type: string
@@ -495,7 +495,7 @@ commands:
                 type: integer
         steps:
             - run:
-                command: gensbom verify << parameters.target >> --context-type << parameters.context-type >> --inputformat << parameters.inputformat >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
+                command: gensbom verify << parameters.target >> --context-type << parameters.context-type >> --input-format << parameters.input-format >> --attest-config << parameters.attest-config >> --attest-default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe-client-id << parameters.scribe-client-id >> --scribe-client-secret << parameters.scribe-client-secret >> --scribe-enable << parameters.scribe-enable >> --scribe-url << parameters.scribe-url >> --show << parameters.show >> --verbose << parameters.verbose >>
                 name: Verify target by BOM attestation
 executors:
     default:
