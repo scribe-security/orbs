@@ -8,7 +8,7 @@ parameters:
     description: Application config file
     default: ""
     type: string
-  inputformat:
+  input-format:
     description: Sbom input formatter, options=[attest-cyclonedx-json]
     default: attest-cyclonedx-json
     type: string
@@ -40,11 +40,11 @@ parameters:
     description: 'Enable scribe client'
     default: false
     type: boolean
-  scribe-clientid:
+  scribe-client-id:
     description: 'Scribe client id'
     type: string
     default: ""
-  scribe-clientsecret:
+  scribe-client-secret:
     description: 'Scribe access token'
     type: string
     default: ""
@@ -52,7 +52,7 @@ parameters:
     description: 'Scribe url'
     type: string
     default: ""
-  scribe-loginurl:
+  scribe-login-url:
     description: 'Scribe auth login url'
     type: string
     default: ""
@@ -66,16 +66,16 @@ steps:
     name: Verify target by BOM attestation
     command: gensbom verify << parameters.target >> \
       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-      <<# parameters.inputformat >>--inputformat << parameters.inputformat >><</ parameters.inputformat >> \
+      <<# parameters.input-format >>--input-format << parameters.input-format >><</ parameters.input-format >> \
       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
       <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
       <<# parameters.attest-name >>--attest.name << parameters.attest-name >><</ parameters.attest-name >> \
       <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
-      <<# parameters.scribe-clientid >>--scribe.clientid << parameters.scribe-clientid >><</ parameters.scribe-clientid  >> \
-      <<# parameters.scribe-clientsecret >>--scribe.clientsecret << parameters.scribe-clientsecret >><</ parameters.scribe-clientsecret  >> \
+      <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id  >> \
+      <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret  >> \
       <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable  >> \
       <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
       <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
-      <<# parameters.scribe-loginurl  >>--scribe.auth0.loginurl << parameters.scribe-loginurl >><</ parameters.scribe-loginurl  >>
+      <<# parameters.scribe-login-url  >>--scribe.auth0.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url  >>
       #  - --context-type=circleci 2DO add support for circleci context.

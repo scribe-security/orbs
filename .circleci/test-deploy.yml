@@ -37,27 +37,27 @@ jobs:
           target: dir:mongo-express-scm
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
-          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-login-url: $SCRIBE_LOGIN_URL
           scribe-audience: $SCRIBE_AUDIENCE
       - scribe/bom:
           target: mongo-express:1.0.0-alpha.4
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
-          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-login-url: $SCRIBE_LOGIN_URL
           scribe-audience: $SCRIBE_AUDIENCE
       - scribe/report:
           verbose: 2
           scribe-enable: true
-          scribe-clientid: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-clientsecret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
+          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
-          scribe-loginurl: $SCRIBE_LOGIN_URL
+          scribe-login-url: $SCRIBE_LOGIN_URL
           scribe-audience: $SCRIBE_AUDIENCE
         
 workflows:
