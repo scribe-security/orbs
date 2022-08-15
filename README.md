@@ -1,6 +1,6 @@
 ---
 title: circle-ci
-sidebar_position: 2
+sidebar_position: 4
 ---
 
 # Scribe CircleCI orbs
@@ -11,7 +11,7 @@ sidebar_position: 2
 --->
 Scribe offers CircleCI orbs for embedding evidence collecting and integrity verification to your workflows. \
 Actions are wrappers to provide CLI tools.
-* Gensbom - Bill of material generation tool
+* Gensbom - bill of material generation tool
 * Valint - validate supply chain integrity tool
 
 ---
