@@ -128,6 +128,6 @@ steps:
           <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret  >> \
           <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable  >> \
           <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
-          <<# parameters.scribe-audience  >>--scribe.auth0.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
+          <<# parameters.scribe-audience  >>--scribe.auth.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
           <<# parameters.scribe-login-url  >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url  >> \
           --context-type=circleci
