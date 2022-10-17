@@ -1,10 +1,7 @@
 version: 2.1
 
 description:  |
-  Scribe offers Orbs for embedding evidence collecting and integrity verification to your workflows.
-  Orb are wrappers to provided CLI tools.
-  * Gensbom - Bill of material generation tool
-  * Valint - validate supply chain integrity tool
+  Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows. 
 
 display:
   home_url: "https://scribesecurity.com"
