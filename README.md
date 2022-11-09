@@ -1,5 +1,5 @@
 ---
-title: circle-ci
+title: Circle-CI
 sidebar_position: 4
 ---
 
