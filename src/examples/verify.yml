@@ -13,4 +13,3 @@ usage:
         - scribe/install
         - scribe/verify:
             target: alpine:latest # any image to be analysed for sbom
-
