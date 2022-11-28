@@ -16,10 +16,6 @@ parameters:
     description: Context dir
     default: ""
     type: string
-  context-type:
-    description: Context type, options=[jenkins github local]
-    default: local
-    type: string
   env:
     description: Envrionment keys to include in sbom
     default: ""
@@ -110,7 +106,6 @@ steps:
           <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
           <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
           <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
-          <<# parameters.context-type >>--context-type << parameters.context-type >><</ parameters.context-type >> \
           <<# parameters.env >>--env << parameters.env >><</ parameters.env >> \
           <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
           <<# parameters.format >>--format << parameters.format >><</ parameters.format >> \
