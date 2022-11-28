@@ -64,7 +64,7 @@ parameters:
 steps:
 - run:
     name: Verify target by BOM attestation
-    command: gensbom verify << parameters.target >> \
+    command: valint verify << parameters.target >> \
       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
       <<# parameters.input-format >>--input-format << parameters.input-format >><</ parameters.input-format >> \
       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \

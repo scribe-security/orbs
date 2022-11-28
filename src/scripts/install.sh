@@ -9,8 +9,6 @@ id=$(id -u)
 if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
 
 if is_command wget; then
-    ls -lh /usr/local/
-    ls -lh /usr/local/bin
     wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
     exit 0
 elif is_command curl; then

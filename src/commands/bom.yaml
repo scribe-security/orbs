@@ -105,7 +105,7 @@ steps:
 - run:
     name: Create SBOM for target
     command: >
-        gensbom bom << parameters.target >> \
+        valint bom << parameters.target >> \
           <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
           <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
           <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
