@@ -20,6 +20,10 @@ parameters:
     description: Output file path
     default: ""
     type: string
+  product-key:
+    description: 'Custom/project product-key'
+    default: ""
+    type: string
   scribe-enable:
     description: 'Enable scribe client'
     default: false
