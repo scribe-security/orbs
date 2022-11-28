@@ -27,6 +27,7 @@ jobs:
       SCRIBE_URL: "https://api.staging.scribesecurity.com"
       SCRIBE_LOGIN_URL: "https://scribesecurity-staging.us.auth0.com"
       SCRIBE_AUDIENCE: "api.staging.scribesecurity.com"
+      ENV: "dev"
     steps:
       - run:
           name: custom checkout
