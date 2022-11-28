@@ -65,6 +65,7 @@ steps:
     name: download report from scribe service
     command: |
       valint report \
+        <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
         <<# parameters.integrity >>--integrity << parameters.integrity >><</ parameters.integrity >> \
         <<# parameters.section >>--section << parameters.section >><</ parameters.section >> \
         <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
