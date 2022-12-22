@@ -21,11 +21,11 @@ usage:
             force: true
 
         # Create SBOM for a local directory.
-      - run:
-          name: custom checkout
-          command: |
-            mkdir testdir
-            echo "test" > testdir/test.txt
+        - run:
+            name: custom checkout
+            command: |
+              mkdir testdir
+              echo "test" > testdir/test.txt
 
         - scribe/bom:
             target: dir:.
@@ -43,4 +43,3 @@ usage:
             target: git:.
             verbose: 2
             force: true
-

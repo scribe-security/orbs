@@ -26,5 +26,5 @@ usage:
 
         # Storing as artifacts
         - store_artifacts:
-              path: scribe/
-              destination: scribe-evidence
+            path: scribe/
+            destination: scribe-evidence

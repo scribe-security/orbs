@@ -21,11 +21,10 @@ usage:
 
         # Storing as artifacts
         - store_artifacts:
-              path: scribe/
-              destination: scribe-evidence
+            path: scribe/
+            destination: scribe-evidence
 
         # Storing as artifacts
         - store_artifacts:
-              path: my_sbom.json
-              destination: scribe-sbom
-
+            path: my_sbom.json
+            destination: scribe-sbom

@@ -1,6 +1,6 @@
 version: 2.1
 
-description:  |
+description: |
   Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows.
 
 display:
