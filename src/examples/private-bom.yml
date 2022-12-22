@@ -1,5 +1,5 @@
 description: >
-    Create SBOM for image hosted on private registry. \
+    Create SBOM for image hosted on private registry.
     Use `docker login` to add access.
 
 usage:

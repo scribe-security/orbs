@@ -1,5 +1,5 @@
 description: >
-  Generate a SBOM for targets
+  Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories.
 
 usage:
   version: 2.1
