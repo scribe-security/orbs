@@ -15,7 +15,7 @@ Easily install and configure the Google Cloud CLI in your CircleCI jobs.
 
 ## Usage
 
-_For full usage guidelines, see the [orb registry listing](http://circleci.com/orbs/registry/orb/circleci/scribe-security/orbs)._
+_For full usage guidelines, see the [orb registry listing](https://circleci.com/developer/orbs/orb/scribe-security/orbs)._
 
 ## Before you begin
 Integrating Scribe Hub with CircleCI requires the following credentials that are found in the product setup dialog (In your **[Scribe Hub](https://prod.hub.scribesecurity.com/ "Scribe Hub Link")** go to **Home>Products>[$product]>Setup**)
