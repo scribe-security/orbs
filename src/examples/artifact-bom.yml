@@ -7,7 +7,7 @@ usage:
   orbs:
     scribe: scribe-security/orbs@1.2.3
   workflows:
-    use-my-orb:
+    save-sbom-artifact:
       jobs:
         - checkout
 
