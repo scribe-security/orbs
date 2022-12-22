@@ -1,0 +1,21 @@
+description: >
+  * Create SBOM for remote `busybox:latest` image.
+  
+usage:
+  version: 2.1
+  orbs:
+    scribe: scribe-security/orbs@1.2.3
+
+  workflows:
+    scribe-sbom-target-job:
+      jobs:
+        - checkout
+
+        # Install scribe tool
+        - scribe/install
+
+        # Create SBOM for remote `busybox:latest` image.
+        - scribe/bom:
+            target: busybox:latest
+            verbose: 2
+            force: true

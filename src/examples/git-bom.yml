@@ -1,0 +1,28 @@
+description: >
+  * Generate SBOM for `mongo-express` remote git repository.
+  * Generate SBOM for checked out local git repository.
+  
+usage:
+  version: 2.1
+  orbs:
+    scribe: scribe-security/orbs@1.2.3
+
+  workflows:
+    scribe-git-target-job:
+      jobs:
+        - checkout
+
+        # Install scribe tool
+        - scribe/install
+
+        # Create SBOM for `mongo-express` remote git repository.
+        - scribe/bom:
+            target: git:https://github.com/mongo-express/mongo-express.git
+            verbose: 2
+            force: true
+
+        # Create SBOM for checked out local git repository.
+        - scribe/bom:
+            target: git:.
+            verbose: 2
+            force: true
