@@ -5,7 +5,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    scribe: scribe-security/orbs@1.2.3
+    scribe: scribe-security/orbs@x.y.z
 
   workflows:
     private-image:
