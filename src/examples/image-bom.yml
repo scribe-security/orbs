@@ -1,6 +1,6 @@
 description: >
   * Create SBOM for remote `busybox:latest` image.
-  
+
 usage:
   version: 2.1
   orbs:

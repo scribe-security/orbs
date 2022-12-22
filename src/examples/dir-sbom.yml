@@ -1,6 +1,6 @@
 description: >
   * Generate SBOM for a local directory.
-  
+
 usage:
   version: 2.1
   orbs:

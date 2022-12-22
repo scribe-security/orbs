@@ -1,7 +1,7 @@
 description: >
   * Generate SBOM for `mongo-express` remote git repository.
   * Generate SBOM for checked out local git repository.
-  
+
 usage:
   version: 2.1
   orbs:
