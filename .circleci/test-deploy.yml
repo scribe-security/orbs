@@ -54,16 +54,7 @@ jobs:
           scribe-url:  $SCRIBE_URL
           scribe-login-url: $SCRIBE_LOGIN_URL
           scribe-audience: $SCRIBE_AUDIENCE
-      - scribe/report:
-          verbose: 2
-          scribe-enable: true
-          product-key: $SCRIBE_PRODUCT_KEY
-          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
-          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
-          scribe-url:  $SCRIBE_URL
-          scribe-login-url: $SCRIBE_LOGIN_URL
-          scribe-audience: $SCRIBE_AUDIENCE
-        
+
 workflows:
   test-deploy:
     jobs:
