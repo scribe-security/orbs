@@ -9,12 +9,37 @@ usage:
     use-my-orb:
       jobs:
         - checkout
+
+        # Install scribe tool
         - scribe/install
-        # Bom checkout
+
+        # Create SBOM for remote `busybox:latest` image.
+        - scribe/bom:
+            target: busybox:latest
+            verbose: 2
+            force: true
+
+        # Create SBOM for a local directory.
+      - run:
+          name: custom checkout
+          command: |
+            mkdir testdir
+            echo "test" > testdir/test.txt
+
         - scribe/bom:
             target: dir:.
             verbose: 2
-        # Bom some image
+            force: true
+
+        # Create SBOM for `mongo-express` remote git repository.
         - scribe/bom:
-            target: alpine:latest
+            target: git:https://github.com/mongo-express/mongo-express.git
             verbose: 2
+            force: true
+
+        # Create SBOM for checked out local git repository.
+        - scribe/bom:
+            target: git:.
+            verbose: 2
+            force: true
+

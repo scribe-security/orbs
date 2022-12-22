@@ -1,7 +1,7 @@
-description: Verify target by BOM attestation
+description: Verify target evidence
 parameters:
   target:
-    description: Verify target by BOM attestation
+    description: Target object name format=[docker:{image:tag}, dir:{dir_path}, git:{git_path}, docker-archive:{archive_path}, oci-archive:archive_path, registry:image:tag]
     default: ""
     type: string
   config:
@@ -9,7 +9,7 @@ parameters:
     default: ""
     type: string
   input-format:
-    description: Sbom input formatter, options=[attest-cyclonedx-json]
+    description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json]
     default: attest-cyclonedx-json
     type: string
   output-directory:
@@ -21,19 +21,19 @@ parameters:
     default: ""
     type: string
   verbose:
-    description: Increase verbosity (-v = info, -vv = debug)
+    description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
     default: 2
     type: integer
   attest-config:
     description: 'Attestation config map'
     default: ""
     type: string
-  attest-name:
-    description: 'Attestation config name (default "gensbom")'
-    default: ""
-    type: string
   attest-default:
     description: 'Attestation default config, options=[sigstore sigstore-github x509]'
+    default: ""
+    type: string
+  attestation:
+    description: 'Attestation for target'
     default: ""
     type: string
   scribe-enable:
@@ -63,14 +63,14 @@ parameters:
 
 steps:
 - run:
-    name: Verify target by BOM attestation
+    name: Verify  attestation
     command: valint verify << parameters.target >> \
       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
+      <<# parameters.attestation >>--attestation << parameters.attestation >><</ parameters.attestation >> \
       <<# parameters.input-format >>--input-format << parameters.input-format >><</ parameters.input-format >> \
       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
       <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
-      <<# parameters.attest-name >>--attest.name << parameters.attest-name >><</ parameters.attest-name >> \
       <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
       <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id  >> \
       <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret  >> \

@@ -13,21 +13,18 @@ usage:
     steps:
       - checkout
       - scribe/install
+      - run:
+          name: custom checkout
+          command: |
+            git clone -b v1.0.0-alpha.4 --single-branch https://github.com/mongo-express/mongo-express.git --depth=1 mongo-express-scm
       - scribe/bom:
-          target: dir:.
+          target: dir:mongo-express-scm
           verbose: 2
           scribe-enable: true
           scribe-client-id: $SCRIBE_CLIENT_ID
           scribe-client-secret: $SCRIBE_CLIENT_SECRET
-      - run: |
-          docker build . -t example_image
       - scribe/bom:
-          target: example_image:latest
-          verbose: 2
-          scribe-enable: true
-          scribe-client-id: $SCRIBE_CLIENT_ID
-          scribe-client-secret: $SCRIBE_CLIENT_SECRET
-      - scribe/report:
+          target: mongo-express:1.0.0-alpha.4
           verbose: 2
           scribe-enable: true
           scribe-client-id: $SCRIBE_CLIENT_ID

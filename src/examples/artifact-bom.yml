@@ -1,0 +1,31 @@
+description: >
+    Using input variable `output-directory` or `output-file` to export evidence as an artifact. \
+    Use  input variable `format` to select between the format.
+
+usage:
+  version: 2.1
+  orbs:
+    scribe: scribe-security/orbs@1.2.3
+  workflows:
+    use-my-orb:
+      jobs:
+        - checkout
+
+        # Install scribe tool
+        - scribe/install
+        - scribe/bom:
+            target: busybox:latest
+            output-file: my_sbom.json
+            verbose: 2
+            force: true
+
+        # Storing as artifacts
+        - store_artifacts:
+              path: scribe/
+              destination: scribe-evidence
+
+        # Storing as artifacts
+        - store_artifacts:
+              path: my_sbom.json
+              destination: scribe-sbom
+

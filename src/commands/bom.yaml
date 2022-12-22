@@ -1,11 +1,11 @@
 description: Create SBOM for target
 parameters:
   target:
-    description: Create SBOM for target
+    description: Target object name format=[docker:{image:tag}, dir:{dir_path}, git:{git_path}, docker-archive:{archive_path}, oci-archive:archive_path, registry:image:tag]
     default: ""
     type: string
   components:
-    description: Select sbom components groups, options=[metadata layers packages files dep]
+    description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
     default: metadata,layers,packages,files,dep
     type: string
   config:
@@ -30,7 +30,19 @@ parameters:
     type: string
   filter-regex:
     description: Filter out files by regex
-    default: .*\.pyc,.*\.git/.*
+    default: ""
+    type: string
+  filter-scope:
+    description: 'Filter packages by scope'
+    default: ""
+    type: string
+  package-type:
+    description: 'Select package type'
+    default: ""
+    type: string
+  package-group:
+    description: 'Select package group'
+    default: ""
     type: string
   attach-regex:
     description: Attach files content by regex
@@ -41,7 +53,7 @@ parameters:
     default: false
     type: boolean
   format:
-    description: Sbom formatter, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json]
+    description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json attest-slsa statement-slsa predicate-slsa]
     default: cyclonedx-json
     type: string
   label:
@@ -50,22 +62,18 @@ parameters:
     type: string
   output-directory:
     description: Report output directory
-    default: ./scribe/gensbom
+    default: ./scribe/valint
     type: string
   output-file:
     description: Output result to file
     default: ""
     type: string
   verbose:
-    description: Increase verbosity (-v = info, -vv = debug)
+    description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
     default: 1
     type: integer
   attest-config:
     description: 'Attestation config map'
-    default: ""
-    type: string
-  attest-name:
-    description: 'Attestation config name (default "gensbom")'
     default: ""
     type: string
   attest-default:
@@ -113,11 +121,13 @@ steps:
           <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
           <<# parameters.filter-purl >>--filter-purl << parameters.filter-purl >><</ parameters.filter-purl >> \
           <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
+          <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
+          <<# parameters.package-type >>--package-type << parameters.package-type >><</ parameters.package-type >> \
+          <<# parameters.package-group >>--package-group << parameters.package-group >><</ parameters.package-group >> \
           <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
           <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
           <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
           <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
-          <<# parameters.attest-name >>--attest.name << parameters.attest-name >><</ parameters.attest-name >> \
           <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
           <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id  >> \
           <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret  >> \
