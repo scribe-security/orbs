@@ -6,10 +6,9 @@ sidebar_position: 4
 # CircleCI
 If you are using CircleCI as your Continuous Integration tool (CI), use these instructions to integrate Scribe into your pipeline to protect your projects. Scribe offers custom orbs to easily integrate our code snippets with your existing pipelines.
 
-<!---
+-
 [![CircleCI Build Status](https://circleci.com/gh/scribe-security/orbs.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/scribe-security/orbs) [![CircleCI Orb Version](https://badges.circleci.com/orbs/scribe-security/orbs.svg)](https://circleci.com/orbs/registry/orb/scribe-security/orbs) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/scribe-security/orbs/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
-
---->
+-
 
 Easily install and configure the Google Cloud CLI in your CircleCI jobs.
 
