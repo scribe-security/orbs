@@ -60,6 +60,14 @@ parameters:
     description: 'Scribe auth audience'
     type: string
     default: ""
+  oci:
+    description: 'Enable OCI store'
+    default: false
+    type: boolean
+  oci-repo:
+    description: 'Select OCI custom attestation repo'
+    type: string
+    default: ""
 
 steps:
 - run:
@@ -78,4 +86,6 @@ steps:
       <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
       <<# parameters.scribe-audience  >>--scribe.auth.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
       <<# parameters.scribe-login-url  >>--scribe.auth.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url  >> \
+      <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
+      <<# parameters.oci-repo  >>--oci-repo << parameters.oci-repo >><</ parameters.oci-repo  >> \
       --context-type=circleci
