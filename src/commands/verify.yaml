@@ -88,4 +88,5 @@ steps:
       <<# parameters.scribe-login-url  >>--scribe.auth.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url  >> \
       <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
       <<# parameters.oci-repo  >>--oci-repo << parameters.oci-repo >><</ parameters.oci-repo  >> \
+      <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
       --context-type=circleci
