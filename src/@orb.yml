@@ -1,10 +1,11 @@
 version: 2.1
 
 description: |
-  Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows. 
+  Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows.
 
-  Orb provides several actions enabling generation of SBOMs from various sources. 
-  The usage examples on this page demonstrate several use cases of SBOM collection (SBOM from a publicly available Docker image, SBOM from a Git repository, SBOM from a local directory) as well as several use cases of uploading the evidence either to the Circle CI workspace or to the Scribe Service.
+  Orb provides several actions enabling generation of SBOMs from various sources.
+  The usage examples on this page demonstrate several use cases of SBOM collection (SBOM from a publicly available Docker image, SBOM from a Git repository,
+  SBOM from a local directory) as well as several use cases of uploading the evidence either to the Circle CI workspace or to the Scribe Service.
 
 display:
   home_url: "https://scribesecurity.com"
