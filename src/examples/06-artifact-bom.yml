@@ -1,4 +1,4 @@
-description: >
+description: |
     Using input variable `output-directory` or `output-file` to export evidence as an artifact.
     Use  input variable `format` to select between the format.
 

@@ -1,6 +1,6 @@
 description: >
-  Scribe provides a set of services to store, verify and manage the supply chain integrity. <br />
-  Following is a full integration examples.
+  Scribe provides a set of services to store, verify and manage the supply chain integrity.
+  Following is a full integration example.
 
 usage:
   version: 2.1

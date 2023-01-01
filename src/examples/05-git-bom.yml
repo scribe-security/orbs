@@ -1,4 +1,4 @@
-description: >
+description: |
   * Generate SBOM for `mongo-express` remote git repository.
   * Generate SBOM for checked out local git repository.
 
