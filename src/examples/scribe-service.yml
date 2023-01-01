@@ -1,6 +1,6 @@
 description: >
-  Generate a SBOM for source and image,
-  Upload sbom to scribe and download integrity report.
+  Scribe provides a set of services to store, verify and manage the supply chain integrity. <br />
+  Following is a full integration examples.
 
 usage:
   version: 2.1
