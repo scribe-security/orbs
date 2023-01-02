@@ -4,7 +4,11 @@ sidebar_position: 4
 ---
 
 # CircleCI
-If you are using CircleCI as your Continuous Integration tool (CI), use these instructions to integrate Scribe into your pipeline to protect your projects. Scribe offers custom orbs to easily integrate our code snippets with your existing pipelines.
+Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows.
+
+The Orb provides several actions enabling the generation of SBOMs from various sources.
+The usage examples on this page demonstrate several use cases of SBOM collection (SBOM from a publicly available Docker image, SBOM from a Git repository,
+SBOM from a local directory) as well as several use cases of uploading the evidence either to the Circle CI workspace or to the Scribe Service.
 
 <!-- -
 [![CircleCI Build Status](https://circleci.com/gh/scribe-security/orbs.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/scribe-security/orbs) [![CircleCI Orb Version](https://badges.circleci.com/orbs/scribe-security/orbs.svg)](https://circleci.com/orbs/registry/orb/scribe-security/orbs) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/scribe-security/orbs/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
