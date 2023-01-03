@@ -2,6 +2,9 @@ description: >
   Scribe provides a set of services to store, verify and manage the supply chain integrity.
   Following is a full integration example.
 
+  Use `setup_remote_docker` step (Optional) to allow access to a local docker daemon.
+  Otherwise image targets is read directly from remote registry.
+
 usage:
   version: 2.1
   orbs:
@@ -11,6 +14,7 @@ usage:
     scribe-service-job:
       jobs:
         - checkout
+        - setup_remote_docker # Optional
         - scribe/install
         - run:
             name: custom checkout
