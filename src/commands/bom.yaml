@@ -6,7 +6,7 @@ parameters:
     type: string
   components:
     description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
-    default: metadata,layers,packages,files,dep
+    default: ""
     type: string
   config:
     description: Application config file

@@ -22,7 +22,7 @@ parameters:
     type: string
   verbose:
     description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
-    default: 2
+    default: 1
     type: integer
   attest-config:
     description: 'Attestation config map'
