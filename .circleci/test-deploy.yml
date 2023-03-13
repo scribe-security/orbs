@@ -75,6 +75,7 @@ workflows:
             - command-tests
             - integration-tests
           context: orb-publishing
+          circleci-token: CIRCLE_TOKEN3
           filters:
             branches:
               ignore: /.*/
