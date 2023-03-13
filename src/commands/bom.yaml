@@ -1,15 +1,31 @@
-description: Create SBOM for target
+description: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
 parameters:
-  target:
-    description: Target object name format=[docker:{image:tag}, dir:{dir_path}, git:{git_path}, docker-archive:{archive_path}, oci-archive:archive_path, registry:image:tag]
+  attach-regex:
+    description: Attach files content by regex
     default: ""
     type: string
+  attest-config:
+    description: Attestation config path
+    default: ""
+    type: string
+  attest-default:
+    description: Attestation default config, options=[sigstore sigstore-github x509]
+    default: sigstore
+    type: string
+  backoff:
+    description: Backoff duration
+    default: 15s
+    type: string
+  cache-enable:
+    description: Enable local cache
+    default: true
+    type: boolean
   components:
     description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
-    default: ""
+    default: metadata,layers,packages,syft,files,dep,commits
     type: string
   config:
-    description: Application config file
+    description: Configuration file path
     default: ""
     type: string
   context-dir:
@@ -17,35 +33,15 @@ parameters:
     default: ""
     type: string
   env:
-    description: Envrionment keys to include in sbom
-    default: ""
-    type: string
-  product-key:
-    description: 'Custom/project product-key'
-    default: ""
-    type: string
-  filter-purl:
-    description: Filter out purls by regex
+    description: Environment keys to include in sbom
     default: ""
     type: string
   filter-regex:
     description: Filter out files by regex
-    default: ""
+    default: '**/*.pyc,**/.git/**'
     type: string
   filter-scope:
-    description: 'Filter packages by scope'
-    default: ""
-    type: string
-  package-type:
-    description: 'Select package type'
-    default: ""
-    type: string
-  package-group:
-    description: 'Select package group'
-    default: ""
-    type: string
-  attach-regex:
-    description: Attach files content by regex
+    description: Filter packages by scope
     default: ""
     type: string
   force:
@@ -56,93 +52,130 @@ parameters:
     description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json attest-slsa statement-slsa predicate-slsa]
     default: cyclonedx-json
     type: string
+  git-branch:
+    description: Git branch in the repository
+    default: ""
+    type: string
+  git-commit:
+    description: Git commit hash in the repository
+    default: ""
+    type: string
+  git-tag:
+    description: Git tag in the repository
+    default: ""
+    type: string
   label:
-    description: Label to connect to sboms
+    description: Add Custom labels
+    default: ""
+    type: string
+  level:
+    description: Log depth level, options=[panic fatal error warning info debug trace]
+    default: ""
+    type: string
+  oci:
+    description: Enable OCI store
+    default: false
+    type: boolean
+  oci-repo:
+    description: Select OCI custom attestation repo
     default: ""
     type: string
   output-directory:
-    description: Report output directory
-    default: ./scribe/valint
+    description: Output directory path
+    default: /home/samtholiya/.cache/valint
     type: string
   output-file:
-    description: Output result to file
+    description: Output file name
     default: ""
+    type: string
+  package-exclude-type:
+    description: Exclude package type, options=[ruby python javascript java dpkg apkdb rpm go-mod rust binary sbom]
+    default: ""
+    type: string
+  package-group:
+    description: Select package group, options=[index install all]
+    default: ""
+    type: string
+  package-type:
+    description: Select package type, options=[ruby python javascript java dpkg apkdb rpm go-mod rust binary sbom]
+    default: ruby,python,javascript,java,dpkg,apkdb,rpm,go-mod,rust,binary,sbom
+    type: string
+  product-key:
+    description: Scribe Project Key
+    default: ""
+    type: string
+  scribe-auth-audience:
+    description: Scribe auth audience
+    default: api.production.scribesecurity.com
+    type: string
+  scribe-client-id:
+    description: Scribe Client ID
+    default: ""
+    type: string
+  scribe-client-secret:
+    description: Scribe Client Secret
+    default: ""
+    type: string
+  scribe-enable:
+    description: Enable scribe client
+    default: false
+    type: boolean
+  scribe-login-url:
+    description: Scribe login url
+    default: https://scribesecurity-production.us.auth0.com
+    type: string
+  scribe-url:
+    description: Scribe API Url
+    default: https://api.production.scribesecurity.com
+    type: string
+  target:
+    description: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
+    default: ""
+    type: string
+  timeout:
+    description: Timeout duration
+    default: 120s
     type: string
   verbose:
     description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
     default: 1
     type: integer
-  attest-config:
-    description: 'Attestation config map'
-    default: ""
-    type: string
-  attest-default:
-    description: 'Attestation default config, options=[sigstore sigstore-github x509]'
-    default: ""
-    type: string
-  scribe-enable:
-    description: 'Enable scribe client'
-    default: false
-    type: boolean
-  scribe-client-id:
-    description: 'Scribe client id'
-    type: string
-    default: ""
-  scribe-client-secret:
-    description: 'Scribe access token'
-    type: string
-    default: ""
-  scribe-url:
-    description: 'Scribe url'
-    type: string
-    default: ""
-  scribe-login-url:
-    description: 'Scribe auth login url'
-    type: string
-    default: ""
-  scribe-audience:
-    description: 'Scribe auth audience'
-    type: string
-    default: ""
-  oci:
-    description: 'Enable OCI store'
-    default: false
-    type: boolean
-  oci-repo:
-    description: 'Select OCI custom attestation repo'
-    type: string
-    default: ""
-
 steps:
 - run:
-    name: Create SBOM for target
-    command: >
-        valint bom << parameters.target >> \
-          <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
-          <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
-          <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
-          <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
-          <<# parameters.env >>--env << parameters.env >><</ parameters.env >> \
-          <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
-          <<# parameters.format >>--format << parameters.format >><</ parameters.format >> \
-          <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
-          <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-          <<# parameters.filter-purl >>--filter-purl << parameters.filter-purl >><</ parameters.filter-purl >> \
-          <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
-          <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
-          <<# parameters.package-type >>--package-type << parameters.package-type >><</ parameters.package-type >> \
-          <<# parameters.package-group >>--package-group << parameters.package-group >><</ parameters.package-group >> \
-          <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
-          <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
-          <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
-          <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
-          <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
-          <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id  >> \
-          <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret  >> \
-          <<# parameters.scribe-enable  >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable  >> \
-          <<# parameters.scribe-url  >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url  >> \
-          <<# parameters.scribe-audience  >>--scribe.auth.audience << parameters.scribe-audience >><</ parameters.scribe-audience  >> \
-          <<# parameters.scribe-login-url  >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url  >> \
-          <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
-          <<# parameters.oci-repo  >>--oci-repo << parameters.oci-repo >><</ parameters.oci-repo  >> \
-          --context-type=circleci
+    name: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
+    command: |
+      valint bom << parameters.target >> <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
+       <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
+       <<# parameters.env >>--env << parameters.env >><</ parameters.env >> \
+       <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
+       <<# parameters.format >>--format << parameters.format >><</ parameters.format >> \
+       <<# parameters.git-branch >>--git-branch << parameters.git-branch >><</ parameters.git-branch >> \
+       <<# parameters.git-commit >>--git-commit << parameters.git-commit >><</ parameters.git-commit >> \
+       <<# parameters.git-tag >>--git-tag << parameters.git-tag >><</ parameters.git-tag >> \
+       <<# parameters.package-exclude-type >>--package-exclude-type << parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
+       <<# parameters.package-group >>--package-group << parameters.package-group >><</ parameters.package-group >> \
+       <<# parameters.package-type >>--package-type << parameters.package-type >><</ parameters.package-type >> \
+       <<# parameters.attest-config >>--attest-config << parameters.attest-config >><</ parameters.attest-config >> \
+       <<# parameters.attest-default >>--attest-default << parameters.attest-default >><</ parameters.attest-default >> \
+       <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >> \
+       <<# parameters.cache-enable >>--cache-enable << parameters.cache-enable >><</ parameters.cache-enable >> \
+       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
+       <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
+       --context-type=circleci \
+       <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
+       <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
+       <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
+       <<# parameters.level >>--level << parameters.level >><</ parameters.level >> \
+       <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
+       <<# parameters.oci-repo >>--oci-repo << parameters.oci-repo >><</ parameters.oci-repo >> \
+       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
+       <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
+       <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
+       <<# parameters.scribe-auth-audience >>--scribe-auth-audience << parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
+       <<# parameters.scribe-client-id >>--scribe-client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
+       <<# parameters.scribe-client-secret >>--scribe-client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
+       <<# parameters.scribe-enable >>--scribe-enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
+       <<# parameters.scribe-login-url >>--scribe-login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
+       <<# parameters.scribe-url >>--scribe-url << parameters.scribe-url >><</ parameters.scribe-url >> \
+       <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >> \
+       <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
