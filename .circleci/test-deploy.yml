@@ -11,6 +11,8 @@ jobs:
   # Create a job to test the commands of your orbs.
   # You may want to add additional validation steps to ensure the commands are working as expected.
   command-tests:
+    environment:
+      ENV: dev
     docker:
       - image: ubuntu:latest
     steps:
