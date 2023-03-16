@@ -34,7 +34,6 @@ jobs:
       - run:
           name: custom checkout
           command: |
-            env
             git clone -b v1.0.0-alpha.4 --single-branch https://github.com/mongo-express/mongo-express.git --depth=1 mongo-express-scm
       - scribe/install
       - scribe/bom:
