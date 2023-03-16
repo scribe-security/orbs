@@ -10,10 +10,18 @@ id=$(id -u)
 if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
 
 if is_command wget; then
-    export ENV=$ENV && wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d
+    if [ "$ENV" = "dev" ]; then
+        wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d -D
+    else
+        wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d
+    fi
     exit 0
 elif is_command curl; then
-    export ENV=$ENV && curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d 
+    if [ "$ENV" = "dev" ]; then
+        curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d -D
+    else
+    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d
+    fi
 else 
     if dpkg --help >/dev/null ; then
         export EXT=".deb"
@@ -28,7 +36,11 @@ else
         $SUDO yum install curl jq -y
     fi
 
-    export ENV=$ENV && curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
+    if [ "$ENV" = "dev" ]; then
+       curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -D
+    else
+        curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
+    fi
 fi
  
 # # Exit if version is already installed
