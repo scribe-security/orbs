@@ -70,7 +70,7 @@ parameters:
     type: string
   output-directory:
     description: Output directory path
-    default: /home/samtholiya/.cache/valint
+    default: valint/scribe
     type: string
   output-file:
     description: Output file name
