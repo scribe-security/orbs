@@ -176,6 +176,6 @@ steps:
        <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
        <<# parameters.scribe-enable >>--scribe-enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
        <<# parameters.scribe-login-url >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
-       <<# parameters.scribe-url >>--scribe-url << parameters.scribe-url >><</ parameters.scribe-url >> \
+       <<# parameters.scribe-url >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url >> \
        <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >> \
        <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
