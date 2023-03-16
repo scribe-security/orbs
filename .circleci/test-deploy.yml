@@ -43,7 +43,7 @@ jobs:
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
           scribe-login-url: $SCRIBE_LOGIN_URL
-          scribe-audience: $SCRIBE_AUDIENCE
+          scribe-auth-audience: $SCRIBE_AUDIENCE
       - scribe/bom:
           target: mongo-express:1.0.0-alpha.4
           verbose: 2
@@ -53,7 +53,7 @@ jobs:
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
           scribe-login-url: $SCRIBE_LOGIN_URL
-          scribe-audience: $SCRIBE_AUDIENCE
+          scribe-auth-audience: $SCRIBE_AUDIENCE
 
 workflows:
   test-deploy:
