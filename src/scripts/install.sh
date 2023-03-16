@@ -5,11 +5,12 @@ is_command() {
   command -v "$1" >/dev/null
 }
 
+
 id=$(id -u)
 if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
 
 if is_command wget; then
-    wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d
+    wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO ENV=$ENV sh -s -- -b /usr/local/bin -d
     exit 0
 elif is_command curl; then
     curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO ENV=$ENV sh -s -- -b /usr/local/bin -d 
@@ -27,7 +28,7 @@ else
         $SUDO yum install curl jq -y
     fi
 
-    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
+    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO ENV=$ENV sh -s -- -b /usr/local/bin
 fi
 
 env 
