@@ -106,7 +106,7 @@ parameters:
     type: string
   scribe-auth-audience:
     description: Scribe auth audience
-    default: api.production.scribesecurity.com
+    default: ""
     type: string
   scribe-client-id:
     description: Scribe Client ID
