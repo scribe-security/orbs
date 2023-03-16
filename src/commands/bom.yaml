@@ -82,7 +82,7 @@ parameters:
     type: string
   output-directory:
     description: Output directory path
-    default: valint/scribe
+    default: /home/samtholiya/.cache/valint
     type: string
   output-file:
     description: Output file name
@@ -106,7 +106,7 @@ parameters:
     type: string
   scribe-auth-audience:
     description: Scribe auth audience
-    default: ""
+    default: api.production.scribesecurity.com
     type: string
   scribe-client-id:
     description: Scribe Client ID
@@ -122,11 +122,11 @@ parameters:
     type: boolean
   scribe-login-url:
     description: Scribe login url
-    default: ""
+    default: https://scribesecurity-production.us.auth0.com
     type: string
   scribe-url:
     description: Scribe API Url
-    default: ""
+    default: https://api.production.scribesecurity.com
     type: string
   target:
     description: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
@@ -171,11 +171,11 @@ steps:
        <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
        <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
        <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
-       <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
+       <<# parameters.scribe-auth-audience >>--scribe.auth.audience << parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
        <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
+       <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
        <<# parameters.scribe-enable >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
        <<# parameters.scribe-login-url >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
-       <<# parameters.scribe-auth-audience >>--scribe.auth.audience << parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
        <<# parameters.scribe-url >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url >> \
        <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >> \
-       <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
+       <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
