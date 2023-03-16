@@ -40,7 +40,7 @@ jobs:
           target: dir:mongo-express-scm
           verbose: 2
           scribe-enable: true
-          product-key: $SCRIBE_PRODUCT_KEY
+          product-key: orbs-deploy
           scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
@@ -50,7 +50,7 @@ jobs:
           target: mongo-express:1.0.0-alpha.4
           verbose: 2
           scribe-enable: true
-          product-key: $SCRIBE_PRODUCT_KEY
+          product-key: orbs-deploy
           scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
