@@ -33,7 +33,7 @@ else
     curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
 fi
 
-
+env 
 # # Exit if version is already installed
 # if command -v secrethub >/dev/null 2>&1 && secrethub --version 2>&1 | cut -d "," -f 1 | grep -q "$(echo $VERSION | cut -c 2-)$"; then
 #   echo -e "${OK_COLOR}==> Version ${VERSION} is already installed${NO_COLOR}"
