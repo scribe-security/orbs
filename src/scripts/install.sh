@@ -5,6 +5,9 @@ is_command() {
   command -v "$1" >/dev/null
 }
 
+env
+echo ENV: $ENV
+set -x
 id=$(id -u)
 if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
 
