@@ -155,8 +155,8 @@ steps:
        <<# parameters.package-exclude-type >>--package-exclude-type << parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
        <<# parameters.package-group >>--package-group << parameters.package-group >><</ parameters.package-group >> \
        <<# parameters.package-type >>--package-type << parameters.package-type >><</ parameters.package-type >> \
-       <<# parameters.attest-config >>--attest-config << parameters.attest-config >><</ parameters.attest-config >> \
-       <<# parameters.attest-default >>--attest-default << parameters.attest-default >><</ parameters.attest-default >> \
+       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
+       <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
        <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >> \
        <<# parameters.cache-enable >>--cache-enable << parameters.cache-enable >><</ parameters.cache-enable >> \
        <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
