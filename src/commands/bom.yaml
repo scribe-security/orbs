@@ -64,6 +64,10 @@ parameters:
     description: Git tag in the repository
     default: ""
     type: string
+  help:
+    description: help for bom
+    default: false
+    type: boolean
   label:
     description: Add Custom labels
     default: ""
@@ -82,7 +86,7 @@ parameters:
     type: string
   output-directory:
     description: Output directory path
-    default: valint/scribe
+    default: /home/samtholiya/.cache/valint
     type: string
   output-file:
     description: Output file name
@@ -106,7 +110,7 @@ parameters:
     type: string
   scribe-auth-audience:
     description: Scribe auth audience
-    default: ""
+    default: api.production.scribesecurity.com
     type: string
   scribe-client-id:
     description: Scribe Client ID
@@ -122,11 +126,11 @@ parameters:
     type: boolean
   scribe-login-url:
     description: Scribe login url
-    default: ""
+    default: https://scribesecurity-production.us.auth0.com
     type: string
   scribe-url:
     description: Scribe API Url
-    default: ""
+    default: https://api.production.scribesecurity.com
     type: string
   target:
     description: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
@@ -145,37 +149,38 @@ steps:
     name: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
     command: |
       valint bom << parameters.target >> <<# parameters.attach-regex >>--attach-regex << parameters.attach-regex >><</ parameters.attach-regex >> \
+       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
+       <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
+       <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >> \
+       <<# parameters.cache-enable >>--cache-enable << parameters.cache-enable >><</ parameters.cache-enable >> \
        <<# parameters.components >>--components << parameters.components >><</ parameters.components >> \
+       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
+       <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
+       --context-type=circleci \
        <<# parameters.env >>--env << parameters.env >><</ parameters.env >> \
+       <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
+       <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
        <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
        <<# parameters.format >>--format << parameters.format >><</ parameters.format >> \
        <<# parameters.git-branch >>--git-branch << parameters.git-branch >><</ parameters.git-branch >> \
        <<# parameters.git-commit >>--git-commit << parameters.git-commit >><</ parameters.git-commit >> \
        <<# parameters.git-tag >>--git-tag << parameters.git-tag >><</ parameters.git-tag >> \
-       <<# parameters.package-exclude-type >>--package-exclude-type << parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
-       <<# parameters.package-group >>--package-group << parameters.package-group >><</ parameters.package-group >> \
-       <<# parameters.package-type >>--package-type << parameters.package-type >><</ parameters.package-type >> \
-       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
-       <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
-       <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >> \
-       <<# parameters.cache-enable >>--cache-enable << parameters.cache-enable >><</ parameters.cache-enable >> \
-       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-       <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
-       --context-type=circleci \
-       <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
-       <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
+       <<# parameters.help >>--help << parameters.help >><</ parameters.help >> \
        <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
        <<# parameters.level >>--level << parameters.level >><</ parameters.level >> \
        <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
        <<# parameters.oci-repo >>--oci-repo << parameters.oci-repo >><</ parameters.oci-repo >> \
        <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
        <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
+       <<# parameters.package-exclude-type >>--package-exclude-type << parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
+       <<# parameters.package-group >>--package-group << parameters.package-group >><</ parameters.package-group >> \
+       <<# parameters.package-type >>--package-type << parameters.package-type >><</ parameters.package-type >> \
        <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
-       <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
+       <<# parameters.scribe-auth-audience >>--scribe.auth.audience << parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
        <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
+       <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
        <<# parameters.scribe-enable >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
        <<# parameters.scribe-login-url >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
-       <<# parameters.scribe-auth-audience >>--scribe.auth.audience << parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
        <<# parameters.scribe-url >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url >> \
        <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >> \
-       <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
+       <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \
