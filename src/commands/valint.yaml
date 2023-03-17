@@ -1,4 +1,4 @@
-description: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
+description: Command Line Interpreter (CLI) tool, that generates evidence the verifies the integrity of your supply chain.
 parameters:
   attest-config:
     description: Attestation config path
@@ -8,10 +8,6 @@ parameters:
     description: Attestation default config, options=[sigstore sigstore-github x509]
     default: sigstore
     type: string
-  attestation:
-    description: Attestation for target
-    default: ""
-    type: string
   backoff:
     description: Backoff duration
     default: 15s
@@ -20,8 +16,8 @@ parameters:
     description: Enable local cache
     default: true
     type: boolean
-  common-name:
-    description: Default policy allowed common names
+  command:
+    description: Command Line Interpreter (CLI) tool, that generates evidence the verifies the integrity of your supply chain.
     default: ""
     type: string
   config:
@@ -32,10 +28,6 @@ parameters:
     description: Context dir
     default: ""
     type: string
-  email:
-    description: Default policy allowed emails
-    default: ""
-    type: string
   filter-regex:
     description: Filter out files by regex
     default: '**/*.pyc,**/.git/**'
@@ -44,18 +36,10 @@ parameters:
     description: Filter packages by scope
     default: ""
     type: string
-  force:
-    description: Force skip cache
-    default: false
-    type: boolean
   help:
-    description: help for verify
+    description: help for valint
     default: false
     type: boolean
-  input-format:
-    description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json]
-    default: attest-cyclonedx-json
-    type: string
   label:
     description: Add Custom labels
     default: ""
@@ -108,17 +92,9 @@ parameters:
     description: Scribe API Url
     default: https://api.production.scribesecurity.com
     type: string
-  target:
-    description: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
-    default: ""
-    type: string
   timeout:
     description: Timeout duration
     default: 120s
-    type: string
-  uri:
-    description: Default policy allowed uris
-    default: ""
     type: string
   verbose:
     description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
@@ -126,23 +102,18 @@ parameters:
     type: integer
 steps:
 - run:
-    name: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
+    name: Command Line Interpreter (CLI) tool, that generates evidence the verifies the integrity of your supply chain.
     command: |
-      valint verify << parameters.target >> <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
+      valint << parameters.command >> <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
        <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
-       <<# parameters.attestation >>--attestation << parameters.attestation >><</ parameters.attestation >> \
        <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >> \
        <<# parameters.cache-enable >>--cache-enable << parameters.cache-enable >><</ parameters.cache-enable >> \
-       <<# parameters.common-name >>--common-name << parameters.common-name >><</ parameters.common-name >> \
        <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
        <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
        --context-type=circleci \
-       <<# parameters.email >>--email << parameters.email >><</ parameters.email >> \
        <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
        <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
-       <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
        <<# parameters.help >>--help << parameters.help >><</ parameters.help >> \
-       <<# parameters.input-format >>--input-format << parameters.input-format >><</ parameters.input-format >> \
        <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
        <<# parameters.level >>--level << parameters.level >><</ parameters.level >> \
        <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
@@ -157,5 +128,4 @@ steps:
        <<# parameters.scribe-login-url >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
        <<# parameters.scribe-url >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url >> \
        <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >> \
-       <<# parameters.uri >>--uri << parameters.uri >><</ parameters.uri >> \
        <<# parameters.verbose >>--verbose << parameters.verbose >><</ parameters.verbose >> \

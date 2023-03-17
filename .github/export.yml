@@ -1,0 +1,55 @@
+name: export
+
+on:
+  workflow_dispatch:
+  push:
+    branches:    
+      - 'main'
+      - 'dev'
+jobs:
+  export_docs:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04] # TODO: only build
+        repo: ["gensbom", "valint", "action-bom", "action-verify", "action-report", "action-installer", "JSL", "misc", "orbs", "azure-tasks", "helm-charts", "valint-pipe"]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir -p sub
+
+      - uses: actions/checkout@v3
+        with:
+          repository: scribe-security/valint
+          path: sub/valint
+          token: ${{ secrets.PR_PAT }}
+      
+      - name: export orbs
+        run: |
+          bash scripts/sync_orbs.sh -E -x
+
+      - name: Branch used
+        id: extract_branch
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            echo "::set-output name=branch::$(echo ${GITHUB_REF##*/})"
+          elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
+          else
+            echo EVENT_NAME=${GITHUB_EVENT_NAME}
+            echo "::set-output name=branch::INVALID_EVENT_BRANCH_UNKNOWN"
+          fi
+          cd sub/valint
+          git status
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: orbs_import_${{ steps.extract_branch.outputs.branch }}
+          path: sub/valint
+          token: ${{ secrets.PR_PAT }}
+          title: autogen - orbs export

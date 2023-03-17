@@ -1,0 +1,41 @@
+name: import
+
+
+on:
+  workflow_dispatch:
+  # push:
+  # schedule:
+  #   - cron: "0 0 * * *" #Every day
+
+jobs:
+  import_docs:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04] # TODO: only build
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir -p sub
+
+      - uses: actions/checkout@v3
+        with:
+          repository: scribe-security/valint
+          path: sub/valint
+          token: ${{ secrets.PR_PAT }}
+
+      - name: import commands
+        run: |
+          bash scripts/sync_orbs.sh
+          git status
+    
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: commands_import
+          title: autogen - orbs import
+          token: ${{ secrets.GITHUB_TOKEN }}
