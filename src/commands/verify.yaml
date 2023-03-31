@@ -1,156 +1,170 @@
 description: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
 parameters:
-  attest-config:
-    description: Attestation config path
-    default: ""
-    type: string
-  attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509]
-    default: sigstore
+  target:
+    description:
     type: string
   attestation:
     description: Attestation for target
+    type: string
     default: ""
-    type: string
-  backoff:
-    description: Backoff duration
-    default: 15s
-    type: string
-  cache-enable:
-    description: Enable local cache
-    default: true
-    type: boolean
   common-name:
     description: Default policy allowed common names
-    default: ""
     type: string
-  config:
-    description: Configuration file path
     default: ""
-    type: string
-  context-dir:
-    description: Context dir
-    default: ""
-    type: string
   email:
     description: Default policy allowed emails
+    type: string
     default: ""
-    type: string
-  filter-regex:
-    description: Filter out files by regex
-    default: '**/*.pyc,**/.git/**'
-    type: string
-  filter-scope:
-    description: Filter packages by scope
-    default: ""
-    type: string
   force:
     description: Force skip cache
-    default: false
     type: boolean
+    default: false
   input-format:
     description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json]
+    type: string
     default: attest-cyclonedx-json
-    type: string
-  label:
-    description: Add Custom labels
-    default: ""
-    type: string
-  level:
-    description: Log depth level, options=[panic fatal error warning info debug trace]
-    default: ""
-    type: string
-  oci:
-    description: Enable OCI store
-    default: false
-    type: boolean
-  oci-repo:
-    description: Select OCI custom attestation repo
-    default: ""
-    type: string
-  output-directory:
-    description: Output directory path
-    default: valint/scribe
-    type: string
-  output-file:
-    description: Output file name
-    default: ""
-    type: string
-  product-key:
-    description: Scribe Project Key
-    default: ""
-    type: string
-  scribe-auth-audience:
-    description: Scribe auth audience
-    default: api.production.scribesecurity.com
-    type: string
-  scribe-client-id:
-    description: Scribe Client ID
-    default: ""
-    type: string
-  scribe-client-secret:
-    description: Scribe Client Secret
-    default: ""
-    type: string
-  scribe-enable:
-    description: Enable scribe client
-    default: false
-    type: boolean
-  scribe-login-url:
-    description: Scribe login url
-    default: https://scribesecurity-production.us.auth0.com
-    type: string
-  scribe-url:
-    description: Scribe API Url
-    default: https://api.production.scribesecurity.com
-    type: string
-  target:
-    description: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
-    default: ""
-    type: string
-  timeout:
-    description: Timeout duration
-    default: 120s
-    type: string
   uri:
     description: Default policy allowed uris
-    default: ""
     type: string
+    default: ""
+  attest-config:
+    description: Attestation config path
+    type: string
+    default: ""
+  attest-default:
+    description: Attestation default config, options=[sigstore sigstore-github x509]
+    type: string
+    default: sigstore
+  backoff:
+    description: Backoff duration
+    type: string
+    default: 15s
+  cache-enable:
+    description: Enable local cache
+    type: boolean
+    default: true
+  config:
+    description: Configuration file path
+    type: string
+    default: ""
+  context-dir:
+    description: Context dir
+    type: string
+    default: ""
+  filter-regex:
+    description: Filter out files by regex
+    type: string
+    default: '**/*.pyc,**/.git/**'
+  filter-scope:
+    description: Filter packages by scope
+    type: string
+    default: ""
+  git-branch:
+    description: Git branch in the repository
+    type: string
+    default: ""
+  git-commit:
+    description: Git commit hash in the repository
+    type: string
+    default: ""
+  git-tag:
+    description: Git tag in the repository
+    type: string
+    default: ""
+  label:
+    description: Add Custom labels
+    type: string
+    default: ""
+  level:
+    description: Log depth level, options=[panic fatal error warning info debug trace]
+    type: string
+    default: ""
+  oci:
+    description: Enable OCI store
+    type: boolean
+    default: false
+  oci-repo:
+    description: Select OCI custom attestation repo
+    type: string
+    default: ""
+  output-directory:
+    description: Output directory path
+    type: string
+    default: scribe/valint
+  output-file:
+    description: Output file name
+    type: string
+    default: ""
+  product-key:
+    description: Scribe Project Key
+    type: string
+    default: ""
+  scribe-auth-audience:
+    description: Scribe auth audience
+    type: string
+    default: api.production.scribesecurity.com
+  scribe-client-id:
+    description: Scribe Client ID
+    type: string
+    default: ""
+  scribe-client-secret:
+    description: Scribe Client Secret
+    type: string
+    default: ""
+  scribe-enable:
+    description: Enable scribe client
+    type: boolean
+    default: false
+  scribe-login-url:
+    description: Scribe login url
+    type: string
+    default: https://scribesecurity-production.us.auth0.com
+  scribe-url:
+    description: Scribe API Url
+    type: string
+    default: https://api.production.scribesecurity.com
+  timeout:
+    description: Timeout duration
+    type: string
+    default: 120s
   verbose:
     description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
-    default: 1
     type: integer
+    default: 0
 steps:
-- run:
-    name: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
-    command: |
-      valint verify << parameters.target >> <<# parameters.attestation >>--attestation << parameters.attestation >><</ parameters.attestation >> \
-       <<# parameters.common-name >>--common-name << parameters.common-name >><</ parameters.common-name >> \
-       <<# parameters.email >>--email << parameters.email >><</ parameters.email >> \
-       <<# parameters.force >>--force << parameters.force >><</ parameters.force >> \
-       <<# parameters.input-format >>--input-format << parameters.input-format >><</ parameters.input-format >> \
-       <<# parameters.uri >>--uri << parameters.uri >><</ parameters.uri >> \
-       <<# parameters.attest-config >>--attest.config << parameters.attest-config >><</ parameters.attest-config >> \
-       <<# parameters.attest-default >>--attest.default << parameters.attest-default >><</ parameters.attest-default >> \
-       <<# parameters.backoff >>--backoff << parameters.backoff >><</ parameters.backoff >> \
-       <<# parameters.cache-enable >>--cache-enable << parameters.cache-enable >><</ parameters.cache-enable >> \
-       <<# parameters.config >>--config << parameters.config >><</ parameters.config >> \
-       <<# parameters.context-dir >>--context-dir << parameters.context-dir >><</ parameters.context-dir >> \
-       --context-type=circleci \
-       <<# parameters.filter-regex >>--filter-regex << parameters.filter-regex >><</ parameters.filter-regex >> \
-       <<# parameters.filter-scope >>--filter-scope << parameters.filter-scope >><</ parameters.filter-scope >> \
-       <<# parameters.label >>--label << parameters.label >><</ parameters.label >> \
-       <<# parameters.level >>--level << parameters.level >><</ parameters.level >> \
-       <<# parameters.oci >>--oci << parameters.oci >><</ parameters.oci >> \
-       <<# parameters.oci-repo >>--oci-repo << parameters.oci-repo >><</ parameters.oci-repo >> \
-       <<# parameters.output-directory >>--output-directory << parameters.output-directory >><</ parameters.output-directory >> \
-       <<# parameters.output-file >>--output-file << parameters.output-file >><</ parameters.output-file >> \
-       <<# parameters.product-key >>--product-key << parameters.product-key >><</ parameters.product-key >> \
-       <<# parameters.scribe-auth-audience >>--scribe.auth.audience << parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
-       <<# parameters.scribe-client-id >>--scribe.client-id << parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
-       <<# parameters.scribe-client-secret >>--scribe.client-secret << parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
-       <<# parameters.scribe-enable >>--scribe.enable << parameters.scribe-enable >><</ parameters.scribe-enable >> \
-       <<# parameters.scribe-login-url >>--scribe.login-url << parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
-       <<# parameters.scribe-url >>--scribe.url << parameters.scribe-url >><</ parameters.scribe-url >> \
-       <<# parameters.timeout >>--timeout << parameters.timeout >><</ parameters.timeout >> \
-       <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
+  - run:
+      name: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
+      command: |
+        valint verify << parameters.target >> <<# parameters.attestation >>--attestation=<< parameters.attestation >><</ parameters.attestation >> \
+         <<# parameters.common-name >>--common-name=<< parameters.common-name >><</ parameters.common-name >> \
+         <<# parameters.email >>--email=<< parameters.email >><</ parameters.email >> \
+         <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
+         <<# parameters.input-format >>--input-format=<< parameters.input-format >><</ parameters.input-format >> \
+         <<# parameters.uri >>--uri=<< parameters.uri >><</ parameters.uri >> \
+         <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
+         <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
+         <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
+         <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \
+         <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
+         <<# parameters.context-dir >>--context-dir=<< parameters.context-dir >><</ parameters.context-dir >> \
+         --context-type=circleci \
+         <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
+         <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
+         <<# parameters.git-branch >>--git-branch=<< parameters.git-branch >><</ parameters.git-branch >> \
+         <<# parameters.git-commit >>--git-commit=<< parameters.git-commit >><</ parameters.git-commit >> \
+         <<# parameters.git-tag >>--git-tag=<< parameters.git-tag >><</ parameters.git-tag >> \
+         <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
+         <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
+         <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
+         <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
+         <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
+         <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
+         <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
+         <<# parameters.scribe-auth-audience >>--scribe.auth.audience=<< parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
+         <<# parameters.scribe-client-id >>--scribe.client-id=<< parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
+         <<# parameters.scribe-client-secret >>--scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
+         <<# parameters.scribe-enable >>--scribe.enable=<< parameters.scribe-enable >><</ parameters.scribe-enable >> \
+         <<# parameters.scribe-login-url >>--scribe.login-url=<< parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
+         <<# parameters.scribe-url >>--scribe.url=<< parameters.scribe-url >><</ parameters.scribe-url >> \
+         <<# parameters.timeout >>--timeout=<< parameters.timeout >><</ parameters.timeout >> \
+         <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
