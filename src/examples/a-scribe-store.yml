@@ -1,12 +1,13 @@
-description: >
+description: >-
   Following is a example utilizing Scribe evidence store.
   Each storer can be used to store, find and download evidence, unifying all the supply chain evidence into a system is an important part to be able to query any subset for policy validation.
+
+  > Use `setup_remote_docker` step (Optional) to allow access to a local docker daemon. Otherwise image targets is read directly from remote registry.
 
   | Type  | Description | requirement |
   | --- | --- | --- |
   | scribe | Evidence is stored on scribe service | scribe credentials |
 
-  > Use `setup_remote_docker` step (Optional) to allow access to a local docker daemon. Otherwise image targets is read directly from remote registry.
 
   ## Scribe Evidence store
   Scribe evidence store allows you store evidence using scribe Service.
