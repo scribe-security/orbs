@@ -28,7 +28,6 @@ usage:
         - scribe/bom:
             target: scribesecuriy.jfrog.io/scribe-docker-local/stub_remote:latest
             output-file: my_sbom.json
-            verbose: 2
             force: true
 
         # Storing as artifacts

@@ -17,5 +17,4 @@ usage:
         # Create SBOM for remote `busybox:latest` image.
         - scribe/bom:
             target: busybox:latest
-            verbose: 2
             force: true

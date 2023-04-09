@@ -18,14 +18,12 @@ usage:
         - scribe/bom:
             target: busybox:latest
             format: statement
-            verbose: 2
             scribe-enable: true
             scribe-client-id: $SCRIBE_CLIENT_ID
             scribe-client-secret: $SCRIBE_CLIENT_SECRET
         - scribe/verify:
             target: busybox:latest
             input-format: statement
-            verbose: 2
             scribe-enable: true
             scribe-client-id: $SCRIBE_CLIENT_ID
             scribe-client-secret: $SCRIBE_CLIENT_SECRET

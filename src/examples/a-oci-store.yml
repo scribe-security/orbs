@@ -18,13 +18,11 @@ usage:
         - scribe/bom:
             target: busybox:latest
             format: statement
-            verbose: 2
             oci: true
             oci-repo: $OCI_REPO
         - scribe/verify:
             target: busybox:latest
             input-format: statement
-            verbose: 2
             scribe-enable: true
             oci: true
             oci-repo: $OCI_REPO

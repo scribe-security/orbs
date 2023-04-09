@@ -16,7 +16,6 @@ usage:
         - scribe/bom:
             target: busybox:latest
             output-file: my_sbom.json
-            verbose: 2
             force: true
 
         # Storing as artifacts

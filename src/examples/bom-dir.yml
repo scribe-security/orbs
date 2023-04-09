@@ -23,5 +23,4 @@ usage:
 
         - scribe/bom:
             target: dir:.
-            verbose: 2
             force: true

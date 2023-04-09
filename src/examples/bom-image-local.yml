@@ -21,7 +21,6 @@ usage:
         - scribe/bom:
             target: image_name:latest
             output-file: my_sbom.json
-            verbose: 2
             force: true
 
         # Storing as artifacts
