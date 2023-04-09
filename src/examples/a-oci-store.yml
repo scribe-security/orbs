@@ -1,11 +1,8 @@
-description: >
+description: >-
   Following is a example utilizing OCI registry as a evidence store.
 
-  Each storer can be used to store, find and download evidence,
+  Evidence stores  can be used to store, find and download evidence,
   unifying all the supply chain evidence into a system is an important part to be able to query any subset for policy validation.
-
-  Use `setup_remote_docker` step (Optional) to allow access to a local docker daemon.
-  Otherwise image targets is read directly from remote registry.
 
 usage:
   version: 2.1
