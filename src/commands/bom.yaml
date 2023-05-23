@@ -1,7 +1,7 @@
-description: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
+description: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
 parameters:
   target:
-    description:
+    description: Target object name format=[<image:tag>, <dir path>, <git url>]
     type: string
   attach-regex:
     description: Attach files content by regex
@@ -11,16 +11,16 @@ parameters:
     description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
     type: string
     default: metadata,layers,packages,syft,files,dep,commits
-  env:
-    description: Environment keys to include in sbom
-    type: string
-    default: ""
+  compress:
+    description: Compress content (generic evidence)
+    type: boolean
+    default: false
   force:
     description: Force overwrite cache
     type: boolean
     default: false
   format:
-    description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json attest-slsa statement-slsa predicate-slsa]
+    description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json predicate-cyclonedx-json attest-slsa statement-slsa predicate-slsa statement-generic attest-generic]
     type: string
     default: cyclonedx-json
   package-exclude-type:
@@ -35,6 +35,14 @@ parameters:
     description: Select package type, options=[ruby python javascript java dpkg apkdb rpm go-mod rust binary sbom]
     type: string
     default: ruby,python,javascript,java,dpkg,apkdb,rpm,go-mod,rust,binary,sbom
+  app-name:
+    description: Logical application name
+    type: string
+    default: ""
+  app-version:
+    description: Logical application version
+    type: string
+    default: ""
   attest-config:
     description: Attestation config path
     type: string
@@ -57,6 +65,10 @@ parameters:
     default: ""
   context-dir:
     description: Context dir
+    type: string
+    default: ""
+  env:
+    description: Environment keys to include in sbom
     type: string
     default: ""
   filter-regex:
@@ -98,13 +110,25 @@ parameters:
   output-directory:
     description: Output directory path
     type: string
-    default: scribe/valint
+    default: /home/runner/.cache/valint
   output-file:
     description: Output file name
     type: string
     default: ""
+  pipeline-name:
+    description: Pipeline name
+    type: string
+    default: ""
+  predicate-type:
+    description: Custom Predicate type (generic evidence format)
+    type: string
+    default: http://scribesecurity.com/evidence/generic/v0.1
   product-key:
-    description: Scribe Project Key
+    description: Product Key
+    type: string
+    default: ""
+  product-version:
+    description: Product Version
     type: string
     default: ""
   scribe-auth-audience:
@@ -141,16 +165,18 @@ parameters:
     default: 0
 steps:
   - run:
-      name: Generate Software Bill Of Materials (SBOM) for container images, filesystems and git repositories
+      name: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
       command: |
         valint bom << parameters.target >> <<# parameters.attach-regex >>--attach-regex=<< parameters.attach-regex >><</ parameters.attach-regex >> \
          <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
-         <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
+         <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
          <<# parameters.package-group >>--package-group=<< parameters.package-group >><</ parameters.package-group >> \
          <<# parameters.package-type >>--package-type=<< parameters.package-type >><</ parameters.package-type >> \
+         <<# parameters.app-name >>--app-name=<< parameters.app-name >><</ parameters.app-name >> \
+         <<# parameters.app-version >>--app-version=<< parameters.app-version >><</ parameters.app-version >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
@@ -158,6 +184,7 @@ steps:
          <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
          <<# parameters.context-dir >>--context-dir=<< parameters.context-dir >><</ parameters.context-dir >> \
          --context-type=circleci \
+         <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
          <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
          <<# parameters.git-branch >>--git-branch=<< parameters.git-branch >><</ parameters.git-branch >> \
@@ -169,7 +196,10 @@ steps:
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
          <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
+         <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
+         <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
+         <<# parameters.product-version >>--product-version=<< parameters.product-version >><</ parameters.product-version >> \
          <<# parameters.scribe-auth-audience >>--scribe.auth.audience=<< parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
          <<# parameters.scribe-client-id >>--scribe.client-id=<< parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
          <<# parameters.scribe-client-secret >>--scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
