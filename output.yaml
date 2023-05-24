@@ -73,7 +73,7 @@ commands:
                 description: Normalize package json files
                 type: boolean
             output-directory:
-                default: /home/samtholiya/.cache/gensbom
+                default: scribe/valint
                 description: Report output directory
                 type: string
             output-file:
@@ -167,7 +167,7 @@ commands:
                 description: Sbom input formatter, options=[attest-cyclonedx-json]
                 type: string
             output-directory:
-                default: /home/samtholiya/.cache/gensbom
+                default: scribe/valint
                 description: Report output directory
                 type: string
             output-file:

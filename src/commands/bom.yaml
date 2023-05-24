@@ -110,7 +110,7 @@ parameters:
   output-directory:
     description: Output directory path
     type: string
-    default: /home/runner/.cache/valint
+    default: scribe/valint
   output-file:
     description: Output file name
     type: string
