@@ -1,7 +1,7 @@
-description: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
+description: Verify compliance policies against evidence to ensure the integrity of supply chain.
 parameters:
   target:
-    description:
+    description: Target object name format=[<image:tag>, <dir path>, <git url>]
     type: string
   attestation:
     description: Attestation for target
@@ -20,11 +20,19 @@ parameters:
     type: boolean
     default: false
   input-format:
-    description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json]
+    description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json statement-generic attest-generic]
     type: string
     default: attest-cyclonedx-json
   uri:
     description: Default policy allowed uris
+    type: string
+    default: ""
+  app-name:
+    description: Logical application name
+    type: string
+    default: ""
+  app-version:
+    description: Logical application version
     type: string
     default: ""
   attest-config:
@@ -49,6 +57,10 @@ parameters:
     default: ""
   context-dir:
     description: Context dir
+    type: string
+    default: ""
+  env:
+    description: Environment keys to include in sbom
     type: string
     default: ""
   filter-regex:
@@ -95,8 +107,20 @@ parameters:
     description: Output file name
     type: string
     default: ""
+  pipeline-name:
+    description: Pipeline name
+    type: string
+    default: ""
+  predicate-type:
+    description: Custom Predicate type (generic evidence format)
+    type: string
+    default: http://scribesecurity.com/evidence/generic/v0.1
   product-key:
-    description: Scribe Project Key
+    description: Product Key
+    type: string
+    default: ""
+  product-version:
+    description: Product Version
     type: string
     default: ""
   scribe-auth-audience:
@@ -133,7 +157,7 @@ parameters:
     default: 0
 steps:
   - run:
-      name: Verify Software Bill Of Materials (SBOM) and other evidence for container images, filesystems and git repositories
+      name: Verify compliance policies against evidence to ensure the integrity of supply chain.
       command: |
         valint verify << parameters.target >> <<# parameters.attestation >>--attestation=<< parameters.attestation >><</ parameters.attestation >> \
          <<# parameters.common-name >>--common-name=<< parameters.common-name >><</ parameters.common-name >> \
@@ -141,6 +165,8 @@ steps:
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
          <<# parameters.input-format >>--input-format=<< parameters.input-format >><</ parameters.input-format >> \
          <<# parameters.uri >>--uri=<< parameters.uri >><</ parameters.uri >> \
+         <<# parameters.app-name >>--app-name=<< parameters.app-name >><</ parameters.app-name >> \
+         <<# parameters.app-version >>--app-version=<< parameters.app-version >><</ parameters.app-version >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
@@ -148,6 +174,7 @@ steps:
          <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
          <<# parameters.context-dir >>--context-dir=<< parameters.context-dir >><</ parameters.context-dir >> \
          --context-type=circleci \
+         <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
          <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
          <<# parameters.git-branch >>--git-branch=<< parameters.git-branch >><</ parameters.git-branch >> \
@@ -159,7 +186,10 @@ steps:
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
          <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
+         <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
+         <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
+         <<# parameters.product-version >>--product-version=<< parameters.product-version >><</ parameters.product-version >> \
          <<# parameters.scribe-auth-audience >>--scribe.auth.audience=<< parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
          <<# parameters.scribe-client-id >>--scribe.client-id=<< parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
          <<# parameters.scribe-client-secret >>--scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
