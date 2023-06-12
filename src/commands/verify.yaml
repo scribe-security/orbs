@@ -102,7 +102,7 @@ parameters:
   output-directory:
     description: Output directory path
     type: string
-    default: scribe/valint
+    default: ./scribe/valint
   output-file:
     description: Output file name
     type: string
@@ -147,6 +147,10 @@ parameters:
     description: Scribe API Url
     type: string
     default: https://api.production.scribesecurity.com
+  structured:
+    description: Enable structured logger
+    type: boolean
+    default: false
   timeout:
     description: Timeout duration
     type: string
@@ -196,5 +200,6 @@ steps:
          <<# parameters.scribe-enable >>--scribe.enable=<< parameters.scribe-enable >><</ parameters.scribe-enable >> \
          <<# parameters.scribe-login-url >>--scribe.login-url=<< parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
          <<# parameters.scribe-url >>--scribe.url=<< parameters.scribe-url >><</ parameters.scribe-url >> \
+         <<# parameters.structured >>--structured=<< parameters.structured >><</ parameters.structured >> \
          <<# parameters.timeout >>--timeout=<< parameters.timeout >><</ parameters.timeout >> \
          <<# parameters.verbose >>--verbose=<< parameters.verbose >><</ parameters.verbose >> \
