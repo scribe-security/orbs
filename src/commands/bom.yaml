@@ -7,6 +7,18 @@ parameters:
     description: Attach files content by regex
     type: string
     default: ""
+  author-email:
+    description: Set author email
+    type: string
+    default: ""
+  author-name:
+    description: Set author name
+    type: string
+    default: ""
+  author-phone:
+    description: Set author phone
+    type: string
+    default: ""
   components:
     description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
     type: string
@@ -24,7 +36,7 @@ parameters:
     type: string
     default: cyclonedx-json
   package-exclude-type:
-    description: Exclude package type, options=[ruby python javascript java dpkg apkdb rpm go-mod rust binary sbom]
+    description: Exclude package type, options=[ruby python javascript java dpkg apkdb rpm go-mod dotnet r-package rust binary sbom]
     type: string
     default: ""
   package-group:
@@ -32,9 +44,25 @@ parameters:
     type: string
     default: ""
   package-type:
-    description: Select package type, options=[ruby python javascript java dpkg apkdb rpm go-mod rust binary sbom]
+    description: Select package type, options=[ruby python javascript java dpkg apkdb rpm go-mod dotnet r-package rust binary sbom]
     type: string
-    default: ruby,python,javascript,java,dpkg,apkdb,rpm,go-mod,rust,binary,sbom
+    default: ruby,python,javascript,java,dpkg,apkdb,rpm,go-mod,dotnet,r-package,rust,binary,sbom
+  supplier-email:
+    description: Set supplier email
+    type: string
+    default: ""
+  supplier-name:
+    description: Set supplier name
+    type: string
+    default: ""
+  supplier-phone:
+    description: Set supplier phone
+    type: string
+    default: ""
+  supplier-url:
+    description: Set supplier url
+    type: string
+    default: ""
   app-name:
     description: Logical application name
     type: string
@@ -48,7 +76,7 @@ parameters:
     type: string
     default: ""
   attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509]
+    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
     type: string
     default: sigstore
   backoff:
@@ -172,6 +200,9 @@ steps:
       name: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
       command: |
         valint bom << parameters.target >> <<# parameters.attach-regex >>--attach-regex=<< parameters.attach-regex >><</ parameters.attach-regex >> \
+         <<# parameters.author-email >>--author-email=<< parameters.author-email >><</ parameters.author-email >> \
+         <<# parameters.author-name >>--author-name=<< parameters.author-name >><</ parameters.author-name >> \
+         <<# parameters.author-phone >>--author-phone=<< parameters.author-phone >><</ parameters.author-phone >> \
          <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
          <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
@@ -179,6 +210,10 @@ steps:
          <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
          <<# parameters.package-group >>--package-group=<< parameters.package-group >><</ parameters.package-group >> \
          <<# parameters.package-type >>--package-type=<< parameters.package-type >><</ parameters.package-type >> \
+         <<# parameters.supplier-email >>--supplier-email=<< parameters.supplier-email >><</ parameters.supplier-email >> \
+         <<# parameters.supplier-name >>--supplier-name=<< parameters.supplier-name >><</ parameters.supplier-name >> \
+         <<# parameters.supplier-phone >>--supplier-phone=<< parameters.supplier-phone >><</ parameters.supplier-phone >> \
+         <<# parameters.supplier-url >>--supplier-url=<< parameters.supplier-url >><</ parameters.supplier-url >> \
          <<# parameters.app-name >>--app-name=<< parameters.app-name >><</ parameters.app-name >> \
          <<# parameters.app-version >>--app-version=<< parameters.app-version >><</ parameters.app-version >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
