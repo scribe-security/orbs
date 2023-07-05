@@ -40,7 +40,7 @@ parameters:
     type: string
     default: ""
   attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509]
+    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
     type: string
     default: sigstore
   backoff:
