@@ -1,9 +1,9 @@
 ---
+sidebar_label: "CircleCI"
 title: CircleCI
 sidebar_position: 5
 ---
 
-# CircleCI
 Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows.
 
 The Orb provides several actions enabling the generation of SBOMs from various sources.
@@ -14,11 +14,11 @@ SBOM from a local directory) as well as several use cases of uploading the evide
 [![CircleCI Build Status](https://circleci.com/gh/scribe-security/orbs.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/scribe-security/orbs) [![CircleCI Orb Version](https://badges.circleci.com/orbs/scribe-security/orbs.svg)](https://circleci.com/orbs/registry/orb/scribe-security/orbs) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/scribe-security/orbs/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 - -->
 
-## Usage
+### Usage
 
 _For full usage guidelines, see the [orb registry listing](https://circleci.com/developer/orbs/orb/scribe-security/orbs)._
 
-## Target types - `[target]`
+### Target types - `[target]`
 ---
 Target types are types of artifacts produced and consumed by your supply chain.
 Using supported targets, you can collect evidence and verify compliance on a range of artifacts.
@@ -50,7 +50,7 @@ Each storer can be used to store, find and download evidence, unifying all the s
 | scribe | Evidence is stored on scribe service | scribe credentials |
 | OCI | Evidence is stored on a remote OCI registry | access to a OCI registry |
 
-## Scribe Evidence store
+### Scribe Evidence store
 Scribe evidence store allows you store evidence using scribe Service.
 
 Related Flags:
@@ -65,12 +65,12 @@ Integrating Scribe Hub with your environment requires the following credentials 
 * **Client ID**
 * **Client Secret**
 
-<img src='../../img/ci/integrations-secrets.jpg' alt='Scribe Integration Secrets' width='70%' min-width='400px'/>
+<img src='../../../../img/ci/integrations-secrets.jpg' alt='Scribe Integration Secrets' width='70%' min-width='400px'/>
 
 * Set your Scribe credentials as environment variables according to [CircleCI environment variables instructions](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-project "CircleCI embedding environment variables instructions").
 * Follow instructions and examples on the CircleCI [ScribeHub Orb page](https://circleci.com/developer/orbs/orb/scribe-security/orbs "Instructions for using ScribeHub Orb")
 
-## OCI Evidence store
+### OCI Evidence store
 Valint supports both storage and verification flows for `attestations`  and `statement` objects utilizing OCI registry as an evidence store.
 
 Using OCI registry as an evidence store allows you to upload, download and verify evidence across your supply chain in a seamless manner.
@@ -87,14 +87,14 @@ Evidence can be stored in any accusable registry.
 You must first login with the required access privileges to your registry before calling Valint.
 For example, using `docker login` command or [circle orbs](https://circleci.com/docs/building-docker-images/).
 
-## Scribe CircleCI Orbs
+### Scribe CircleCI Orbs
 
 [CircleCI 'Orbs'](https://circleci.com/developer/orbs "Circle CI Orbs") are shareable packages of CircleCI configuration code snippets. They are often shared in a registry and used to simplify configuration of builds on CircleCI.
 Scribe offers custom CircleCI Orbs for easier integration of CircleCI workflows with Scribe Hub. The custom Orbs are used for evidence collection and integrity verification in your workflows.
 
 ---
 
-## Resources
+### Resources
 
 * [CircleCI ScribeHub Orb Registry Page](https://circleci.com/orbs/registry/orb/scribe-security/orbs) - The official registry page of the ScribeHub orb for all versions, executors, commands, and jobs described.
 * [CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
