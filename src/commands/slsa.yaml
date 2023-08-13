@@ -21,7 +21,7 @@ parameters:
     default: metadata,layers
   external:
     description: Add build external parameters
-    type:
+    type: string
   finished-on:
     description: Set metadata finished time (<YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z)
     type: string
