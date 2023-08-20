@@ -1,66 +1,53 @@
-description: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
+description: Collect, Create and Store SLSA provenance evidence
 parameters:
   target:
     description: Target object name format=[<image:tag>, <dir path>, <git url>]
     type: string
-  attach-regex:
-    description: Attach files content by regex
+  all-env:
+    description: Attach all environment variables
+    type: boolean
+    default: false
+  build-type:
+    description: Set build type
     type: string
     default: ""
-  author-email:
-    description: Set author email
-    type: string
-    default: ""
-  author-name:
-    description: Set author name
-    type: string
-    default: ""
-  author-phone:
-    description: Set author phone
+  builder-id:
+    description: Set builder id
     type: string
     default: ""
   components:
-    description: Select by products components groups, options=[metadata layers packages syft files dep commits]
+    description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
     type: string
-    default: metadata,layers,packages,syft,dep,commits
-  compress:
-    description: Compress content (generic evidence)
-    type: boolean
-    default: false
+    default: metadata,layers
+  external:
+    description: Add build external parameters
+    type: string
+  finished-on:
+    description: Set metadata finished time (<YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z)
+    type: string
+    default: ""
   force:
     description: Force overwrite cache
     type: boolean
     default: false
   format:
-    description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json attest-slsa statement-slsa statement-generic attest-generic]
+    description: Evidence format, options=[statement attest predicate]
     type: string
-    default: cyclonedx-json
-  package-exclude-type:
-    description: Exclude package type, options=[ruby python javascript java dpkg apkdb rpm go-mod dotnet r-package rust binary sbom]
-    type: string
-    default: ""
-  package-group:
-    description: Select package group, options=[index install all]
+    default: statement
+  invocation:
+    description: Set metadata invocation ID
     type: string
     default: ""
-  package-type:
-    description: Select package type, options=[ruby python javascript java dpkg apkdb rpm go-mod dotnet r-package rust binary sbom]
-    type: string
-    default: ruby,python,javascript,java,dpkg,apkdb,rpm,go-mod,dotnet,r-package,rust,binary,sbom
-  supplier-email:
-    description: Set supplier email
+  predicate:
+    description: Import predicate path
     type: string
     default: ""
-  supplier-name:
-    description: Set supplier name
+  started-on:
+    description: Set metadata started time (<YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z)
     type: string
     default: ""
-  supplier-phone:
-    description: Set supplier phone
-    type: string
-    default: ""
-  supplier-url:
-    description: Set supplier url
+  statement:
+    description: Import statement path
     type: string
     default: ""
   app-name:
@@ -197,23 +184,20 @@ parameters:
     default: 0
 steps:
   - run:
-      name: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
+      name: Collect, Create and Store SLSA provenance evidence
       command: |
-        valint bom << parameters.target >> <<# parameters.attach-regex >>--attach-regex=<< parameters.attach-regex >><</ parameters.attach-regex >> \
-         <<# parameters.author-email >>--author-email=<< parameters.author-email >><</ parameters.author-email >> \
-         <<# parameters.author-name >>--author-name=<< parameters.author-name >><</ parameters.author-name >> \
-         <<# parameters.author-phone >>--author-phone=<< parameters.author-phone >><</ parameters.author-phone >> \
+        valint slsa << parameters.target >> <<# parameters.all-env >>--all-env=<< parameters.all-env >><</ parameters.all-env >> \
+         <<# parameters.build-type >>--build-type=<< parameters.build-type >><</ parameters.build-type >> \
+         <<# parameters.builder-id >>--builder-id=<< parameters.builder-id >><</ parameters.builder-id >> \
          <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
-         <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
+         <<# parameters.external >>--external=<< parameters.external >><</ parameters.external >> \
+         <<# parameters.finished-on >>--finished-on=<< parameters.finished-on >><</ parameters.finished-on >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
-         <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
-         <<# parameters.package-group >>--package-group=<< parameters.package-group >><</ parameters.package-group >> \
-         <<# parameters.package-type >>--package-type=<< parameters.package-type >><</ parameters.package-type >> \
-         <<# parameters.supplier-email >>--supplier-email=<< parameters.supplier-email >><</ parameters.supplier-email >> \
-         <<# parameters.supplier-name >>--supplier-name=<< parameters.supplier-name >><</ parameters.supplier-name >> \
-         <<# parameters.supplier-phone >>--supplier-phone=<< parameters.supplier-phone >><</ parameters.supplier-phone >> \
-         <<# parameters.supplier-url >>--supplier-url=<< parameters.supplier-url >><</ parameters.supplier-url >> \
+         <<# parameters.invocation >>--invocation=<< parameters.invocation >><</ parameters.invocation >> \
+         <<# parameters.predicate >>--predicate=<< parameters.predicate >><</ parameters.predicate >> \
+         <<# parameters.started-on >>--started-on=<< parameters.started-on >><</ parameters.started-on >> \
+         <<# parameters.statement >>--statement=<< parameters.statement >><</ parameters.statement >> \
          <<# parameters.app-name >>--app-name=<< parameters.app-name >><</ parameters.app-name >> \
          <<# parameters.app-version >>--app-version=<< parameters.app-version >><</ parameters.app-version >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
