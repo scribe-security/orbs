@@ -22,6 +22,7 @@ parameters:
   external:
     description: Add build external parameters
     type: string
+    default: ""
   finished-on:
     description: Set metadata finished time (<YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z)
     type: string
