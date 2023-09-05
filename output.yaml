@@ -112,6 +112,113 @@ commands:
             - run:
                 command: valint bom << parameters.target >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type circleci --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --attest.config << parameters.attest-config >> --attest.default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe.client-id << parameters.scribe-client-id >> --scribe.client-secret << parameters.scribe-client-secret >> --scribe.enable << parameters.scribe-enable >> --scribe.url << parameters.scribe-url >> --show << parameters.show >> --verbose=<< parameters.verbose >>
                 name: Create SBOM for target
+    slsa:
+        description: Create SLSA for target
+        parameters:
+            target:
+                default: ""
+                description: Create SBOM for target
+                type: string
+            attach-regex:
+                default: ""
+                description: Attach files content by regex
+                type: string
+            attest-config:
+                default: ""
+                description: Attestation config map
+                type: string
+            attest-default:
+                default: sigstore
+                description: Attestation default config, options=[sigstore sigstore-github x509 kms]
+                type: string
+            attest-name:
+                default: gensbom
+                description: Attestation config name
+                type: string
+            components:
+                default: metadata,layers,packages,files,dep
+                description: Select sbom components groups, options=[metadata layers packages files dep]
+                type: string
+            config:
+                default: ""
+                description: Application config file
+                type: string
+            context-dir:
+                default: ""
+                description: Context dir
+                type: string
+            env:
+                default: ""
+                description: Envrionment keys to include in sbom
+                type: string
+            failonerror:
+                default: true
+                description: Fail on errors
+                type: boolean
+            filter-purl:
+                default: ""
+                description: Filter out purls by regex
+                type: string
+            filter-regex:
+                default: ""
+                description: Filter out files by regex
+                type: string
+            force:
+                default: false
+                description: Force overwrite cache
+                type: boolean
+            format:
+                default: cyclonedx-json
+                description: Sbom formatter, options=[statement asset predicate]
+                type: string
+            label:
+                default: ""
+                description: Label to connect to sboms
+                type: string
+            normalizers-packagejson-enable:
+                default: true
+                description: Normalize package json files
+                type: boolean
+            output-directory:
+                default: scribe/valint
+                description: Report output directory
+                type: string
+            output-file:
+                default: ""
+                description: Output result to file
+                type: string
+            quiet:
+                default: false
+                description: Suppress all logging output
+                type: boolean
+            scribe-client-id:
+                default: ""
+                description: Scribe client id
+                type: string
+            scribe-client-secret:
+                default: ""
+                description: Scribe client secret
+                type: string
+            scribe-enable:
+                default: false
+                description: Enable scribe client
+                type: boolean
+            scribe-url:
+                default: https://api.production.scribesecurity.com
+                description: Scribe url
+                type: string
+            show:
+                default: false
+                description: Print object to stdout
+                type: boolean
+            verbose:
+                default: 1
+                description: Increase verbosity (-v = info, -vv = debug)
+                type: integer
+        steps:
+            - run:
+                command: valint slsa << parameters.target >> --attach-regex << parameters.attach-regex >> --components << parameters.components >> --context-dir << parameters.context-dir >> --context-type circleci --env << parameters.env >> --force << parameters.force >> --format << parameters.format >> --label << parameters.label >> --normalizers-packagejson-enable << parameters.normalizers-packagejson-enable >> --attest.config << parameters.attest-config >> --attest.default << parameters.attest-default >> --attest-name << parameters.attest-name >> --config << parameters.config >> --failonerror << parameters.failonerror >> --filter-purl << parameters.filter-purl >> --filter-regex << parameters.filter-regex >> --output-directory << parameters.output-directory >> --output-file << parameters.output-file >> --quiet << parameters.quiet >> --scribe.client-id << parameters.scribe-client-id >> --scribe.client-secret << parameters.scribe-client-secret >> --scribe.enable << parameters.scribe-enable >> --scribe.url << parameters.scribe-url >> --show << parameters.show >> --verbose=<< parameters.verbose >>
+                name: Create SLSA for target
   
     install:
         description: This will install the binary
