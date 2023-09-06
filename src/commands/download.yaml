@@ -1,66 +1,22 @@
-description: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
+description: Downloads the evidence based on cache
 parameters:
   target:
     description: Target object name format=[<image:tag>, <dir path>, <git url>]
     type: string
-  attach-regex:
-    description: Attach files content by regex
+  folder-path:
+    description: Folder to download the evidences of the given target
     type: string
     default: ""
-  author-email:
-    description: Set author email
-    type: string
-    default: ""
-  author-name:
-    description: Set author name
-    type: string
-    default: ""
-  author-phone:
-    description: Set author phone
-    type: string
-    default: ""
-  components:
-    description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
-    type: string
-    default: metadata,layers,packages,syft,dep,commits
-  compress:
-    description: Compress content (generic evidence)
-    type: boolean
-    default: false
-  force:
-    description: Force overwrite cache
-    type: boolean
-    default: false
   format:
-    description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json attest-slsa statement-slsa statement-generic attest-generic]
-    type: string
-    default: cyclonedx-json
-  package-exclude-type:
-    description: Exclude package type, options=[ruby python javascript java dpkg apkdb rpm go-mod dotnet r-package rust binary sbom]
+    description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json statement-generic attest-generic]
     type: string
     default: ""
-  package-group:
-    description: Select package group, options=[index install all]
+  ref:
+    description: ref of the store
     type: string
     default: ""
-  package-type:
-    description: Select package type, options=[ruby python javascript java dpkg apkdb rpm go-mod dotnet r-package rust binary sbom]
-    type: string
-    default: ruby,python,javascript,java,dpkg,apkdb,rpm,go-mod,dotnet,r-package,rust,binary,sbom
-  supplier-email:
-    description: Set supplier email
-    type: string
-    default: ""
-  supplier-name:
-    description: Set supplier name
-    type: string
-    default: ""
-  supplier-phone:
-    description: Set supplier phone
-    type: string
-    default: ""
-  supplier-url:
-    description: Set supplier url
+  store:
+    description: Stores
     type: string
     default: ""
   attest-config:
@@ -209,23 +165,12 @@ parameters:
     default: 0
 steps:
   - run:
-      name: Collect, Create and Store evidence for artifacts (SBOMs,SLSA provenance) or any third-party tools.
+      name: Downloads the evidence based on cache
       command: |
-        valint bom << parameters.target >> <<# parameters.attach-regex >>--attach-regex=<< parameters.attach-regex >><</ parameters.attach-regex >> \
-         <<# parameters.author-email >>--author-email=<< parameters.author-email >><</ parameters.author-email >> \
-         <<# parameters.author-name >>--author-name=<< parameters.author-name >><</ parameters.author-name >> \
-         <<# parameters.author-phone >>--author-phone=<< parameters.author-phone >><</ parameters.author-phone >> \
-         <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
-         <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
-         <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
+        valint download << parameters.target >> <<# parameters.folder-path >>--folder-path=<< parameters.folder-path >><</ parameters.folder-path >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
-         <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
-         <<# parameters.package-group >>--package-group=<< parameters.package-group >><</ parameters.package-group >> \
-         <<# parameters.package-type >>--package-type=<< parameters.package-type >><</ parameters.package-type >> \
-         <<# parameters.supplier-email >>--supplier-email=<< parameters.supplier-email >><</ parameters.supplier-email >> \
-         <<# parameters.supplier-name >>--supplier-name=<< parameters.supplier-name >><</ parameters.supplier-name >> \
-         <<# parameters.supplier-phone >>--supplier-phone=<< parameters.supplier-phone >><</ parameters.supplier-phone >> \
-         <<# parameters.supplier-url >>--supplier-url=<< parameters.supplier-url >><</ parameters.supplier-url >> \
+         <<# parameters.ref >>--ref=<< parameters.ref >><</ parameters.ref >> \
+         <<# parameters.store >>--store=<< parameters.store >><</ parameters.store >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
