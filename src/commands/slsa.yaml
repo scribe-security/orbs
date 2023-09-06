@@ -15,8 +15,12 @@ parameters:
     description: Set builder id
     type: string
     default: ""
+  by-product:
+    description: Attach by product path
+    type: string
+    default: ""
   components:
-    description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
+    description: Select by products components groups, options=[metadata layers packages syft files dep commits]
     type: string
     default: metadata,layers
   external:
@@ -24,7 +28,7 @@ parameters:
     type: string
     default: ""
   finished-on:
-    description: Set metadata finished time (<YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z)
+    description: Set metadata finished time (YYYY-MM-DDThh:mm:ssZ)
     type: string
     default: ""
   force:
@@ -44,19 +48,11 @@ parameters:
     type: string
     default: ""
   started-on:
-    description: Set metadata started time (<YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z)
+    description: Set metadata started time (YYYY-MM-DDThh:mm:ssZ)
     type: string
     default: ""
   statement:
     description: Import statement path
-    type: string
-    default: ""
-  app-name:
-    description: Logical application name
-    type: string
-    default: ""
-  app-version:
-    description: Logical application version
     type: string
     default: ""
   attest-config:
@@ -66,15 +62,23 @@ parameters:
   attest-default:
     description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
     type: string
-    default: sigstore
+    default: ""
   backoff:
     description: Backoff duration
     type: string
-    default: 15s
+    default: ""
+  ca:
+    description: x509 CA Chain path
+    type: string
+    default: ""
   cache-enable:
     description: Enable local cache
     type: boolean
     default: true
+  cert:
+    description: x509 Cert path
+    type: string
+    default: ""
   config:
     description: Configuration file path
     type: string
@@ -107,12 +111,24 @@ parameters:
     description: Git tag in the repository
     type: string
     default: ""
+  key:
+    description: x509 Private key path
+    type: string
+    default: ""
   label:
     description: Add Custom labels
     type: string
     default: ""
   level:
     description: Log depth level, options=[panic fatal error warning info debug trace]
+    type: string
+    default: ""
+  log-context:
+    description: Attach context to all logs
+    type: boolean
+    default: false
+  log-file:
+    description: Output log to file
     type: string
     default: ""
   oci:
@@ -138,7 +154,7 @@ parameters:
   predicate-type:
     description: Custom Predicate type (generic evidence format)
     type: string
-    default: http://scribesecurity.com/evidence/generic/v0.1
+    default: ""
   product-key:
     description: Product Key
     type: string
@@ -150,7 +166,7 @@ parameters:
   scribe-auth-audience:
     description: Scribe auth audience
     type: string
-    default: api.production.scribesecurity.com
+    default: ""
   scribe-client-id:
     description: Scribe Client ID
     type: string
@@ -166,11 +182,11 @@ parameters:
   scribe-login-url:
     description: Scribe login url
     type: string
-    default: https://scribe-hub-production.us.auth0.com
+    default: ""
   scribe-url:
     description: Scribe API Url
     type: string
-    default: https://airflow.scribesecurity.com
+    default: ""
   structured:
     description: Enable structured logger
     type: boolean
@@ -178,7 +194,7 @@ parameters:
   timeout:
     description: Timeout duration
     type: string
-    default: 120s
+    default: ""
   verbose:
     description: Log verbosity level [-v,--verbose=1] = info, [-vv,--verbose=2] = debug
     type: integer
@@ -190,6 +206,7 @@ steps:
         valint slsa << parameters.target >> <<# parameters.all-env >>--all-env=<< parameters.all-env >><</ parameters.all-env >> \
          <<# parameters.build-type >>--build-type=<< parameters.build-type >><</ parameters.build-type >> \
          <<# parameters.builder-id >>--builder-id=<< parameters.builder-id >><</ parameters.builder-id >> \
+         <<# parameters.by-product >>--by-product=<< parameters.by-product >><</ parameters.by-product >> \
          <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
          <<# parameters.external >>--external=<< parameters.external >><</ parameters.external >> \
          <<# parameters.finished-on >>--finished-on=<< parameters.finished-on >><</ parameters.finished-on >> \
@@ -199,12 +216,12 @@ steps:
          <<# parameters.predicate >>--predicate=<< parameters.predicate >><</ parameters.predicate >> \
          <<# parameters.started-on >>--started-on=<< parameters.started-on >><</ parameters.started-on >> \
          <<# parameters.statement >>--statement=<< parameters.statement >><</ parameters.statement >> \
-         <<# parameters.app-name >>--app-name=<< parameters.app-name >><</ parameters.app-name >> \
-         <<# parameters.app-version >>--app-version=<< parameters.app-version >><</ parameters.app-version >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
+         <<# parameters.ca >>--ca=<< parameters.ca >><</ parameters.ca >> \
          <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \
+         <<# parameters.cert >>--cert=<< parameters.cert >><</ parameters.cert >> \
          <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
          <<# parameters.context-dir >>--context-dir=<< parameters.context-dir >><</ parameters.context-dir >> \
          --context-type=circleci \
@@ -214,8 +231,11 @@ steps:
          <<# parameters.git-branch >>--git-branch=<< parameters.git-branch >><</ parameters.git-branch >> \
          <<# parameters.git-commit >>--git-commit=<< parameters.git-commit >><</ parameters.git-commit >> \
          <<# parameters.git-tag >>--git-tag=<< parameters.git-tag >><</ parameters.git-tag >> \
+         <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
+         <<# parameters.log-context >>--log-context=<< parameters.log-context >><</ parameters.log-context >> \
+         <<# parameters.log-file >>--log-file=<< parameters.log-file >><</ parameters.log-file >> \
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
