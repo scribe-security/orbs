@@ -1,0 +1,26 @@
+description: |
+  * Generate SLSA for `mongo-express` remote git repository.
+  * Generate SLSA for checked out local git repository.
+
+usage:
+  version: 2.1
+  orbs:
+    scribe: scribe-security/orbs@x.y.z
+
+  workflows:
+    scribe-git-target-job:
+      jobs:
+        - checkout
+
+        # Install scribe tool
+        - scribe/install
+
+        # Create SBOM for `mongo-express` remote git repository.
+        - scribe/slsa:
+            target: git:https://github.com/mongo-express/mongo-express.git
+            force: true
+
+        # Create SBOM for checked out local git repository.
+        - scribe/slsa:
+            target: git:.
+            force: true
