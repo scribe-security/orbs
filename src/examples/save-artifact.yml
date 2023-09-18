@@ -1,29 +1,38 @@
-description: |
-    Using input variable `output-directory` or `output-file` to export evidence as an artifact.
-    Use  input variable `format` to select between the format.
+description: >
+  * Using input variable `output-directory` or `output-file` to export evidence as an artifact.
+  * Use input variable `format` to select between the format.
 
 usage:
   version: 2.1
   orbs:
     scribe: scribe-security/orbs@x.y.z
-  workflows:
-    save-sbom-artifact:
-      jobs:
-        - checkout
+jobs:
+  save-sbom-artifact-job:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - checkout
 
-        # Install scribe tool
-        - scribe/install
-        - scribe/bom:
-            target: busybox:latest
-            output-file: my_sbom.json
-            force: true
+      # Install scribe tool
+      - scribe/install
 
-        # Storing as artifacts
-        - store_artifacts:
-            path: scribe/
-            destination: scribe-evidence
+      - scribe/bom:
+          target: busybox:latest
+          output-file: my_sbom.json
+          format: json  # You can specify the format you need here
+          force: true
 
-        # Storing as artifacts
-        - store_artifacts:
-            path: my_sbom.json
-            destination: scribe-sbom
+      # Storing as artifacts
+      - store_artifacts:
+          path: scribe/
+          destination: scribe-evidence
+
+      # Storing as artifacts
+      - store_artifacts:
+          path: my_sbom.json
+          destination: scribe-sbom
+
+workflows:
+  example-save-sbom-artifact-workflow:
+    jobs:
+      - save-sbom-artifact-job

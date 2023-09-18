@@ -1,29 +1,38 @@
-description: >-
-  Following is a example utilizing Scribe evidence store.
+description: >
+  * Example utilizing Scribe evidence store.
 
-  Evidence stores  can be used to store, find and download evidence,
-  unifying all the supply chain evidence into a system is an important part to be able to query any subset for policy validation.
+  Evidence stores can be used to store, find, and download evidence.
+  Unifying all the supply chain evidence into a system is an important part to be able to query any subset for policy validation.
 
 usage:
   version: 2.1
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-  workflows:
-    scribe-service-job:
-      jobs:
-        - checkout
-        - setup_remote_docker # Optional
-        - scribe/install
-        - scribe/bom:
-            target: busybox:latest
-            format: statement
-            scribe-enable: true
-            scribe-client-id: $SCRIBE_CLIENT_ID
-            scribe-client-secret: $SCRIBE_CLIENT_SECRET
-        - scribe/verify:
-            target: busybox:latest
-            input-format: statement
-            scribe-enable: true
-            scribe-client-id: $SCRIBE_CLIENT_ID
-            scribe-client-secret: $SCRIBE_CLIENT_SECRET
+jobs:
+  scribe-service-job:
+    docker:
+      - image: docker:stable-git
+    docker:
+      - image: docker:stable-git
+    steps:
+      - checkout
+      - setup_remote_docker # Optional
+      - scribe/install
+      - scribe/bom:
+          target: busybox:latest
+          format: statement
+          scribe-enable: true
+          scribe-client-id: $SCRIBE_CLIENT_ID
+          scribe-client-secret: $SCRIBE_CLIENT_SECRET
+      - scribe/verify:
+          target: busybox:latest
+          input-format: statement
+          scribe-enable: true
+          scribe-client-id: $SCRIBE_CLIENT_ID
+          scribe-client-secret: $SCRIBE_CLIENT_SECRET
+
+workflows:
+  example-scribe-service-workflow:
+    jobs:
+      - scribe-service-job

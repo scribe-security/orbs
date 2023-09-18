@@ -7,20 +7,27 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-  workflows:
-    scribe-git-target-job:
-      jobs:
-        - checkout
+jobs:
+  scribe-git-target-job:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - checkout
 
-        # Install scribe tool
-        - scribe/install
+      # Install scribe tool
+      - scribe/install
 
-        # Create SBOM for `mongo-express` remote git repository.
-        - scribe/bom:
-            target: git:https://github.com/mongo-express/mongo-express.git
-            force: true
+      # Create SBOM for `mongo-express` remote git repository.
+      - scribe/bom:
+          target: git:https://github.com/mongo-express/mongo-express.git
+          force: true
 
-        # Create SBOM for checked out local git repository.
-        - scribe/bom:
-            target: git:.
-            force: true
+      # Create SBOM for checked out local git repository.
+      - scribe/bom:
+          target: git:.
+          force: true
+
+workflows:
+  example-scribe-git-target-workflow:
+    jobs:
+      - scribe-git-target-job

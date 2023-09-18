@@ -1,29 +1,37 @@
 description: >
-    Create SBOM for image built by local docker `image_name:latest` image.
+  * Create SBOM for image built by local Docker `image_name:latest` image.
 
 usage:
   version: 2.1
   orbs:
     scribe: scribe-security/orbs@x.y.z
-  workflows:
-    local-image:
-      jobs:
-        - checkout
 
-        # Install scribe tool
-        - scribe/install
+jobs:
+  local-image-job:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - checkout
 
-        - setup_remote_docker:
-            docker_layer_caching: true
+      # Install scribe tool
+      - scribe/install
 
-        # Docker build ..
+      - setup_remote_docker:
+          docker_layer_caching: true
 
-        - scribe/bom:
-            target: image_name:latest
-            output-file: my_sbom.json
-            force: true
+      # Docker build ..
 
-        # Storing as artifacts
-        - store_artifacts:
-            path: scribe/
-            destination: scribe-evidence
+      - scribe/bom:
+          target: image_name:latest
+          output-file: my_sbom.json
+          force: true
+
+      # Storing as artifacts
+      - store_artifacts:
+          path: scribe/
+          destination: scribe-evidence
+
+workflows:
+  example-local-image-workflow:
+    jobs:
+      - local-image-job

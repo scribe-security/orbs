@@ -1,26 +1,32 @@
 description: >
-  * Generate SLSA for a local directory.
+  * Generate SLSA Provenance for a local directory.
 
 usage:
   version: 2.1
   orbs:
     scribe: scribe-security/orbs@x.y.z
+    
+jobs:
+  sbom-local-dir-job:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - checkout
 
-  workflows:
-    scribe-dir-target-job:
-      jobs:
-        - checkout
+      # Install scribe tool
+      - scribe/install
+      
+      # Create SBOM for a local directory.
+      - run:
+          name: custom checkout
+          command: |
+            mkdir testdir
+            echo "test" > testdir/test.txt
+      - scribe/bom:
+          target: dir:.
+          force: true
 
-        # Install scribe tool
-        - scribe/install
-
-        # Create SBOM for a local directory.
-        - run:
-            name: custom checkout
-            command: |
-              mkdir testdir
-              echo "test" > testdir/test.txt
-
-        - scribe/slsa:
-            target: dir:.
-            force: true
+workflows:
+  example-sbom-local-dir-workflow:
+    jobs:
+      - sbom-local-dir-job
