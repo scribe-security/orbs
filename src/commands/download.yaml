@@ -19,6 +19,10 @@ parameters:
     description: Stores
     type: string
     default: ""
+  allow-expired:
+    description: Allow expired certs
+    type: boolean
+    default: false
   attest-config:
     description: Attestation config path
     type: string
@@ -51,6 +55,18 @@ parameters:
     description: Context dir
     type: string
     default: ""
+  crl:
+    description: x509 CRL path
+    type: string
+    default: ""
+  crl-full-chain:
+    description: Enable Full chain CRL verfication
+    type: boolean
+    default: false
+  disable-crl:
+    description: Disable certificate revocation verificatoin
+    type: boolean
+    default: false
   env:
     description: Environment keys to include in sbom
     type: string
@@ -115,6 +131,10 @@ parameters:
     description: Pipeline name
     type: string
     default: ""
+  policy-args:
+    description: Policy arguments
+    type: string
+    default: ""
   predicate-type:
     description: Custom Predicate type (generic evidence format)
     type: string
@@ -171,6 +191,7 @@ steps:
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.ref >>--ref=<< parameters.ref >><</ parameters.ref >> \
          <<# parameters.store >>--store=<< parameters.store >><</ parameters.store >> \
+         <<# parameters.allow-expired >>--allow-expired=<< parameters.allow-expired >><</ parameters.allow-expired >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
@@ -180,6 +201,9 @@ steps:
          <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
          <<# parameters.context-dir >>--context-dir=<< parameters.context-dir >><</ parameters.context-dir >> \
          --context-type=circleci \
+         <<# parameters.crl >>--crl=<< parameters.crl >><</ parameters.crl >> \
+         <<# parameters.crl-full-chain >>--crl-full-chain=<< parameters.crl-full-chain >><</ parameters.crl-full-chain >> \
+         <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
          <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
@@ -196,6 +220,7 @@ steps:
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
          <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
          <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
+         <<# parameters.policy-args >>--policy-args=<< parameters.policy-args >><</ parameters.policy-args >> \
          <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
          <<# parameters.product-version >>--product-version=<< parameters.product-version >><</ parameters.product-version >> \

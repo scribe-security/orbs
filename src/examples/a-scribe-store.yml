@@ -13,8 +13,6 @@ jobs:
   scribe-service-job:
     docker:
       - image: docker:stable-git
-    docker:
-      - image: docker:stable-git
     steps:
       - checkout
       - setup_remote_docker # Optional
