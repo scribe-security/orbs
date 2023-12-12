@@ -71,6 +71,10 @@ parameters:
     description: Enable Full chain CRL verfication
     type: boolean
     default: false
+  deliverable:
+    description: Mark as deliverable, options=[true, false]
+    type: string
+    default: ""
   disable-crl:
     description: Disable certificate revocation verificatoin
     type: boolean
@@ -213,6 +217,7 @@ steps:
          --context-type=circleci \
          <<# parameters.crl >>--crl=<< parameters.crl >><</ parameters.crl >> \
          <<# parameters.crl-full-chain >>--crl-full-chain=<< parameters.crl-full-chain >><</ parameters.crl-full-chain >> \
+         <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
