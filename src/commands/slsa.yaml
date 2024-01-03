@@ -103,6 +103,10 @@ parameters:
     description: Mark as deliverable, options=[true, false]
     type: string
     default: ""
+  depth:
+    description: Git clone depth
+    type: integer
+    default: 0
   disable-crl:
     description: Disable certificate revocation verificatoin
     type: boolean
@@ -169,6 +173,10 @@ parameters:
     default: ""
   pipeline-name:
     description: Pipeline name
+    type: string
+    default: ""
+  platform:
+    description: Select target platform, examples=windows/armv6, arm64 ..)
     type: string
     default: ""
   policy-args:
@@ -253,6 +261,7 @@ steps:
          <<# parameters.crl >>--crl=<< parameters.crl >><</ parameters.crl >> \
          <<# parameters.crl-full-chain >>--crl-full-chain=<< parameters.crl-full-chain >><</ parameters.crl-full-chain >> \
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
+         <<# parameters.depth >>--depth=<< parameters.depth >><</ parameters.depth >> \
          <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
@@ -270,6 +279,7 @@ steps:
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
          <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
          <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
+         <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.policy-args >>--policy-args=<< parameters.policy-args >><</ parameters.policy-args >> \
          <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
