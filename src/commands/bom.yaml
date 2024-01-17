@@ -23,10 +23,6 @@ parameters:
     description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
     type: string
     default: metadata,layers,packages,syft,dep,commits
-  compress:
-    description: Compress content (generic evidence)
-    type: boolean
-    default: false
   force:
     description: Force overwrite cache
     type: boolean
@@ -248,7 +244,6 @@ steps:
          <<# parameters.author-name >>--author-name=<< parameters.author-name >><</ parameters.author-name >> \
          <<# parameters.author-phone >>--author-phone=<< parameters.author-phone >><</ parameters.author-phone >> \
          <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
-         <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
