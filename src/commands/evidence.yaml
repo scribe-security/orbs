@@ -1,58 +1,38 @@
-description: Collect, Create and Store SLSA provenance evidence
+description: Collect, Create and Store any file as evidence
 parameters:
-  target:
-    description: Target object name format=[<image:tag>, <dir path>, <git url>]
+  file:
+    description: File Path to add as evidence
     type: string
-  all-env:
-    description: Attach all environment variables
-    type: boolean
-    default: false
-  build-type:
-    description: Set build type
-    type: string
-    default: ""
-  builder-id:
-    description: Set builder id
-    type: string
-    default: ""
-  by-product:
-    description: Attach by product path
-    type: string
-    default: ""
-  components:
-    description: Select by products components groups, options=[metadata layers packages syft files dep commits]
-    type: string
-    default: metadata,layers
-  external:
-    description: Add build external parameters
-    type: string
-    default: ""
-  finished-on:
-    description: Set metadata finished time (YYYY-MM-DDThh:mm:ssZ)
-    type: string
-    default: ""
-  force:
-    description: Force overwrite cache
+  compress:
+    description: Compress content)
     type: boolean
     default: false
   format:
     description: Evidence format, options=[statement attest]
     type: string
     default: statement
-  invocation:
-    description: Set metadata invocation ID
+  format-encoding:
+    description: Format encoding
     type: string
     default: ""
-  predicate:
-    description: Import predicate path
+  format-type:
+    description: Format type
     type: string
     default: ""
-  started-on:
-    description: Set metadata started time (YYYY-MM-DDThh:mm:ssZ)
+  format-version:
+    description: Format version
     type: string
     default: ""
-  statement:
-    description: Import statement path
+  tool:
+    description: Tool name
+    type: string
+    default: ""
+  tool-vendor:
+    description: Tool vendor
+    type: string
+    default: ""
+  tool-version:
+    description: Tool version
     type: string
     default: ""
   allow-expired:
@@ -233,21 +213,16 @@ parameters:
     default: 0
 steps:
   - run:
-      name: Collect, Create and Store SLSA provenance evidence
+      name: Collect, Create and Store any file as evidence
       command: |
-        valint slsa << parameters.target >> <<# parameters.all-env >>--all-env=<< parameters.all-env >><</ parameters.all-env >> \
-         <<# parameters.build-type >>--build-type=<< parameters.build-type >><</ parameters.build-type >> \
-         <<# parameters.builder-id >>--builder-id=<< parameters.builder-id >><</ parameters.builder-id >> \
-         <<# parameters.by-product >>--by-product=<< parameters.by-product >><</ parameters.by-product >> \
-         <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
-         <<# parameters.external >>--external=<< parameters.external >><</ parameters.external >> \
-         <<# parameters.finished-on >>--finished-on=<< parameters.finished-on >><</ parameters.finished-on >> \
-         <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
+        valint evidence << parameters.file >> <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
-         <<# parameters.invocation >>--invocation=<< parameters.invocation >><</ parameters.invocation >> \
-         <<# parameters.predicate >>--predicate=<< parameters.predicate >><</ parameters.predicate >> \
-         <<# parameters.started-on >>--started-on=<< parameters.started-on >><</ parameters.started-on >> \
-         <<# parameters.statement >>--statement=<< parameters.statement >><</ parameters.statement >> \
+         <<# parameters.format-encoding >>--format-encoding=<< parameters.format-encoding >><</ parameters.format-encoding >> \
+         <<# parameters.format-type >>--format-type=<< parameters.format-type >><</ parameters.format-type >> \
+         <<# parameters.format-version >>--format-version=<< parameters.format-version >><</ parameters.format-version >> \
+         <<# parameters.tool >>--tool=<< parameters.tool >><</ parameters.tool >> \
+         <<# parameters.tool-vendor >>--tool-vendor=<< parameters.tool-vendor >><</ parameters.tool-vendor >> \
+         <<# parameters.tool-version >>--tool-version=<< parameters.tool-version >><</ parameters.tool-version >> \
          <<# parameters.allow-expired >>--allow-expired=<< parameters.allow-expired >><</ parameters.allow-expired >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
