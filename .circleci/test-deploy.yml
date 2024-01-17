@@ -63,7 +63,7 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     environment:
-      SCRIBE_URL: https://airflow.staging.scribesecurity.com
+      SCRIBE_URL: https://api.staging.scribesecurity.com
       ENV: dev
     steps:
       - scribe/install
