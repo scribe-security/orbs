@@ -116,7 +116,7 @@ parameters:
     type: boolean
     default: false
   env:
-    description: Environment keys to include in sbom
+    description: Environment keys to include in evidence
     type: string
     default: ""
   filter-regex:
@@ -183,10 +183,6 @@ parameters:
     description: Select target platform, examples=windows/armv6, arm64 ..)
     type: string
     default: ""
-  policy-args:
-    description: Policy arguments
-    type: string
-    default: ""
   predicate-type:
     description: Custom Predicate type (generic evidence format)
     type: string
@@ -197,6 +193,10 @@ parameters:
     default: ""
   product-version:
     description: Product Version
+    type: string
+    default: ""
+  rule-args:
+    description: Policy arguments
     type: string
     default: ""
   scribe-auth-audience:
@@ -285,10 +285,10 @@ steps:
          <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
          <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
-         <<# parameters.policy-args >>--policy-args=<< parameters.policy-args >><</ parameters.policy-args >> \
          <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
          <<# parameters.product-version >>--product-version=<< parameters.product-version >><</ parameters.product-version >> \
+         <<# parameters.rule-args >>--rule-args=<< parameters.rule-args >><</ parameters.rule-args >> \
          <<# parameters.scribe-auth-audience >>--scribe.auth.audience=<< parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
          <<# parameters.scribe-client-id >>--scribe.client-id=<< parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
          <<# parameters.scribe-client-secret >>--scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
