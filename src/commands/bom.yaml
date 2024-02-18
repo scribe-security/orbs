@@ -127,6 +127,14 @@ parameters:
     description: Filter packages by scope
     type: string
     default: ""
+  gate:
+    description: Policy Gate name
+    type: string
+    default: ""
+  git-auth:
+    description: 'Git repository authentication info, [format: ''username:password'']'
+    type: string
+    default: ""
   git-branch:
     description: Git branch in the repository
     type: string
@@ -271,6 +279,8 @@ steps:
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
          <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
+         <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.git-auth >>--git-auth=<< parameters.git-auth >><</ parameters.git-auth >> \
          <<# parameters.git-branch >>--git-branch=<< parameters.git-branch >><</ parameters.git-branch >> \
          <<# parameters.git-commit >>--git-commit=<< parameters.git-commit >><</ parameters.git-commit >> \
          <<# parameters.git-tag >>--git-tag=<< parameters.git-tag >><</ parameters.git-tag >> \
