@@ -1,5 +1,9 @@
 description: List evidence in all evidence stores
 parameters:
+  all:
+    description: Include all evidence fields
+    type: boolean
+    default: false
   columns:
     description: List of columns to be displayed
     type: string
@@ -12,28 +16,36 @@ parameters:
     description: Filters for each evidence property
     type: string
     default: ""
+  format:
+    description: List output format, options=[table json]
+    type: string
+    default: ""
   format-encoding:
-    description: Format encoding
+    description: Evidence Format encoding
     type: string
     default: ""
   format-type:
-    description: Format type
+    description: Evidence Format type
     type: string
     default: ""
   format-version:
-    description: Format version
+    description: Evidence Format version
+    type: string
+    default: ""
+  output-file:
+    description: File to write output
     type: string
     default: ""
   tool:
-    description: Tool name
+    description: Evidence Tool name
     type: string
     default: ""
   tool-vendor:
-    description: Tool vendor
+    description: Evidence Tool vendor
     type: string
     default: ""
   tool-version:
-    description: Tool version
+    description: Evidence Tool version
     type: string
     default: ""
   allow-expired:
@@ -156,10 +168,6 @@ parameters:
     description: Output directory path
     type: string
     default: ./scribe/valint
-  output-file:
-    description: Output file name
-    type: string
-    default: ""
   pipeline-name:
     description: Pipeline name
     type: string
@@ -224,12 +232,15 @@ steps:
   - run:
       name: List evidence in all evidence stores
       command: |
-        valint list <<# parameters.columns >>--columns=<< parameters.columns >><</ parameters.columns >> \
+        valint list <<# parameters.all >>--all=<< parameters.all >><</ parameters.all >> \
+         <<# parameters.columns >>--columns=<< parameters.columns >><</ parameters.columns >> \
          <<# parameters.current >>--current=<< parameters.current >><</ parameters.current >> \
          <<# parameters.filters >>--filters=<< parameters.filters >><</ parameters.filters >> \
+         <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.format-encoding >>--format-encoding=<< parameters.format-encoding >><</ parameters.format-encoding >> \
          <<# parameters.format-type >>--format-type=<< parameters.format-type >><</ parameters.format-type >> \
          <<# parameters.format-version >>--format-version=<< parameters.format-version >><</ parameters.format-version >> \
+         <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
          <<# parameters.tool >>--tool=<< parameters.tool >><</ parameters.tool >> \
          <<# parameters.tool-vendor >>--tool-vendor=<< parameters.tool-vendor >><</ parameters.tool-vendor >> \
          <<# parameters.tool-version >>--tool-version=<< parameters.tool-version >><</ parameters.tool-version >> \
@@ -264,7 +275,6 @@ steps:
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
-         <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
          <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \

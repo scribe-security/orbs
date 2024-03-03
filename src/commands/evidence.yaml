@@ -12,27 +12,27 @@ parameters:
     type: string
     default: statement
   format-encoding:
-    description: Format encoding
+    description: Evidence Format encoding
     type: string
     default: ""
   format-type:
-    description: Format type
+    description: Evidence Format type
     type: string
     default: ""
   format-version:
-    description: Format version
+    description: Evidence Format version
     type: string
     default: ""
   tool:
-    description: Tool name
+    description: Evidence Tool name
     type: string
     default: ""
   tool-vendor:
-    description: Tool vendor
+    description: Evidence Tool vendor
     type: string
     default: ""
   tool-version:
-    description: Tool version
+    description: Evidence Tool version
     type: string
     default: ""
   allow-expired:
