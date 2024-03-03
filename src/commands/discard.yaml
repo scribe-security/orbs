@@ -4,17 +4,25 @@ parameters:
     description: Target object name format=[<image:tag>, <dir path>, <git url>]
     type: string
   current:
-    description: discard evidence attached to the current context
+    description: Discard evidence attached to the current context
     type: boolean
     default: false
   interactive:
-    description: force interactive mode for the discard list
+    description: Force interactive mode for the discard list
     type: boolean
     default: false
+  ref:
+    description: Evidence store refrence
+    type: string
+    default: ""
   silent:
-    description: automatically accept the discard list
+    description: Automatically accept the discard list
     type: boolean
     default: false
+  store:
+    description: Select evidence store
+    type: string
+    default: ""
   allow-expired:
     description: Allow expired certs
     type: boolean
@@ -205,7 +213,9 @@ steps:
       command: |
         valint discard << parameters.target >> <<# parameters.current >>--current=<< parameters.current >><</ parameters.current >> \
          <<# parameters.interactive >>--interactive=<< parameters.interactive >><</ parameters.interactive >> \
+         <<# parameters.ref >>--ref=<< parameters.ref >><</ parameters.ref >> \
          <<# parameters.silent >>--silent=<< parameters.silent >><</ parameters.silent >> \
+         <<# parameters.store >>--store=<< parameters.store >><</ parameters.store >> \
          <<# parameters.allow-expired >>--allow-expired=<< parameters.allow-expired >><</ parameters.allow-expired >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \

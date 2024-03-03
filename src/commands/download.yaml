@@ -12,11 +12,11 @@ parameters:
     type: string
     default: ""
   ref:
-    description: ref of the store
+    description: Evidence store refrence
     type: string
     default: ""
   store:
-    description: Stores
+    description: Select evidence store
     type: string
     default: ""
   allow-expired:
