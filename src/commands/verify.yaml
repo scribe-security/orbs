@@ -23,12 +23,24 @@ parameters:
     description: Force skip cache
     type: boolean
     default: false
+  initiative:
+    description: Run only rules with specified initiative
+    type: string
+    default: ""
   input-format:
     description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json statement-generic attest-generic ]
     type: string
     default: ""
+  policy:
+    description: Policy configuration file path (early-availability)
+    type: string
+    default: ""
   rule:
     description: Rule configuration file path (early-availability)
+    type: string
+    default: ""
+  rule-label:
+    description: Run only rules with specified label
     type: string
     default: ""
   skip-bundle:
@@ -236,8 +248,11 @@ steps:
          <<# parameters.common-name >>--common-name=<< parameters.common-name >><</ parameters.common-name >> \
          <<# parameters.email >>--email=<< parameters.email >><</ parameters.email >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
+         <<# parameters.initiative >>--initiative=<< parameters.initiative >><</ parameters.initiative >> \
          <<# parameters.input-format >>--input-format=<< parameters.input-format >><</ parameters.input-format >> \
+         <<# parameters.policy >>--policy=<< parameters.policy >><</ parameters.policy >> \
          <<# parameters.rule >>--rule=<< parameters.rule >><</ parameters.rule >> \
+         <<# parameters.rule-label >>--rule-label=<< parameters.rule-label >><</ parameters.rule-label >> \
          <<# parameters.skip-bundle >>--skip-bundle=<< parameters.skip-bundle >><</ parameters.skip-bundle >> \
          <<# parameters.skip-report >>--skip-report=<< parameters.skip-report >><</ parameters.skip-report >> \
          <<# parameters.uri >>--uri=<< parameters.uri >><</ parameters.uri >> \
