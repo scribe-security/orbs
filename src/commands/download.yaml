@@ -1,7 +1,7 @@
 description: Downloads the evidence based on cache
 parameters:
   target:
-    description: Target object name format=[<image:tag>, <dir path>, <git url>]
+    description: Target object name format=[<image:tag>, <dir path>, <git url>, <file path]
     type: string
   folder-path:
     description: Folder to download the evidences of the given target
@@ -9,6 +9,10 @@ parameters:
     default: ""
   format:
     description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json statement-generic attest-generic ]
+    type: string
+    default: ""
+  payload:
+    description: path of the decoded payload
     type: string
     default: ""
   ref:
@@ -209,6 +213,7 @@ steps:
       command: |
         valint download << parameters.target >> <<# parameters.folder-path >>--folder-path=<< parameters.folder-path >><</ parameters.folder-path >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
+         <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.ref >>--ref=<< parameters.ref >><</ parameters.ref >> \
          <<# parameters.store >>--store=<< parameters.store >><</ parameters.store >> \
          <<# parameters.allow-expired >>--allow-expired=<< parameters.allow-expired >><</ parameters.allow-expired >> \
