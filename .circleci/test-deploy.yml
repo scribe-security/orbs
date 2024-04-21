@@ -39,7 +39,6 @@ jobs:
           verbose: 2
           scribe-enable: true
           product-key: circle.orbs.deploy.bom
-          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
       - scribe/bom:
@@ -47,7 +46,6 @@ jobs:
           verbose: 2
           scribe-enable: true
           product-key: circle.orbs.deploy.bom
-          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
       - scribe/bom:
@@ -55,7 +53,6 @@ jobs:
           verbose: 2
           scribe-enable: true
           product-key: circle.orbs.deploy.bom
-          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
 
@@ -73,7 +70,6 @@ jobs:
           scribe-enable: true
           product-key: circle.orbs.deploy.policy
           format: statement
-          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
       - scribe/verify:
@@ -82,7 +78,6 @@ jobs:
           product-key: circle.orbs.deploy.policy
           input-format: statement
           scribe-enable: true
-          scribe-client-id: $SCRIBE_STAGING_M2M_CLIENT_ID
           scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
           scribe-url:  $SCRIBE_URL
 
