@@ -193,7 +193,7 @@ parameters:
     type: string
     default: ""
   scribe-auth-audience:
-    description: Scribe auth audience
+    description: Scribe auth audience (deprecated)
     type: string
     default: ""
   scribe-client-id:
@@ -209,7 +209,7 @@ parameters:
     type: boolean
     default: false
   scribe-login-url:
-    description: Scribe login url
+    description: Scribe login url (deprecated)
     type: string
     default: ""
   scribe-url:
