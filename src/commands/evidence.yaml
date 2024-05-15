@@ -23,6 +23,10 @@ parameters:
     description: Evidence Format version
     type: string
     default: ""
+  parser:
+    description: Evidence Parser Name
+    type: string
+    default: ""
   tool:
     description: Evidence Tool name
     type: string
@@ -188,11 +192,11 @@ parameters:
     type: string
     default: ""
   scribe-client-id:
-    description: Scribe Client ID
+    description: Scribe Client ID (deprecated)
     type: string
     default: ""
   scribe-client-secret:
-    description: Scribe Client Secret
+    description: Scribe Client Token
     type: string
     default: ""
   scribe-enable:
@@ -228,6 +232,7 @@ steps:
          <<# parameters.format-encoding >>--format-encoding=<< parameters.format-encoding >><</ parameters.format-encoding >> \
          <<# parameters.format-type >>--format-type=<< parameters.format-type >><</ parameters.format-type >> \
          <<# parameters.format-version >>--format-version=<< parameters.format-version >><</ parameters.format-version >> \
+         <<# parameters.parser >>--parser=<< parameters.parser >><</ parameters.parser >> \
          <<# parameters.tool >>--tool=<< parameters.tool >><</ parameters.tool >> \
          <<# parameters.tool-vendor >>--tool-vendor=<< parameters.tool-vendor >><</ parameters.tool-vendor >> \
          <<# parameters.tool-version >>--tool-version=<< parameters.tool-version >><</ parameters.tool-version >> \
