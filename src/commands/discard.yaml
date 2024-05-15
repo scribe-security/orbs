@@ -176,11 +176,11 @@ parameters:
     type: string
     default: ""
   scribe-client-id:
-    description: Scribe Client ID
+    description: Scribe Client ID (deprecated)
     type: string
     default: ""
   scribe-client-secret:
-    description: Scribe Client Secret
+    description: Scribe Client Token
     type: string
     default: ""
   scribe-enable:
