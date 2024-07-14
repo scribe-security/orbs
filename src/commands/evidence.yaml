@@ -3,14 +3,42 @@ parameters:
   target:
     description:
     type: string
+  attest-config:
+    description: Attestation config path
+    type: string
+    default: ""
+  attest-default:
+    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
+    type: string
+    default: ""
+  ca:
+    description: x509 CA Chain path
+    type: string
+    default: ""
+  cert:
+    description: x509 Cert path
+    type: string
+    default: ""
   compress:
     description: Compress content)
+    type: boolean
+    default: false
+  crl:
+    description: x509 CRL path
+    type: string
+    default: ""
+  crl-full-chain:
+    description: Enable Full chain CRL verfication
+    type: boolean
+    default: false
+  disable-crl:
+    description: Disable certificate revocation verificatoin
     type: boolean
     default: false
   format:
     description: Evidence format, options=[statement attest]
     type: string
-    default: statement
+    default: ""
   format-encoding:
     description: Evidence Format encoding
     type: string
@@ -21,6 +49,18 @@ parameters:
     default: ""
   format-version:
     description: Evidence Format version
+    type: string
+    default: ""
+  key:
+    description: x509 Private key path
+    type: string
+    default: ""
+  oci:
+    description: Enable OCI store
+    type: boolean
+    default: false
+  oci-repo:
+    description: Select OCI custom attestation repo
     type: string
     default: ""
   parser:
@@ -39,96 +79,24 @@ parameters:
     description: Evidence Tool version
     type: string
     default: ""
-  allow-expired:
-    description: Allow expired certs
-    type: boolean
-    default: false
-  attest-config:
-    description: Attestation config path
-    type: string
-    default: ""
-  attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
-    type: string
-    default: ""
-  backoff:
-    description: Backoff duration
-    type: string
-    default: ""
-  ca:
-    description: x509 CA Chain path
-    type: string
-    default: ""
   cache-enable:
     description: Enable local cache
     type: boolean
     default: true
-  cert:
-    description: x509 Cert path
-    type: string
-    default: ""
   config:
     description: Configuration file path
     type: string
     default: ""
-  context-dir:
-    description: Context dir
-    type: string
-    default: ""
-  crl:
-    description: x509 CRL path
-    type: string
-    default: ""
-  crl-full-chain:
-    description: Enable Full chain CRL verfication
-    type: boolean
-    default: false
   deliverable:
     description: Mark as deliverable, options=[true, false]
     type: string
     default: ""
-  depth:
-    description: Git clone depth
-    type: integer
-    default: 0
-  disable-crl:
-    description: Disable certificate revocation verificatoin
-    type: boolean
-    default: false
   env:
     description: Environment keys to include in evidence
     type: string
     default: ""
-  filter-regex:
-    description: Filter out files by regex
-    type: string
-    default: '**/*.pyc,**/.git/**'
-  filter-scope:
-    description: Filter packages by scope
-    type: string
-    default: ""
   gate:
     description: Policy Gate name
-    type: string
-    default: ""
-  git-auth:
-    description: 'Git repository authentication info, [format: ''username:password'']'
-    type: string
-    default: ""
-  git-branch:
-    description: Git branch in the repository
-    type: string
-    default: ""
-  git-commit:
-    description: Git commit hash in the repository
-    type: string
-    default: ""
-  git-tag:
-    description: Git tag in the repository
-    type: string
-    default: ""
-  key:
-    description: x509 Private key path
     type: string
     default: ""
   label:
@@ -147,14 +115,6 @@ parameters:
     description: Output log to file
     type: string
     default: ""
-  oci:
-    description: Enable OCI store
-    type: boolean
-    default: false
-  oci-repo:
-    description: Select OCI custom attestation repo
-    type: string
-    default: ""
   output-directory:
     description: Output directory path
     type: string
@@ -165,10 +125,6 @@ parameters:
     default: ""
   pipeline-name:
     description: Pipeline name
-    type: string
-    default: ""
-  platform:
-    description: Select target platform, examples=windows/armv6, arm64 ..)
     type: string
     default: ""
   predicate-type:
@@ -183,14 +139,6 @@ parameters:
     description: Product Version
     type: string
     default: ""
-  rule-args:
-    description: Policy arguments
-    type: string
-    default: ""
-  scribe-auth-audience:
-    description: Scribe auth audience (deprecated)
-    type: string
-    default: ""
   scribe-client-id:
     description: Scribe Client ID (deprecated)
     type: string
@@ -199,14 +147,14 @@ parameters:
     description: Scribe Client Token
     type: string
     default: ""
-  scribe-enable:
-    description: Enable scribe client
+  scribe-disable:
+    description: Disable scribe client
     type: boolean
     default: false
-  scribe-login-url:
-    description: Scribe login url (deprecated)
-    type: string
-    default: ""
+  scribe-enable:
+    description: Enable scribe client (deprecated)
+    type: boolean
+    default: false
   scribe-url:
     description: Scribe API Url
     type: string
@@ -227,58 +175,45 @@ steps:
   - run:
       name: Collect, Create and Store any file as evidence
       command: |
-        valint evidence << parameters.target >> <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
+        valint evidence << parameters.target >> <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
+         <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
+         <<# parameters.ca >>--ca=<< parameters.ca >><</ parameters.ca >> \
+         <<# parameters.cert >>--cert=<< parameters.cert >><</ parameters.cert >> \
+         <<# parameters.compress >>--compress=<< parameters.compress >><</ parameters.compress >> \
+         <<# parameters.crl >>--crl=<< parameters.crl >><</ parameters.crl >> \
+         <<# parameters.crl-full-chain >>--crl-full-chain=<< parameters.crl-full-chain >><</ parameters.crl-full-chain >> \
+         <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.format-encoding >>--format-encoding=<< parameters.format-encoding >><</ parameters.format-encoding >> \
          <<# parameters.format-type >>--format-type=<< parameters.format-type >><</ parameters.format-type >> \
          <<# parameters.format-version >>--format-version=<< parameters.format-version >><</ parameters.format-version >> \
+         <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
+         <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
+         <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.parser >>--parser=<< parameters.parser >><</ parameters.parser >> \
          <<# parameters.tool >>--tool=<< parameters.tool >><</ parameters.tool >> \
          <<# parameters.tool-vendor >>--tool-vendor=<< parameters.tool-vendor >><</ parameters.tool-vendor >> \
          <<# parameters.tool-version >>--tool-version=<< parameters.tool-version >><</ parameters.tool-version >> \
-         <<# parameters.allow-expired >>--allow-expired=<< parameters.allow-expired >><</ parameters.allow-expired >> \
-         <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
-         <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
-         <<# parameters.backoff >>--backoff=<< parameters.backoff >><</ parameters.backoff >> \
-         <<# parameters.ca >>--ca=<< parameters.ca >><</ parameters.ca >> \
          <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \
-         <<# parameters.cert >>--cert=<< parameters.cert >><</ parameters.cert >> \
          <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
-         <<# parameters.context-dir >>--context-dir=<< parameters.context-dir >><</ parameters.context-dir >> \
          --context-type=circleci \
-         <<# parameters.crl >>--crl=<< parameters.crl >><</ parameters.crl >> \
-         <<# parameters.crl-full-chain >>--crl-full-chain=<< parameters.crl-full-chain >><</ parameters.crl-full-chain >> \
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
-         <<# parameters.depth >>--depth=<< parameters.depth >><</ parameters.depth >> \
-         <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
-         <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
-         <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
          <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
-         <<# parameters.git-auth >>--git-auth=<< parameters.git-auth >><</ parameters.git-auth >> \
-         <<# parameters.git-branch >>--git-branch=<< parameters.git-branch >><</ parameters.git-branch >> \
-         <<# parameters.git-commit >>--git-commit=<< parameters.git-commit >><</ parameters.git-commit >> \
-         <<# parameters.git-tag >>--git-tag=<< parameters.git-tag >><</ parameters.git-tag >> \
-         <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
          <<# parameters.log-context >>--log-context=<< parameters.log-context >><</ parameters.log-context >> \
          <<# parameters.log-file >>--log-file=<< parameters.log-file >><</ parameters.log-file >> \
-         <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
-         <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.output-directory >>--output-directory=<< parameters.output-directory >><</ parameters.output-directory >> \
          <<# parameters.output-file >>--output-file=<< parameters.output-file >><</ parameters.output-file >> \
          <<# parameters.pipeline-name >>--pipeline-name=<< parameters.pipeline-name >><</ parameters.pipeline-name >> \
-         <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.predicate-type >>--predicate-type=<< parameters.predicate-type >><</ parameters.predicate-type >> \
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
          <<# parameters.product-version >>--product-version=<< parameters.product-version >><</ parameters.product-version >> \
-         <<# parameters.rule-args >>--rule-args=<< parameters.rule-args >><</ parameters.rule-args >> \
-         <<# parameters.scribe-auth-audience >>--scribe.auth.audience=<< parameters.scribe-auth-audience >><</ parameters.scribe-auth-audience >> \
          <<# parameters.scribe-client-id >>--scribe.client-id=<< parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
          <<# parameters.scribe-client-secret >>--scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
+         <<# parameters.scribe-disable >>--scribe.disable=<< parameters.scribe-disable >><</ parameters.scribe-disable >> \
          <<# parameters.scribe-enable >>--scribe.enable=<< parameters.scribe-enable >><</ parameters.scribe-enable >> \
-         <<# parameters.scribe-login-url >>--scribe.login-url=<< parameters.scribe-login-url >><</ parameters.scribe-login-url >> \
          <<# parameters.scribe-url >>--scribe.url=<< parameters.scribe-url >><</ parameters.scribe-url >> \
          <<# parameters.structured >>--structured=<< parameters.structured >><</ parameters.structured >> \
          <<# parameters.timeout >>--timeout=<< parameters.timeout >><</ parameters.timeout >> \
