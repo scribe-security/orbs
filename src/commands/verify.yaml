@@ -19,6 +19,26 @@ parameters:
     description: Policy bundle uri/path (early-availability)
     type: string
     default: ""
+  bundle-auth:
+    description: 'Bundle repository authentication info, [format: ''username:password'']'
+    type: string
+    default: ""
+  bundle-branch:
+    description: Bundle branch in the repository
+    type: string
+    default: ""
+  bundle-commit:
+    description: Bundle commit hash in the repository
+    type: string
+    default: ""
+  bundle-depth:
+    description: Bundle clone depth
+    type: integer
+    default: 0
+  bundle-tag:
+    description: Bundle tag in the repository
+    type: string
+    default: ""
   ca:
     description: x509 CA Chain path
     type: string
@@ -223,6 +243,11 @@ steps:
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.attestation >>--attestation=<< parameters.attestation >><</ parameters.attestation >> \
          <<# parameters.bundle >>--bundle=<< parameters.bundle >><</ parameters.bundle >> \
+         <<# parameters.bundle-auth >>--bundle-auth=<< parameters.bundle-auth >><</ parameters.bundle-auth >> \
+         <<# parameters.bundle-branch >>--bundle-branch=<< parameters.bundle-branch >><</ parameters.bundle-branch >> \
+         <<# parameters.bundle-commit >>--bundle-commit=<< parameters.bundle-commit >><</ parameters.bundle-commit >> \
+         <<# parameters.bundle-depth >>--bundle-depth=<< parameters.bundle-depth >><</ parameters.bundle-depth >> \
+         <<# parameters.bundle-tag >>--bundle-tag=<< parameters.bundle-tag >><</ parameters.bundle-tag >> \
          <<# parameters.ca >>--ca=<< parameters.ca >><</ parameters.ca >> \
          <<# parameters.cert >>--cert=<< parameters.cert >><</ parameters.cert >> \
          <<# parameters.common-name >>--common-name=<< parameters.common-name >><</ parameters.common-name >> \
