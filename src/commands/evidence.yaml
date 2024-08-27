@@ -8,7 +8,7 @@ parameters:
     type: string
     default: ""
   attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
+    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env kms pubkey]
     type: string
     default: ""
   ca:
@@ -55,6 +55,10 @@ parameters:
     description: x509 Private key path
     type: string
     default: ""
+  kms:
+    description: Provide KMS key reference
+    type: string
+    default: ""
   oci:
     description: Enable OCI store
     type: boolean
@@ -65,6 +69,10 @@ parameters:
     default: ""
   parser:
     description: Evidence Parser Name
+    type: string
+    default: ""
+  pubkey:
+    description: Public key path
     type: string
     default: ""
   tool:
@@ -188,9 +196,11 @@ steps:
          <<# parameters.format-type >>--format-type=<< parameters.format-type >><</ parameters.format-type >> \
          <<# parameters.format-version >>--format-version=<< parameters.format-version >><</ parameters.format-version >> \
          <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
+         <<# parameters.kms >>--kms=<< parameters.kms >><</ parameters.kms >> \
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.parser >>--parser=<< parameters.parser >><</ parameters.parser >> \
+         <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
          <<# parameters.tool >>--tool=<< parameters.tool >><</ parameters.tool >> \
          <<# parameters.tool-vendor >>--tool-vendor=<< parameters.tool-vendor >><</ parameters.tool-vendor >> \
          <<# parameters.tool-version >>--tool-version=<< parameters.tool-version >><</ parameters.tool-version >> \
