@@ -8,7 +8,7 @@ parameters:
     type: string
     default: ""
   attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
+    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env kms pubkey]
     type: string
     default: ""
   attestation:
@@ -103,6 +103,10 @@ parameters:
     description: x509 Private key path
     type: string
     default: ""
+  kms:
+    description: Provide KMS key reference
+    type: string
+    default: ""
   oci:
     description: Enable OCI store
     type: boolean
@@ -117,6 +121,18 @@ parameters:
     default: ""
   policy:
     description: Policy configuration file path (early-availability)
+    type: string
+    default: ""
+  provenance:
+    description: Create target SLSA Provenance evidence
+    type: boolean
+    default: false
+  pubkey:
+    description: Public key path
+    type: string
+    default: ""
+  public-key:
+    description: Public key path
     type: string
     default: ""
   rule:
@@ -264,10 +280,14 @@ steps:
          <<# parameters.initiative >>--initiative=<< parameters.initiative >><</ parameters.initiative >> \
          <<# parameters.input-format >>--input-format=<< parameters.input-format >><</ parameters.input-format >> \
          <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
+         <<# parameters.kms >>--kms=<< parameters.kms >><</ parameters.kms >> \
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.policy >>--policy=<< parameters.policy >><</ parameters.policy >> \
+         <<# parameters.provenance >>--provenance=<< parameters.provenance >><</ parameters.provenance >> \
+         <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
+         <<# parameters.public-key >>--public-key=<< parameters.public-key >><</ parameters.public-key >> \
          <<# parameters.rule >>--rule=<< parameters.rule >><</ parameters.rule >> \
          <<# parameters.rule-args >>--rule-args=<< parameters.rule-args >><</ parameters.rule-args >> \
          <<# parameters.rule-label >>--rule-label=<< parameters.rule-label >><</ parameters.rule-label >> \

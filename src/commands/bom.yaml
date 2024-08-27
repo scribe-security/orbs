@@ -12,7 +12,7 @@ parameters:
     type: string
     default: ""
   attest-default:
-    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env]
+    description: Attestation default config, options=[sigstore sigstore-github x509 x509-env kms pubkey]
     type: string
     default: ""
   author-email:
@@ -91,6 +91,10 @@ parameters:
     description: x509 Private key path
     type: string
     default: ""
+  kms:
+    description: Provide KMS key reference
+    type: string
+    default: ""
   oci:
     description: Enable OCI store
     type: boolean
@@ -100,7 +104,7 @@ parameters:
     type: string
     default: ""
   package-exclude-type:
-    description: Exclude package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel]
+    description: Exclude package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua]
     type: string
     default: ""
   package-group:
@@ -108,7 +112,7 @@ parameters:
     type: string
     default: ""
   package-type:
-    description: Select package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel]
+    description: Select package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua]
     type: string
     default: ""
   payload:
@@ -123,6 +127,10 @@ parameters:
     description: Include SLSA Provenance evidence
     type: boolean
     default: false
+  pubkey:
+    description: Public key path
+    type: string
+    default: ""
   supplier-email:
     description: Set supplier email
     type: string
@@ -257,6 +265,7 @@ steps:
          <<# parameters.git-commit >>--git-commit=<< parameters.git-commit >><</ parameters.git-commit >> \
          <<# parameters.git-tag >>--git-tag=<< parameters.git-tag >><</ parameters.git-tag >> \
          <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
+         <<# parameters.kms >>--kms=<< parameters.kms >><</ parameters.kms >> \
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
@@ -265,6 +274,7 @@ steps:
          <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.provenance >>--provenance=<< parameters.provenance >><</ parameters.provenance >> \
+         <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
          <<# parameters.supplier-email >>--supplier-email=<< parameters.supplier-email >><</ parameters.supplier-email >> \
          <<# parameters.supplier-name >>--supplier-name=<< parameters.supplier-name >><</ parameters.supplier-name >> \
          <<# parameters.supplier-phone >>--supplier-phone=<< parameters.supplier-phone >><</ parameters.supplier-phone >> \
