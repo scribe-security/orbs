@@ -107,6 +107,10 @@ parameters:
     description: Select OCI custom attestation repo
     type: string
     default: ""
+  pass:
+    description: Private key password
+    type: string
+    default: ""
   payload:
     description: path of the decoded payload
     type: string
@@ -253,6 +257,7 @@ steps:
          <<# parameters.kms >>--kms=<< parameters.kms >><</ parameters.kms >> \
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
+         <<# parameters.pass >>--pass=<< parameters.pass >><</ parameters.pass >> \
          <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.predicate >>--predicate=<< parameters.predicate >><</ parameters.predicate >> \
