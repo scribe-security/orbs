@@ -115,6 +115,10 @@ parameters:
     description: Select package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua]
     type: string
     default: ""
+  pass:
+    description: Private key password
+    type: string
+    default: ""
   payload:
     description: path of the decoded payload
     type: string
@@ -271,6 +275,7 @@ steps:
          <<# parameters.package-exclude-type >>--package-exclude-type=<< parameters.package-exclude-type >><</ parameters.package-exclude-type >> \
          <<# parameters.package-group >>--package-group=<< parameters.package-group >><</ parameters.package-group >> \
          <<# parameters.package-type >>--package-type=<< parameters.package-type >><</ parameters.package-type >> \
+         <<# parameters.pass >>--pass=<< parameters.pass >><</ parameters.pass >> \
          <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.provenance >>--provenance=<< parameters.provenance >><</ parameters.provenance >> \
