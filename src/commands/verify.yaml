@@ -127,6 +127,10 @@ parameters:
     description: Private key password
     type: string
     default: ""
+  payload:
+    description: path of the decoded payload
+    type: string
+    default: ""
   platform:
     description: Select target platform, examples=windows/armv6, arm64 ..)
     type: string
@@ -298,6 +302,7 @@ steps:
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.pass >>--pass=<< parameters.pass >><</ parameters.pass >> \
+         <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.policy >>--policy=<< parameters.policy >><</ parameters.policy >> \
          <<# parameters.provenance >>--provenance=<< parameters.provenance >><</ parameters.provenance >> \
