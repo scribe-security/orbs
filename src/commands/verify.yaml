@@ -15,6 +15,10 @@ parameters:
     description: Attestation for target
     type: string
     default: ""
+  base-image:
+    description: Base image for the target
+    type: string
+    default: ""
   bom:
     description: Create target SBOM evidence
     type: boolean
@@ -195,6 +199,10 @@ parameters:
     description: Policy Gate name
     type: string
     default: ""
+  input:
+    description: Input Evidence target, format (<parser>:<file> or <scheme>:<name>:<tag>)
+    type: string
+    default: ""
   label:
     description: Add Custom labels
     type: string
@@ -274,6 +282,7 @@ steps:
         valint verify << parameters.target >> <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.attestation >>--attestation=<< parameters.attestation >><</ parameters.attestation >> \
+         <<# parameters.base-image >>--base-image=<< parameters.base-image >><</ parameters.base-image >> \
          <<# parameters.bom >>--bom=<< parameters.bom >><</ parameters.bom >> \
          <<# parameters.bundle >>--bundle=<< parameters.bundle >><</ parameters.bundle >> \
          <<# parameters.bundle-auth >>--bundle-auth=<< parameters.bundle-auth >><</ parameters.bundle-auth >> \
@@ -320,6 +329,7 @@ steps:
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.input >>--input=<< parameters.input >><</ parameters.input >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
          <<# parameters.log-context >>--log-context=<< parameters.log-context >><</ parameters.log-context >> \

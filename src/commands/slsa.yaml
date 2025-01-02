@@ -36,7 +36,7 @@ parameters:
     type: string
     default: ""
   components:
-    description: Select by products components groups, options=[metadata layers packages syft files dep commits]
+    description: Select by products components groups, options=[metadata layers packages syft files dep commits base_image]
     type: string
     default: metadata,layers
   crl:
@@ -155,6 +155,10 @@ parameters:
     description: Policy Gate name
     type: string
     default: ""
+  input:
+    description: Input Evidence target, format (<parser>:<file> or <scheme>:<name>:<tag>)
+    type: string
+    default: ""
   label:
     description: Add Custom labels
     type: string
@@ -270,6 +274,7 @@ steps:
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.input >>--input=<< parameters.input >><</ parameters.input >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
          <<# parameters.log-context >>--log-context=<< parameters.log-context >><</ parameters.log-context >> \
