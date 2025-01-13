@@ -27,6 +27,10 @@ parameters:
     description: Set author phone
     type: string
     default: ""
+  base-image:
+    description: Base image for the target
+    type: string
+    default: ""
   ca:
     description: x509 CA Chain path
     type: string
@@ -36,7 +40,7 @@ parameters:
     type: string
     default: ""
   components:
-    description: Select sbom components groups, options=[metadata layers packages syft files dep commits]
+    description: Select sbom components groups, options=[metadata layers packages syft files dep commits base_image]
     type: string
     default: metadata,layers,packages,syft,dep,commits
   crl:
@@ -68,7 +72,7 @@ parameters:
     type: boolean
     default: false
   format:
-    description: Evidence format, options=[cyclonedx-json cyclonedx-xml attest-cyclonedx-json statement-cyclonedx-json attest-slsa statement-slsa statement-generic attest-generic]
+    description: Evidence format, options=[json statement attest]
     type: string
     default: ""
   git-auth:
@@ -171,6 +175,10 @@ parameters:
     description: Policy Gate name
     type: string
     default: ""
+  input:
+    description: Input Evidence target, format (<parser>:<file> or <scheme>:<name>:<tag>)
+    type: string
+    default: ""
   label:
     description: Add Custom labels
     type: string
@@ -253,6 +261,7 @@ steps:
          <<# parameters.author-email >>--author-email=<< parameters.author-email >><</ parameters.author-email >> \
          <<# parameters.author-name >>--author-name=<< parameters.author-name >><</ parameters.author-name >> \
          <<# parameters.author-phone >>--author-phone=<< parameters.author-phone >><</ parameters.author-phone >> \
+         <<# parameters.base-image >>--base-image=<< parameters.base-image >><</ parameters.base-image >> \
          <<# parameters.ca >>--ca=<< parameters.ca >><</ parameters.ca >> \
          <<# parameters.cert >>--cert=<< parameters.cert >><</ parameters.cert >> \
          <<# parameters.components >>--components=<< parameters.components >><</ parameters.components >> \
@@ -290,6 +299,7 @@ steps:
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
          <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.input >>--input=<< parameters.input >><</ parameters.input >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
          <<# parameters.log-context >>--log-context=<< parameters.log-context >><</ parameters.log-context >> \
