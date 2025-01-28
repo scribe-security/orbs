@@ -171,6 +171,10 @@ parameters:
     description: Skip bundle download
     type: boolean
     default: false
+  skip-confirmation:
+    description: Skip Sigstore Confirmation
+    type: boolean
+    default: false
   skip-report:
     description: Skip Policy report stage
     type: boolean
@@ -321,6 +325,7 @@ steps:
          <<# parameters.rule-args >>--rule-args=<< parameters.rule-args >><</ parameters.rule-args >> \
          <<# parameters.rule-label >>--rule-label=<< parameters.rule-label >><</ parameters.rule-label >> \
          <<# parameters.skip-bundle >>--skip-bundle=<< parameters.skip-bundle >><</ parameters.skip-bundle >> \
+         <<# parameters.skip-confirmation >>--skip-confirmation=<< parameters.skip-confirmation >><</ parameters.skip-confirmation >> \
          <<# parameters.skip-report >>--skip-report=<< parameters.skip-report >><</ parameters.skip-report >> \
          <<# parameters.uri >>--uri=<< parameters.uri >><</ parameters.uri >> \
          <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \
