@@ -79,6 +79,10 @@ parameters:
     description: Public key path
     type: string
     default: ""
+  skip-confirmation:
+    description: Skip Sigstore Confirmation
+    type: boolean
+    default: false
   tool:
     description: Evidence Tool name
     type: string
@@ -210,6 +214,7 @@ steps:
          <<# parameters.parser >>--parser=<< parameters.parser >><</ parameters.parser >> \
          <<# parameters.pass >>--pass=<< parameters.pass >><</ parameters.pass >> \
          <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
+         <<# parameters.skip-confirmation >>--skip-confirmation=<< parameters.skip-confirmation >><</ parameters.skip-confirmation >> \
          <<# parameters.tool >>--tool=<< parameters.tool >><</ parameters.tool >> \
          <<# parameters.tool-vendor >>--tool-vendor=<< parameters.tool-vendor >><</ parameters.tool-vendor >> \
          <<# parameters.tool-version >>--tool-version=<< parameters.tool-version >><</ parameters.tool-version >> \

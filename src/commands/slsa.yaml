@@ -127,6 +127,10 @@ parameters:
     description: Public key path
     type: string
     default: ""
+  skip-confirmation:
+    description: Skip Sigstore Confirmation
+    type: boolean
+    default: false
   started-on:
     description: Set metadata started time (YYYY-MM-DDThh:mm:ssZ)
     type: string
@@ -266,6 +270,7 @@ steps:
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.predicate >>--predicate=<< parameters.predicate >><</ parameters.predicate >> \
          <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
+         <<# parameters.skip-confirmation >>--skip-confirmation=<< parameters.skip-confirmation >><</ parameters.skip-confirmation >> \
          <<# parameters.started-on >>--started-on=<< parameters.started-on >><</ parameters.started-on >> \
          <<# parameters.statement >>--statement=<< parameters.statement >><</ parameters.statement >> \
          <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \

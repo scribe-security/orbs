@@ -139,6 +139,10 @@ parameters:
     description: Public key path
     type: string
     default: ""
+  skip-confirmation:
+    description: Skip Sigstore Confirmation
+    type: boolean
+    default: false
   supplier-email:
     description: Set supplier email
     type: string
@@ -289,6 +293,7 @@ steps:
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
          <<# parameters.provenance >>--provenance=<< parameters.provenance >><</ parameters.provenance >> \
          <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
+         <<# parameters.skip-confirmation >>--skip-confirmation=<< parameters.skip-confirmation >><</ parameters.skip-confirmation >> \
          <<# parameters.supplier-email >>--supplier-email=<< parameters.supplier-email >><</ parameters.supplier-email >> \
          <<# parameters.supplier-name >>--supplier-name=<< parameters.supplier-name >><</ parameters.supplier-name >> \
          <<# parameters.supplier-phone >>--supplier-phone=<< parameters.supplier-phone >><</ parameters.supplier-phone >> \
