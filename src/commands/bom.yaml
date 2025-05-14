@@ -108,7 +108,7 @@ parameters:
     type: string
     default: ""
   package-exclude-type:
-    description: Exclude package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua]
+    description: Exclude package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua bitnami terraform]
     type: string
     default: ""
   package-group:
@@ -116,7 +116,7 @@ parameters:
     type: string
     default: ""
   package-type:
-    description: Select package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua]
+    description: Select package type, options=[ruby python javascript java dpkg apk rpm go dotnet r rust binary sbom nix conan alpm cocoapods swift dart elixir php erlang github portage haskell kernel wordpress lua bitnami terraform]
     type: string
     default: ""
   pass:
@@ -180,7 +180,7 @@ parameters:
     type: string
     default: ""
   input:
-    description: Input Evidence target, format (<parser>:<file> or <scheme>:<name>:<tag>)
+    description: Input Evidence target, format (\<parser>:\<file> or \<scheme>:\<name>:\<tag>)
     type: string
     default: ""
   label:
