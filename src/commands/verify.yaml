@@ -3,6 +3,10 @@ parameters:
   target:
     description: Target object name format=[<image:tag>, <dir path>, <git url>] (Optional)
     type: string
+  all-evidence:
+    description: Run all evidence verification
+    type: boolean
+    default: false
   attest-config:
     description: Attestation config path
     type: string
@@ -19,6 +23,10 @@ parameters:
     description: Base image for the target
     type: string
     default: ""
+  beautify:
+    description: Enhance the output using ANSI and Unicode characters
+    type: boolean
+    default: false
   bom:
     description: Create target SBOM evidence
     type: boolean
@@ -104,7 +112,15 @@ parameters:
     type: string
     default: ""
   initiative:
-    description: Run only rules with specified initiative
+    description: Initiative configuration file path (early-availability)
+    type: string
+    default: ""
+  initiative-id:
+    description: Initiative id
+    type: string
+    default: ""
+  initiative-name:
+    description: Initiative name
     type: string
     default: ""
   input-format:
@@ -117,6 +133,10 @@ parameters:
     default: ""
   kms:
     description: Provide KMS key reference
+    type: string
+    default: ""
+  md:
+    description: Output Initiative result markdown report file
     type: string
     default: ""
   oci:
@@ -137,10 +157,6 @@ parameters:
     default: ""
   platform:
     description: Select target platform, examples=windows/armv6, arm64 ..)
-    type: string
-    default: ""
-  policy:
-    description: Policy configuration file path (early-availability)
     type: string
     default: ""
   provenance:
@@ -199,8 +215,12 @@ parameters:
     description: Environment keys to include in evidence
     type: string
     default: ""
-  gate:
+  gate-name:
     description: Policy Gate name
+    type: string
+    default: ""
+  gate-type:
+    description: Policy Gate type
     type: string
     default: ""
   input:
@@ -283,10 +303,12 @@ steps:
   - run:
       name: Verify compliance policies against evidence to ensure the integrity of supply chain.
       command: |
-        valint verify << parameters.target >> <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
+        valint verify << parameters.target >> <<# parameters.all-evidence >>--all-evidence=<< parameters.all-evidence >><</ parameters.all-evidence >> \
+         <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
          <<# parameters.attestation >>--attestation=<< parameters.attestation >><</ parameters.attestation >> \
          <<# parameters.base-image >>--base-image=<< parameters.base-image >><</ parameters.base-image >> \
+         <<# parameters.beautify >>--beautify=<< parameters.beautify >><</ parameters.beautify >> \
          <<# parameters.bom >>--bom=<< parameters.bom >><</ parameters.bom >> \
          <<# parameters.bundle >>--bundle=<< parameters.bundle >><</ parameters.bundle >> \
          <<# parameters.bundle-auth >>--bundle-auth=<< parameters.bundle-auth >><</ parameters.bundle-auth >> \
@@ -309,15 +331,17 @@ steps:
          <<# parameters.git-commit >>--git-commit=<< parameters.git-commit >><</ parameters.git-commit >> \
          <<# parameters.git-tag >>--git-tag=<< parameters.git-tag >><</ parameters.git-tag >> \
          <<# parameters.initiative >>--initiative=<< parameters.initiative >><</ parameters.initiative >> \
+         <<# parameters.initiative-id >>--initiative-id=<< parameters.initiative-id >><</ parameters.initiative-id >> \
+         <<# parameters.initiative-name >>--initiative-name=<< parameters.initiative-name >><</ parameters.initiative-name >> \
          <<# parameters.input-format >>--input-format=<< parameters.input-format >><</ parameters.input-format >> \
          <<# parameters.key >>--key=<< parameters.key >><</ parameters.key >> \
          <<# parameters.kms >>--kms=<< parameters.kms >><</ parameters.kms >> \
+         <<# parameters.md >>--md=<< parameters.md >><</ parameters.md >> \
          <<# parameters.oci >>--oci=<< parameters.oci >><</ parameters.oci >> \
          <<# parameters.oci-repo >>--oci-repo=<< parameters.oci-repo >><</ parameters.oci-repo >> \
          <<# parameters.pass >>--pass=<< parameters.pass >><</ parameters.pass >> \
          <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.platform >>--platform=<< parameters.platform >><</ parameters.platform >> \
-         <<# parameters.policy >>--policy=<< parameters.policy >><</ parameters.policy >> \
          <<# parameters.provenance >>--provenance=<< parameters.provenance >><</ parameters.provenance >> \
          <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
          <<# parameters.public-key >>--public-key=<< parameters.public-key >><</ parameters.public-key >> \
@@ -333,7 +357,8 @@ steps:
          --context-type=circleci \
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
-         <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.gate-name >>--gate-name=<< parameters.gate-name >><</ parameters.gate-name >> \
+         <<# parameters.gate-type >>--gate-type=<< parameters.gate-type >><</ parameters.gate-type >> \
          <<# parameters.input >>--input=<< parameters.input >><</ parameters.input >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \

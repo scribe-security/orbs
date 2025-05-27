@@ -3,12 +3,24 @@ parameters:
   target:
     description: Target object name format=[<image:tag>, <dir path>, <git url>, <file path]
     type: string
+  beautify:
+    description: Enhance the output using ANSI and Unicode characters
+    type: boolean
+    default: false
   folder-path:
     description: Folder to download the evidences of the given target
     type: string
     default: ""
   format:
     description: Evidence format, options=[attest-cyclonedx-json attest-slsa statement-slsa statement-cyclonedx-json statement-generic attest-generic ]
+    type: string
+    default: ""
+  initiative-report:
+    description: Download Initiative result report
+    type: boolean
+    default: false
+  md:
+    description: Output Initiative result markdown report file
     type: string
     default: ""
   payload:
@@ -39,8 +51,12 @@ parameters:
     description: Environment keys to include in evidence
     type: string
     default: ""
-  gate:
+  gate-name:
     description: Policy Gate name
+    type: string
+    default: ""
+  gate-type:
+    description: Policy Gate type
     type: string
     default: ""
   input:
@@ -123,8 +139,11 @@ steps:
   - run:
       name: Downloads the evidence based on cache
       command: |
-        valint download << parameters.target >> <<# parameters.folder-path >>--folder-path=<< parameters.folder-path >><</ parameters.folder-path >> \
+        valint download << parameters.target >> <<# parameters.beautify >>--beautify=<< parameters.beautify >><</ parameters.beautify >> \
+         <<# parameters.folder-path >>--folder-path=<< parameters.folder-path >><</ parameters.folder-path >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
+         <<# parameters.initiative-report >>--initiative-report=<< parameters.initiative-report >><</ parameters.initiative-report >> \
+         <<# parameters.md >>--md=<< parameters.md >><</ parameters.md >> \
          <<# parameters.payload >>--payload=<< parameters.payload >><</ parameters.payload >> \
          <<# parameters.ref >>--ref=<< parameters.ref >><</ parameters.ref >> \
          <<# parameters.store >>--store=<< parameters.store >><</ parameters.store >> \
@@ -133,7 +152,8 @@ steps:
          --context-type=circleci \
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
-         <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.gate-name >>--gate-name=<< parameters.gate-name >><</ parameters.gate-name >> \
+         <<# parameters.gate-type >>--gate-type=<< parameters.gate-type >><</ parameters.gate-type >> \
          <<# parameters.input >>--input=<< parameters.input >><</ parameters.input >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \

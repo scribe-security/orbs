@@ -175,8 +175,12 @@ parameters:
     description: Environment keys to include in evidence
     type: string
     default: ""
-  gate:
+  gate-name:
     description: Policy Gate name
+    type: string
+    default: ""
+  gate-type:
+    description: Policy Gate type
     type: string
     default: ""
   input:
@@ -303,7 +307,8 @@ steps:
          --context-type=circleci \
          <<# parameters.deliverable >>--deliverable=<< parameters.deliverable >><</ parameters.deliverable >> \
          <<# parameters.env >>--env=<< parameters.env >><</ parameters.env >> \
-         <<# parameters.gate >>--gate=<< parameters.gate >><</ parameters.gate >> \
+         <<# parameters.gate-name >>--gate-name=<< parameters.gate-name >><</ parameters.gate-name >> \
+         <<# parameters.gate-type >>--gate-type=<< parameters.gate-type >><</ parameters.gate-type >> \
          <<# parameters.input >>--input=<< parameters.input >><</ parameters.input >> \
          <<# parameters.label >>--label=<< parameters.label >><</ parameters.label >> \
          <<# parameters.level >>--level=<< parameters.level >><</ parameters.level >> \
