@@ -1,0 +1,44 @@
+description: >
+  Example: Enforce SP 800-190 initiative with the Scribe orb,
+  including a Trivy vulnerability scan.
+
+usage:
+  version: 2.1
+  orbs:
+    scribe: scribe-security/orbs@x.y.z
+
+  jobs:
+    initiative-sp800-190:
+      description: >
+        Pulls or builds the target image, scans it with Trivy,
+        then verifies SP 800-190 controls using the Scribe CLI.
+      docker:
+        - image: docker:stable-git
+      steps:
+        - checkout
+        - setup_remote_docker
+        - scribe/install
+        - run:
+            name: Scan image with Trivy
+            command: |
+              docker pull busybox:latest
+              trivy image \
+                --format sarif \
+                --output trivy-report.sarif \
+                --exit-code 0 \
+                --ignore-unfixed \
+                --severity CRITICAL,HIGH \
+                busybox:latest
+        - scribe/verify:
+            initiative: sp-800-190@v2    # SP 800-190 initiative catalog
+            target: busybox:latest        # image under test
+            bom: true                     # auto-generate SBOM evidence
+            base-image: Dockerfile        # include base-image evidence
+            input-format: statement       # treat SBOM as “statement” evidence
+            scribe-enable: true
+            scribe-client-secret: $SCRIBE_CLIENT_SECRET
+
+  workflows:
+    example-initiative-sp800-190:
+      jobs:
+        - initiative-sp800-190

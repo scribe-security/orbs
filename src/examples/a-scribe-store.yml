@@ -21,13 +21,11 @@ jobs:
           target: busybox:latest
           format: statement
           scribe-enable: true
-          scribe-client-id: $SCRIBE_CLIENT_ID
           scribe-client-secret: $SCRIBE_CLIENT_SECRET
       - scribe/verify:
           target: busybox:latest
           input-format: statement
           scribe-enable: true
-          scribe-client-id: $SCRIBE_CLIENT_ID
           scribe-client-secret: $SCRIBE_CLIENT_SECRET
 
 workflows:

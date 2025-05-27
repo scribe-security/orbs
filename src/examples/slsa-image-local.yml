@@ -24,7 +24,6 @@ jobs:
       - scribe/bom:
           target: image_name:latest
           output-file: my_sbom.json
-          force: true
 
       # Storing as artifacts
       - store_artifacts:
