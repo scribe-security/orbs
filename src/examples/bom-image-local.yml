@@ -6,30 +6,29 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-jobs:
-  local-image-job:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - checkout
+  jobs:
+    local-image-job:
+      docker:
+        - image: docker:stable-git
+      steps:
+        - checkout
 
-      # Install scribe tool
-      - scribe/install
+        # Install scribe tool
+        - scribe/install
 
-      - setup_remote_docker:
-          docker_layer_caching: true
+        - setup_remote_docker:
+            docker_layer_caching: true
 
-      # Docker build ..
+        # Docker build ..
 
-      - scribe/bom:
-          target: image_name:latest
-          output-file: my_sbom.json
-          force: true
+        - scribe/bom:
+            target: image_name:latest
+            output-file: my_sbom.json
 
-      # Storing as artifacts
-      - store_artifacts:
-          path: scribe/
-          destination: scribe-evidence
+        # Storing as artifacts
+        - store_artifacts:
+            path: scribe/
+            destination: scribe-evidence
 
 workflows:
   example-local-image-workflow:

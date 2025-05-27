@@ -9,27 +9,27 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-jobs:
-  oci-registry-job:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - checkout
-      - setup_remote_docker # Optional
-      - scribe/install
-      - scribe/bom:
-          target: busybox:latest
-          format: statement
-          oci: true
-          oci-repo: $OCI_REPO
-      - scribe/verify:
-          target: busybox:latest
-          input-format: statement
-          scribe-enable: true
-          oci: true
-          oci-repo: $OCI_REPO
+  jobs:
+    oci-registry-job:
+      docker:
+        - image: docker:stable-git
+      steps:
+        - checkout
+        - setup_remote_docker
+        - scribe/install
+        - scribe/bom:
+            target: busybox:latest
+            format: statement
+            oci: true
+            oci-repo: $OCI_REPO
+        - scribe/verify:
+            target: busybox:latest
+            input-format: statement
+            scribe-enable: true
+            oci: true
+            oci-repo: $OCI_REPO
 
-workflows:
-  example-oci-registry-workflow:
-    jobs:
-      - oci-registry-job
+  workflows:
+    example-oci-registry-workflow:
+      jobs:
+        - oci-registry-job

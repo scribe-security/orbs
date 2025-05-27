@@ -6,17 +6,16 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-jobs:
-  image-bom:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - scribe/install
+  jobs:
+    image-bom:
+      docker:
+        - image: docker:stable-git
+      steps:
+        - scribe/install
 
-      # Create SBOM for remote `busybox:latest` image.
-      - scribe/bom:
-          target: busybox:latest
-          force: true
+        # Create SBOM for remote `busybox:latest` image.
+        - scribe/bom:
+            target: busybox:latest
 
 workflows:
   example-workflow:

@@ -6,25 +6,24 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-jobs:
-  sbom-local-dir-job:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - checkout
+  jobs:
+    sbom-local-dir-job:
+      docker:
+        - image: docker:stable-git
+      steps:
+        - checkout
 
-      # Install scribe tool
-      - scribe/install
+        # Install scribe tool
+        - scribe/install
 
-      # Create SBOM for a local directory.
-      - run:
-          name: custom checkout
-          command: |
-            mkdir testdir
-            echo "test" > testdir/test.txt
-      - scribe/bom:
-          target: dir:.
-          force: true
+        # Create SBOM for a local directory.
+        - run:
+            name: custom checkout
+            command: |
+              mkdir testdir
+              echo "test" > testdir/test.txt
+        - scribe/bom:
+            target: dir:.
 
 workflows:
   example-sbom-local-dir-workflow:

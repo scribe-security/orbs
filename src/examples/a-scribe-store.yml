@@ -9,24 +9,24 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-jobs:
-  scribe-service-job:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - checkout
-      - setup_remote_docker # Optional
-      - scribe/install
-      - scribe/bom:
-          target: busybox:latest
-          format: statement
-          scribe-enable: true
-          scribe-client-secret: $SCRIBE_CLIENT_SECRET
-      - scribe/verify:
-          target: busybox:latest
-          input-format: statement
-          scribe-enable: true
-          scribe-client-secret: $SCRIBE_CLIENT_SECRET
+  jobs:
+    scribe-service-job:
+      docker:
+        - image: docker:stable-git
+      steps:
+        - checkout
+        - setup_remote_docker # Optional
+        - scribe/install
+        - scribe/bom:
+            target: busybox:latest
+            format: statement
+            scribe-enable: true
+            scribe-client-secret: $SCRIBE_CLIENT_SECRET
+        - scribe/verify:
+            target: busybox:latest
+            input-format: statement
+            scribe-enable: true
+            scribe-client-secret: $SCRIBE_CLIENT_SECRET
 
 workflows:
   example-scribe-service-workflow:

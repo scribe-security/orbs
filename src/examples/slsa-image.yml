@@ -6,20 +6,19 @@ usage:
   orbs:
     scribe: scribe-security/orbs@x.y.z
 
-jobs:
-  slsa-remote-image-job:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - checkout
+  jobs:
+    slsa-remote-image-job:
+      docker:
+        - image: docker:stable-git
+      steps:
+        - checkout
 
-      # Install scribe tool
-      - scribe/install
+        # Install scribe tool
+        - scribe/install
 
-      # Create SLSA for remote `busybox:latest` image.
-      - scribe/slsa:
-          target: busybox:latest
-          force: true
+        # Create SLSA for remote `busybox:latest` image.
+        - scribe/slsa:
+            target: busybox:latest
 
 workflows:
   example-slsa-remote-image-workflow:
