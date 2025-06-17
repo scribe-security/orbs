@@ -4,78 +4,33 @@ title: CircleCI
 sidebar_position: 5
 ---
 
-Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows.
+Use the following instructions to integrate your CircleCI with Scribe.
 
-The Orb provides several actions enabling the generation of SBOMs from various sources.
-The usage examples on this page demonstrate several use cases of SBOM collection (SBOM from a publicly available Docker image, SBOM from a Git repository,
-SBOM from a local directory) as well as several use cases of uploading the evidence either to the Circle CI workspace or to the Scribe Service.
+### 1. Obtain a Scribe Hub API Token
 
-<!-- -
-[![CircleCI Build Status](https://circleci.com/gh/scribe-security/orbs.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/scribe-security/orbs) [![CircleCI Orb Version](https://badges.circleci.com/orbs/scribe-security/orbs.svg)](https://circleci.com/orbs/registry/orb/scribe-security/orbs) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/scribe-security/orbs/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
-- -->
+Create an API token in [Scribe Hub > Account > Tokens](https://app.scribesecurity.com/account/tokens). Copy it to a safe temporary notepad until you complete the integration.
 
-### Usage
+:::note Important
+The token is a secret and will not be accessible from the UI after you finalize the token generation. 
+:::
 
-_For full usage guidelines, see the **[orb registry listing](https://circleci.com/developer/orbs/orb/scribe-security/orbs)**._
+### 2. Add the API token to the CircleCI secrtes
 
-### Target types - `[target]`
----
-Target types are types of artifacts produced and consumed by your supply chain.
-Using supported targets, you can collect evidence and verify compliance on a range of artifacts.
+Add the Scribe Hub API token as SCRIBE_TOKEN to your CircleCI environment by following the [CircleCI environment variables instructions](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-project "CircleCI embedding environment variables instructions")
 
-> Fields specified as [target] support the following format.
+### 3. Install Scribe CLI and usage
 
-### Format
-
-`[scheme]:[name]:[tag]` 
-
-| Sources | target-type | scheme | Description | example
-| --- | --- | --- | --- | --- |
-| Docker Daemon | image | docker | use the Docker daemon | docker:busybox:latest |
-| OCI registry | image | registry | use the docker registry directly | registry:busybox:latest |
-| Docker archive | image | docker-archive | use a tarball from disk for archives created from "docker save" | image | docker-archive:path/to/yourimage.tar |
-| OCI archive | image | oci-archive | tarball from disk for OCI archives | oci-archive:path/to/yourimage.tar |
-| Remote git | git| git | remote repository git | git:https://github.com/yourrepository.git |
-| Local git | git | git | local repository git | git:path/to/yourrepository | 
-| Directory | dir | dir | directory path on disk | dir:path/to/yourproject | 
-| File | file | file | file path on disk | file:path/to/yourproject/file | 
-
-> Use `setup_remote_docker` step (Optional) to allow access to a local docker daemon. Otherwise image targets is read directly from remote registry.
-
-### Evidence Stores
-Each storer can be used to store, find and download evidence, unifying all the supply chain evidence into a system is an important part to be able to query any subset for policy validation.
-
-| Type  | Description | requirement |
-| --- | --- | --- |
-| scribe | Evidence is stored on scribe service | scribe credentials |
-| OCI | Evidence is stored on a remote OCI registry | access to a OCI registry |
-
-### Scribe Evidence store
-Scribe evidence store allows you store evidence using scribe Service.
-
-Related Flags:
-> Note the flag set:
->* `scribe-client-id`
->* `scribe-client-secret`
->* `scribe-enable`
-
-### Before you begin
-Integrating Scribe Hub with your environment requires the following credentials that are found in the **Integrations** page. (In your **[Scribe Hub](https://scribehub.scribesecurity.com/ "Scribe Hub Link")** go to **integrations**)
-
-* **Client ID**
-* **Client Secret**
-
-<img src='../../../../img/ci/integrations-secrets.jpg' alt='Scribe Integration Secrets' width='70%' min-width='400px'/>
-
-* Set your Scribe credentials as environment variables according to **[CircleCI environment variables instructions](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-project "CircleCI embedding environment variables instructions")**.
-* Follow instructions and examples on the CircleCI **[ScribeHub Orb page](https://circleci.com/developer/orbs/orb/scribe-security/orbs "Instructions for using ScribeHub Orb")**.
+**Valint**(Scribe CLI) is required to generate evidence in such as SBOMs and SLSA provenance. 
+Installation instructions and usage examples can be found on the [Scribe Security Orb page](https://circleci.com/developer/orbs/orb/scribe-security/orbs)
 
 
 ### Alternative evidence stores
+
 > You can learn more about alternative stores **[here](https://scribe-security.netlify.app/docs/integrating-scribe/other-evidence-stores)**.
 
 <details>
   <summary> <b> OCI Evidence store </b></summary>
+
 Valint supports both storage and verification flows for `attestations`  and `statement` objects utilizing OCI registry as an evidence store.
 
 Using OCI registry as an evidence store allows you to upload, download and verify evidence across your supply chain in a seamless manner.
@@ -91,6 +46,7 @@ Evidence can be stored in any accusable registry.
 
 You must first login with the required access privileges to your registry before calling Valint.
 For example, using `docker login` command or **[circle orbs](https://circleci.com/docs/building-docker-images/)**.
+
 </details>
 
 ### Scribe CircleCI Orbs
