@@ -39,21 +39,21 @@ jobs:
           verbose: 2
           scribe-enable: true
           product-key: circle.orbs.deploy.bom
-          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-secret: $SCRIBE_STAGING_MIKEY_TOKEN
           scribe-url:  $SCRIBE_URL
       - scribe/bom:
           target: git:mongo-express-scm
           verbose: 2
           scribe-enable: true
           product-key: circle.orbs.deploy.bom
-          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-secret: $SCRIBE_STAGING_MIKEY_TOKEN
           scribe-url:  $SCRIBE_URL
       - scribe/bom:
           target: mongo-express:1.0.0-alpha.4
           verbose: 2
           scribe-enable: true
           product-key: circle.orbs.deploy.bom
-          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-secret: $SCRIBE_STAGING_MIKEY_TOKEN
           scribe-url:  $SCRIBE_URL
 
   policy-e2e-tests:
@@ -70,7 +70,7 @@ jobs:
           scribe-enable: true
           product-key: circle.orbs.deploy.policy
           format: statement
-          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-secret: $SCRIBE_STAGING_MIKEY_TOKEN
           scribe-url:  $SCRIBE_URL
       - scribe/verify:
           target: busybox:latest
@@ -78,7 +78,7 @@ jobs:
           product-key: circle.orbs.deploy.policy
           input-format: statement
           scribe-enable: true
-          scribe-client-secret: $SCRIBE_STAGING_M2M_CLIENT_SECRET
+          scribe-client-secret: $SCRIBE_STAGING_MIKEY_TOKEN
           scribe-url:  $SCRIBE_URL
 
 workflows:
