@@ -25,7 +25,7 @@ usage:
         - scribe/bom:
             target: dir:.
 
-workflows:
-  example-sbom-local-dir-workflow:
-    jobs:
-      - sbom-local-dir-job
+  workflows:
+    example-sbom-local-dir-workflow:
+      jobs:
+        - sbom-local-dir-job

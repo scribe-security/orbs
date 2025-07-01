@@ -20,7 +20,7 @@ usage:
         - scribe/slsa:
             target: busybox:latest
 
-workflows:
-  example-slsa-remote-image-workflow:
-    jobs:
-      - slsa-remote-image-job
+  workflows:
+    example-slsa-remote-image-workflow:
+      jobs:
+        - slsa-remote-image-job

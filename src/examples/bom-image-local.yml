@@ -30,7 +30,7 @@ usage:
             path: scribe/
             destination: scribe-evidence
 
-workflows:
-  example-local-image-workflow:
-    jobs:
-      - local-image-job
+  workflows:
+    example-local-image-workflow:
+      jobs:
+        - local-image-job

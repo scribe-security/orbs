@@ -31,10 +31,10 @@ usage:
                 busybox:latest
         - scribe/verify:
             initiative: sp-800-190@v2    # SP 800-190 initiative catalog
-            target: busybox:latest        # image under test
-            bom: true                     # auto-generate SBOM evidence
-            base-image: Dockerfile        # include base-image evidence
-            input-format: statement       # treat SBOM as “statement” evidence
+            target: busybox:latest       # image under test
+            bom: true                    # auto-generate SBOM evidence
+            base-image: Dockerfile       # include base-image evidence
+            input-format: statement      # treat SBOM as “statement” evidence
             scribe-enable: true
             scribe-client-secret: $SCRIBE_CLIENT_SECRET
 

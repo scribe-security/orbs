@@ -17,7 +17,7 @@ usage:
         - scribe/bom:
             target: busybox:latest
 
-workflows:
-  example-workflow:
-    jobs:
-      - image-bom
+  workflows:
+    example-workflow:
+      jobs:
+        - image-bom

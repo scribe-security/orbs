@@ -27,12 +27,11 @@ usage:
             path: scribe/
             destination: scribe-evidence
 
-        # Storing as artifacts
         - store_artifacts:
             path: my_sbom.json
             destination: scribe-sbom
 
-workflows:
-  example-save-sbom-artifact-workflow:
-    jobs:
-      - save-sbom-artifact-job
+  workflows:
+    example-save-sbom-artifact-workflow:
+      jobs:
+        - save-sbom-artifact-job

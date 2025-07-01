@@ -25,7 +25,7 @@ jobs:
       - scribe/bom:
           target: git:.
 
-workflows:
-  example-scribe-git-target-workflow:
-    jobs:
-      - scribe-git-target-job
+  workflows:
+    example-scribe-git-target-workflow:
+      jobs:
+        - scribe-git-target-job

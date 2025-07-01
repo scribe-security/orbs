@@ -26,7 +26,7 @@ usage:
         - scribe/bom:
             target: dir:.
 
-workflows:
-  example-scribe-dir-target-workflow:
-    jobs:
-      - scribe-dir-target-job
+  workflows:
+    example-scribe-dir-target-workflow:
+      jobs:
+        - scribe-dir-target-job
