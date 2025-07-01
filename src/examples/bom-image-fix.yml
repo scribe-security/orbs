@@ -8,7 +8,7 @@ usage:
   workflows:
     example-workflow:
       jobs:
-        image-bom:
+      - image-bom:
           docker:
           - image: docker:stable-git
           steps:
