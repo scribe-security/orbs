@@ -8,13 +8,10 @@ usage:
   workflows:
     example-workflow:
       jobs:
-        
         image-bom:
           docker:
-            - image: docker:stable-git
+          - image: docker:stable-git
           steps:
-            - scribe/install
-
-            # Create SBOM for remote `busybox:latest` image.
-            - scribe/bom:
-                target: busybox:latest
+          - scribe/install
+          - scribe/bom:
+              target: busybox:latest
