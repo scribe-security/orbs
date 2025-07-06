@@ -195,6 +195,22 @@ parameters:
     description: Skip Policy report stage
     type: boolean
     default: false
+  source:
+    description: SLSA Git repository source for target
+    type: string
+    default: ""
+  source-asset-id:
+    description: Source asset id for SLSA Git repository source
+    type: string
+    default: ""
+  source-asset-name:
+    description: Source asset name for SLSA Git repository source
+    type: string
+    default: ""
+  source-asset-platform:
+    description: Source asset platform for SLSA Git repository source
+    type: string
+    default: ""
   uri:
     description: Default policy allowed uris
     type: string
@@ -351,6 +367,10 @@ steps:
          <<# parameters.skip-bundle >>--skip-bundle=<< parameters.skip-bundle >><</ parameters.skip-bundle >> \
          <<# parameters.skip-confirmation >>--skip-confirmation=<< parameters.skip-confirmation >><</ parameters.skip-confirmation >> \
          <<# parameters.skip-report >>--skip-report=<< parameters.skip-report >><</ parameters.skip-report >> \
+         <<# parameters.source >>--source=<< parameters.source >><</ parameters.source >> \
+         <<# parameters.source-asset-id >>--source-asset-id=<< parameters.source-asset-id >><</ parameters.source-asset-id >> \
+         <<# parameters.source-asset-name >>--source-asset-name=<< parameters.source-asset-name >><</ parameters.source-asset-name >> \
+         <<# parameters.source-asset-platform >>--source-asset-platform=<< parameters.source-asset-platform >><</ parameters.source-asset-platform >> \
          <<# parameters.uri >>--uri=<< parameters.uri >><</ parameters.uri >> \
          <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \
          <<# parameters.config >>--config=<< parameters.config >><</ parameters.config >> \
