@@ -87,6 +87,10 @@ parameters:
     description: Default policy allowed emails
     type: string
     default: ""
+  exit-code:
+    description: Exit code to use when policy violations occur (-1 = ignore and keep original status, 0 = succeed regardless, 1-255 = fail with that code)
+    type: integer
+    default: -1
   force:
     description: Force skip cache
     type: boolean
@@ -340,6 +344,7 @@ steps:
          <<# parameters.depth >>--depth=<< parameters.depth >><</ parameters.depth >> \
          <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.email >>--email=<< parameters.email >><</ parameters.email >> \
+         <<# parameters.exit-code >>--exit-code=<< parameters.exit-code >><</ parameters.exit-code >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.git-auth >>--git-auth=<< parameters.git-auth >><</ parameters.git-auth >> \
