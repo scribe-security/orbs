@@ -15,6 +15,10 @@ parameters:
     description: Attestation default config, options=[sigstore sigstore-github x509 x509-env kms pubkey]
     type: string
     default: ""
+  bom:
+    description: Upload SBOM evidence and by product
+    type: boolean
+    default: false
   build-type:
     description: Set build type
     type: string
@@ -131,6 +135,22 @@ parameters:
     description: Skip Sigstore Confirmation
     type: boolean
     default: false
+  source:
+    description: Git repository source for target
+    type: string
+    default: ""
+  source-asset-id:
+    description: Source asset id for Git source repo
+    type: string
+    default: ""
+  source-asset-name:
+    description: Source asset name for Git source repo
+    type: string
+    default: ""
+  source-asset-platform:
+    description: Source asset platform for Git source repo
+    type: string
+    default: ""
   started-on:
     description: Set metadata started time (YYYY-MM-DDThh:mm:ssZ)
     type: string
@@ -246,6 +266,7 @@ steps:
         valint slsa << parameters.target >> <<# parameters.all-env >>--all-env=<< parameters.all-env >><</ parameters.all-env >> \
          <<# parameters.attest-config >>--attest.config=<< parameters.attest-config >><</ parameters.attest-config >> \
          <<# parameters.attest-default >>--attest.default=<< parameters.attest-default >><</ parameters.attest-default >> \
+         <<# parameters.bom >>--bom=<< parameters.bom >><</ parameters.bom >> \
          <<# parameters.build-type >>--build-type=<< parameters.build-type >><</ parameters.build-type >> \
          <<# parameters.builder-id >>--builder-id=<< parameters.builder-id >><</ parameters.builder-id >> \
          <<# parameters.by-product >>--by-product=<< parameters.by-product >><</ parameters.by-product >> \
@@ -275,6 +296,10 @@ steps:
          <<# parameters.predicate >>--predicate=<< parameters.predicate >><</ parameters.predicate >> \
          <<# parameters.pubkey >>--pubkey=<< parameters.pubkey >><</ parameters.pubkey >> \
          <<# parameters.skip-confirmation >>--skip-confirmation=<< parameters.skip-confirmation >><</ parameters.skip-confirmation >> \
+         <<# parameters.source >>--source=<< parameters.source >><</ parameters.source >> \
+         <<# parameters.source-asset-id >>--source-asset-id=<< parameters.source-asset-id >><</ parameters.source-asset-id >> \
+         <<# parameters.source-asset-name >>--source-asset-name=<< parameters.source-asset-name >><</ parameters.source-asset-name >> \
+         <<# parameters.source-asset-platform >>--source-asset-platform=<< parameters.source-asset-platform >><</ parameters.source-asset-platform >> \
          <<# parameters.started-on >>--started-on=<< parameters.started-on >><</ parameters.started-on >> \
          <<# parameters.statement >>--statement=<< parameters.statement >><</ parameters.statement >> \
          <<# parameters.cache-enable >>--cache-enable=<< parameters.cache-enable >><</ parameters.cache-enable >> \
