@@ -23,7 +23,7 @@ workflows:
           filters: *filters
       - orb-tools/publish:
           orb-name: bd-demo/custom-orb
-          vcs-type: << pipeline.project.type >>
+          vcs-type: "github"
           requires:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
           # Use a context to hold your publishing token.
