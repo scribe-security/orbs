@@ -33,6 +33,6 @@ workflows:
       # Triggers the next workflow in the Orb Development Kit. 
       - orb-tools/continue:
           pipeline-number: << pipeline.number >>
-          vcs-type: << pipeline.project.type >>
+          vcs-type: "github"
           requires: [orb-tools/publish]
           filters: *filters
