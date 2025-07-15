@@ -319,7 +319,7 @@ steps:
          <<# parameters.product-key >>--product-key=<< parameters.product-key >><</ parameters.product-key >> \
          <<# parameters.product-version >>--product-version=<< parameters.product-version >><</ parameters.product-version >> \
          <<# parameters.scribe-client-id >>--scribe.client-id=<< parameters.scribe-client-id >><</ parameters.scribe-client-id >> \
-         <<# parameters.scribe-client-secret >>--scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
+         --scribe.client-secret=<< parameters.scribe-client-secret >><</ parameters.scribe-client-secret >> \
          <<# parameters.scribe-disable >>--scribe.disable=<< parameters.scribe-disable >><</ parameters.scribe-disable >> \
          <<# parameters.scribe-enable >>--scribe.enable=<< parameters.scribe-enable >><</ parameters.scribe-enable >> \
          <<# parameters.scribe-url >>--scribe.url=<< parameters.scribe-url >><</ parameters.scribe-url >> \
