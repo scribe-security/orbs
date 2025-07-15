@@ -97,8 +97,7 @@ parameters:
     default: ""
   kms:
     description: Provide KMS key reference
-    type: string
-    default: ""
+    type: env_var_name
   oci:
     description: Enable OCI store
     type: boolean
@@ -233,8 +232,7 @@ parameters:
     default: ""
   scribe-client-secret:
     description: Scribe Client Token
-    type: string
-    default: ""
+    type: env_var_name
   scribe-disable:
     description: Disable scribe client
     type: boolean
