@@ -1,6 +1,8 @@
 version: 2.1
 
 description: |
+  > !! Forked version of Scribe Security's original CCI Orb
+  
   Scribe offers CircleCI Orbs for embedding evidence collecting and integrity verification to your workflows.
 
   The Orb provides several actions enabling generation of SBOMs from various sources.
@@ -9,4 +11,4 @@ description: |
 
 display:
   home_url: "https://scribesecurity.com"
-  source_url: "https://github.com/scribe-security/orbs"
+  source_url: "https://github.com/biswarup1290dass/orbs"
