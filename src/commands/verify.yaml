@@ -91,6 +91,18 @@ parameters:
     description: Exit code to use when policy violations occur (-1 = ignore and keep original status, 0 = succeed regardless, 1-255 = fail with that code)
     type: integer
     default: -1
+  filter-purl:
+    description: Filter out purls by regex
+    type: string
+    default: ""
+  filter-regex:
+    description: Filter out files by regex
+    type: string
+    default: '**/*.pyc,**/.git/**'
+  filter-scope:
+    description: Filter packages by scope
+    type: string
+    default: ""
   force:
     description: Force skip cache
     type: boolean
@@ -345,6 +357,9 @@ steps:
          <<# parameters.disable-crl >>--disable-crl=<< parameters.disable-crl >><</ parameters.disable-crl >> \
          <<# parameters.email >>--email=<< parameters.email >><</ parameters.email >> \
          <<# parameters.exit-code >>--exit-code=<< parameters.exit-code >><</ parameters.exit-code >> \
+         <<# parameters.filter-purl >>--filter-purl=<< parameters.filter-purl >><</ parameters.filter-purl >> \
+         <<# parameters.filter-regex >>--filter-regex=<< parameters.filter-regex >><</ parameters.filter-regex >> \
+         <<# parameters.filter-scope >>--filter-scope=<< parameters.filter-scope >><</ parameters.filter-scope >> \
          <<# parameters.force >>--force=<< parameters.force >><</ parameters.force >> \
          <<# parameters.format >>--format=<< parameters.format >><</ parameters.format >> \
          <<# parameters.git-auth >>--git-auth=<< parameters.git-auth >><</ parameters.git-auth >> \
