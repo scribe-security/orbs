@@ -231,7 +231,7 @@ commands:
             - run:
                 command: |-
                     #!/bin/sh
-                    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | sh
+                    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | sh
                 name: installing binaries version >> parameters.version >>
 
     verify:

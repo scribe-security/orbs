@@ -11,16 +11,16 @@ if [ "${id}" = 0 ]; then export SUDO=""; else export SUDO="sudo"; fi
 
 if is_command wget; then
     if [ "$ENV" = "dev" ]; then
-        wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d -D
+        wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | $SUDO sh -s -- -b /usr/local/bin -d -D
     else
-        wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d
+        wget -O /dev/stdout  https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | $SUDO sh -s -- -b /usr/local/bin -d
     fi
     exit 0
 elif is_command curl; then
     if [ "$ENV" = "dev" ]; then
-        curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d -D
+        curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | $SUDO sh -s -- -b /usr/local/bin -d -D
     else
-    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -d
+    curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | $SUDO sh -s -- -b /usr/local/bin -d
     fi
 else 
     if dpkg --help >/dev/null ; then
@@ -37,9 +37,9 @@ else
     fi
 
     if [ "$ENV" = "dev" ]; then
-       curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin -D
+       curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | $SUDO sh -s -- -b /usr/local/bin -D
     else
-        curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/install.sh | $SUDO sh -s -- -b /usr/local/bin
+        curl -sSfL https://raw.githubusercontent.com/scribe-security/misc/master/gh_install.sh | $SUDO sh -s -- -b /usr/local/bin
     fi
 fi
  
